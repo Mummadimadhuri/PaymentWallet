@@ -1,6 +1,5 @@
-package com.capg.payment_wallet_application.beans;
+package com.capg.payment_wallet_application.dto;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,12 +9,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
+import com.capg.payment_wallet_application.beans.Wallet;
 import com.sun.istack.NotNull;
 
-@Entity
-public class BankAccount {
-
+public class BankAccountDTO {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Min(value=100000000000L,message = "Account number must be a 12 digit numbers")
@@ -35,11 +32,11 @@ public class BankAccount {
 	@ManyToOne
 	private Wallet wallet;
 
-	public BankAccount() {
+	public BankAccountDTO() {
 		super();
 	}
 
-	public BankAccount(@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$") String ifscCode, @Size(max = 20) String bankName,
+	public BankAccountDTO(@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$") String ifscCode, @Size(max = 20) String bankName,
 			@DecimalMin(value = "1000.0", message = "balance must be a number at least 1000") double balance,
 			Wallet wallet) {
 		super();
@@ -86,7 +83,4 @@ public class BankAccount {
 		return "BankAccount [accountNo=" + accountNo + ", ifscCode=" + ifscCode + ", bankName=" + bankName
 				+ ", balance=" + balance + ", wallet=" + wallet + "]";
 	}
-	
-	
-	
 }
