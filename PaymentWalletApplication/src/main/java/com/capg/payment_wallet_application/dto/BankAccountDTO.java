@@ -9,9 +9,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.stereotype.Component;
+
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.sun.istack.NotNull;
-
+@Component
 public class BankAccountDTO {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
