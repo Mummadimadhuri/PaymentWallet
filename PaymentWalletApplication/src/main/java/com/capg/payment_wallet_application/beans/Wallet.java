@@ -48,4 +48,6 @@ public class Wallet {
 		return "Wallet [walletId=" + walletId + ", balance=" + balance 	+ "]";
 	}
 	
+	
+	
 }
