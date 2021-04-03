@@ -1,28 +1,21 @@
-package com.capg.payment_wallet_application.beans;
+package com.capg.payment_wallet_application.dto;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.DecimalMin;
+import org.springframework.stereotype.Component;
 
-@Entity
-public class Wallet {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int walletId;
+@Component
+public class WalletDTO {
 	
-	@DecimalMin(value="1000.0",message="Balance must be atleast 1000.0")
+	
+	private int walletId;
 	private BigDecimal balance;
 
-	public Wallet() {
+	public WalletDTO() {
 		super();
 	}
 
-	public Wallet(BigDecimal amount) {
+	public WalletDTO(BigDecimal amount) {
 		super();
 		this.balance = amount;
 	}
@@ -30,6 +23,7 @@ public class Wallet {
 	public int getWalletId() {
 		return walletId;
 	}
+
 	public void setWalletId(int walletId) {
 		this.walletId = walletId;
 	}
@@ -46,7 +40,5 @@ public class Wallet {
 	public String toString() {
 		return "Wallet [walletId=" + walletId + ", balance=" + balance 	+ "]";
 	}
-	
-	
-	
+
 }

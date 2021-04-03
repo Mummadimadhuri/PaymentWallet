@@ -32,22 +32,22 @@ public class TransactionService implements ITransactionService {
 	@Override
 	public List<TransactionDTO> viewAllTransactions(Wallet wallet) {
 		// TODO Auto-generated method stub
-		List<TransactionDTO> list = transactionRepo.viewAllTransactions(wallet);
-		return list;
+		List<Transaction> list = transactionRepo.viewAllTransactions(wallet);
+		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
 	@Override
 	public List<TransactionDTO> viewTransactionsByDate(LocalDate from, LocalDate to) {
 		// TODO Auto-generated method stub
-		List<TransactionDTO> list = transactionRepo.viewTransactionsByDate(from, to);
-		return list;
+		List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
+		return  TransactionUtils.convertToTransactionDtoList(list);
 	}
 
 	@Override
 	public List<TransactionDTO> viewAllTransactions(String type) {
 		// TODO Auto-generated method stub
-		List<TransactionDTO> list =  transactionRepo.viewAllTransactions(type);
-		return list;
+		List<Transaction> list =  transactionRepo.viewAllTransactions(type);
+		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
 }

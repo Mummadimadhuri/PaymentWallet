@@ -15,7 +15,7 @@ public class TransactionUtils {
 	}
 	public static Transaction convertToTransaction(TransactionDTO dto) {
 		Transaction transaction = new Transaction();
-	
+	        transaction.setTransactionId(dto.getTransactionId());
 			transaction.setAmount(dto.getAmount());
 			transaction.setTransactionType(dto.getTransactionType());;
 			transaction.setTransactionDate(dto.getTransactionDate());
@@ -27,6 +27,7 @@ public class TransactionUtils {
 	public static TransactionDTO convertToTransactionDto(Transaction transaction)
 	{
 		TransactionDTO transactiondto = new TransactionDTO();
+		transactiondto.setTransactionId(transaction.getTransactionId());
 		transactiondto.setAmount(transaction.getAmount());
 		transactiondto.setTransactionType(transaction.getTransactionType());
 		transactiondto.setTransactionDate(transaction.getTransactionDate());
