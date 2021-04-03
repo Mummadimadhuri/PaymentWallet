@@ -1,6 +1,6 @@
 package com.capg.payment_wallet_application.beans;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,11 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import com.sun.istack.NotNull;
-
-@Component
 @Entity
 public class Customer {
 
@@ -21,16 +17,17 @@ public class Customer {
 	private String name;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique = true)
-	@Pattern(regexp = "^[6-9]{1}[0-9]{9}")
+	@Pattern(regexp = "^[6-9]{1}[0-9]{9}",
+	message = "Mobile number should be a 10 digit number with first digit from 6 to 9")
 	private String mobileNo;
 	
-	@Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?={8,})")
+	@Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?={8,})",
+			message = "Password should contain at least one Capital letter, one small letter,"
+					+ " one number and one special character")
 	private String password;
 	
 	@Autowired
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 
 	public Customer() {

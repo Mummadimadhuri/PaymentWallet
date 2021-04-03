@@ -7,30 +7,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-@Component
 @Entity
 public class Wallet {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Min(value=1000)
 	private int walletId;
 	
-	@DecimalMin(value="Balance must be at least 1000.0")
+	@DecimalMin(value="1000.0",message="Balance must be atleast 1000.0")
 	private BigDecimal balance;
 
-	@Autowired
 	public Wallet() {
-
+		super();
 	}
 
 	public Wallet(BigDecimal amount) {
+		super();
 		this.balance = amount;
+	}
+	
+	public int getWalletId() {
+		return walletId;
+	}
+
+	public void setWalletId(int walletId) {
+		this.walletId = walletId;
 	}
 
 	public BigDecimal getBalance() {
@@ -43,7 +45,9 @@ public class Wallet {
 
 	@Override
 	public String toString() {
-		return " balance= " + balance;
+		return "Wallet [walletId=" + walletId + ", balance=" + balance 	+ "]";
 	}
-
+	
+	
+	
 }

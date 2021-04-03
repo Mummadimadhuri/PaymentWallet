@@ -16,14 +16,13 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-
 @Entity
 public class Transaction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int transactionId;
+	
 	
 	private String transactionType;
 	
