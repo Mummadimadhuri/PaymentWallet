@@ -9,15 +9,14 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
 
-@Component
 @Entity
 public class Transaction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int transactionId;
+	
 	
 	private String transactionType;
 	
