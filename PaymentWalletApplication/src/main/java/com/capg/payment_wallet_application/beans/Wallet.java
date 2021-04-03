@@ -45,9 +45,6 @@ public class Wallet {
 
 	@Override
 	public String toString() {
-		return "Wallet [walletId=" + walletId + ", balance=" + balance + "]";
+		return "Wallet [walletId=" + walletId + ", balance=" + balance 	+ "]";
 	}
-
-	
-
 }
