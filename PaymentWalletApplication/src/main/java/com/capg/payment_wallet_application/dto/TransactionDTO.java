@@ -1,6 +1,6 @@
 package com.capg.payment_wallet_application.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -25,9 +25,9 @@ public class TransactionDTO {
 	private String transactionType;
 	
 	@Column(name = "transactiondate") 
-	@DateTimeFormat(pattern = "dd/mm/yyyy")
-	@Temporal(TemporalType.DATE)
-	private Date transactionDate;
+	@DateTimeFormat(pattern = "dd-mm-yyyy")
+//	@Temporal(TemporalType.DATE)
+	private LocalDate transactionDate;
 	
 	@ManyToOne
 	public Wallet wallet;
@@ -42,7 +42,7 @@ public class TransactionDTO {
 		super();
 	}
 
-	public TransactionDTO(int transactionId, String transactionType, Date transactionDate, Wallet wallet, double amount,
+	public TransactionDTO(int transactionId, String transactionType, LocalDate transactionDate, Wallet wallet, double amount,
 			@Size(max = 100) String description) {
 		super();
 		this.transactionType = transactionType;
@@ -60,12 +60,12 @@ public class TransactionDTO {
 		this.transactionType = transactionType;
 	}
 
-	public Date getTransactionDate() {
+	public LocalDate getTransactionDate() {
 		return transactionDate;
 	}
 
-	public void setTransactionDate(Date transactionDate) {
-		this.transactionDate = transactionDate;
+	public void setTransactionDate(LocalDate localDate) {
+		this.transactionDate = localDate;
 	}
 
 	public Wallet getWallet() {

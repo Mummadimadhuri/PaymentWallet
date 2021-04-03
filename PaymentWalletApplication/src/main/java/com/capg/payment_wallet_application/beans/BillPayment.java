@@ -10,13 +10,13 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class BillPayment {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Min(value=1000)
 	private int billId;
 	
 	@ManyToOne
@@ -27,7 +27,7 @@ public class BillPayment {
 	@DecimalMin(value = "1.0", message="amount should be at least 1.0")
 	private double amount;
 	
-	@DateTimeFormat(pattern="dd/mm/yyyy")
+	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate paymentDate;
 	
 	public BillPayment() {

@@ -6,6 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,17 +36,18 @@ public class TransactionController {
 		return transactionService.addTransaction(tran);
 	}
 	
-	@GetMapping(value = "/get-wallet-transaction/{wallet}", produces = "application/json")
-	public List<TransactionDTO> viewAllTransactions (@PathVariable Wallet wallet) {
+	@GetMapping(value = "/get-wallet-transaction/{walletId}/{balance}", produces = "application/json")
+	public List<TransactionDTO> viewAllTransactions (Wallet wallet) {
 		LOGGER.info("Get By wallet available");
 		return transactionService.viewAllTransactions(wallet);
 	}
 	
 	@GetMapping(value = "/get-all-betweendates/{from}/{to}", produces = "application/json")
-	public List<TransactionDTO> viewTransactionsByDate(@PathVariable LocalDate from,@PathVariable LocalDate to)
+	public List<TransactionDTO> viewTransactionsByDate(@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate from,@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate to)
 	{
 		return transactionService.viewTransactionsByDate(from,to);
 	}
+	
 	@GetMapping(value = "/get-all-types/{type}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions(@PathVariable String type)
 	{

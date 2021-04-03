@@ -13,6 +13,7 @@ public class TransactionUtils {
 			dtolist.add(convertToTransactionDto(Transaction));
 		return dtolist;
 	}
+	
 	public static Transaction convertToTransaction(TransactionDTO dto) {
 		Transaction transaction = new Transaction();
 	
