@@ -34,13 +34,27 @@ public class TransactionService implements ITransactionService {
 
 	@Override
 	public List<TransactionDTO> viewAllTransactions(Wallet wallet) {
+<<<<<<< HEAD
 		List<Transaction> list = transactionRepo.viewAllTransactions(wallet);
 		List<TransactionDTO> dtoList = TransactionUtils.convertToTransactionDtoList(list);
 		return dtoList;
+=======
+		// TODO Auto-generated method stub
+		List<Transaction> list = transactionRepo.viewAllTransactions(wallet);
+		return TransactionUtils.convertToTransactionDtoList(list);
+	}
+
+	@Override
+	public List<TransactionDTO> viewTransactionsByDate(LocalDate from, LocalDate to) {
+		// TODO Auto-generated method stub
+		List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
+		return  TransactionUtils.convertToTransactionDtoList(list);
+>>>>>>> branch 'master' of https://github.com/Mummadimadhuri/PaymentWallet
 	}
 
 	@Override
 	public List<TransactionDTO> viewAllTransactions(String type) {
+<<<<<<< HEAD
 		List<Transaction> list = null;
 		if(transactionTypeValidation(type)) {
 			list =  transactionRepo.viewAllTransactions(type);
@@ -65,6 +79,11 @@ public class TransactionService implements ITransactionService {
 			flag = false;
 		}
 		return flag;
+=======
+		// TODO Auto-generated method stub
+		List<Transaction> list =  transactionRepo.viewAllTransactions(type);
+		return TransactionUtils.convertToTransactionDtoList(list);
+>>>>>>> branch 'master' of https://github.com/Mummadimadhuri/PaymentWallet
 	}
 
 }

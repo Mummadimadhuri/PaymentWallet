@@ -11,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.Customer;
+import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.beans.Wallet;
+import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.WalletRepo;
+import com.capg.payment_wallet_application.util.CustomerUtils;
 
 @Service
 public class WalletServiceImpl implements WalletService {
@@ -26,16 +29,16 @@ public class WalletServiceImpl implements WalletService {
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 	
 	@Override
-	public Customer createAccount(String name, String mobileno, BigDecimal amount) throws ConstraintViolationException {
+	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount) throws ConstraintViolationException {
 		Customer customer = new Customer(name, mobileno);
 		Wallet wallet = customer.getWallet();
 		wallet.setBalance(amount);
 		customer.setWallet(wallet);
-		return walletRepo.save(customer);
-	}
+	    return CustomerUtils.convertToCustomerDto(walletRepo.save(customer));
+	} 
 	
 	@Override
-	public Customer showBalance(String mobileno) {
+	public CustomerDTO showBalance(String mobileno) {
 		Customer customer = null;
 		if (mobileNoValidation(mobileno)) {
 			customer = walletRepo.findOne(mobileno);
@@ -45,11 +48,11 @@ public class WalletServiceImpl implements WalletService {
 		if (customer == null) {
 			throw new InvalidInputException(unregisteredMobileNo);
 		}
-		return customer;
+		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
-	public Customer fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount) {
+	public CustomerDTO fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount) {
 		if (!mobileNoValidation(sourceMobileNo)) {
 			throw new InvalidInputException(invalidMobileNo);
 		}
@@ -73,11 +76,11 @@ public class WalletServiceImpl implements WalletService {
 		targetWallet.setBalance(targetWallet.getBalance().add(amount));
 		walletRepo.save(source);
 		walletRepo.save(target);
-		return source;
+		return  CustomerUtils.convertToCustomerDto(source);
 	}
 
 	@Override
-	public Customer depositAmount(String mobileNo, BigDecimal amount) {
+	public CustomerDTO depositAmount(String mobileNo, BigDecimal amount) {
 		Customer customer = null;
 		if (mobileNoValidation(mobileNo)) {
 			customer = walletRepo.findByMobileNo(mobileNo);
@@ -89,11 +92,11 @@ public class WalletServiceImpl implements WalletService {
 		}
 		customer.getWallet().setBalance(customer.getWallet().getBalance().add(amount));
 		walletRepo.save(customer);
-		return customer;
+		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
-	public Customer withdrawAmount(String mobileNo, BigDecimal amount) {
+	public CustomerDTO withdrawAmount(String mobileNo, BigDecimal amount) {
 		Customer customer = null;
 		if (mobileNoValidation(mobileNo)) {
 			customer = walletRepo.findByMobileNo(mobileNo);
@@ -112,28 +115,29 @@ public class WalletServiceImpl implements WalletService {
 		}
 		customer.getWallet().setBalance(currentBalance);
 		walletRepo.save(customer);
-		return customer;
+		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
-	public List<Customer> getList() {
-		return walletRepo.getList();
+	public List<CustomerDTO> getList() {
+		List<Customer> list= walletRepo.getList();
+		return CustomerUtils.convertToCustomerDtoList(list);
 	}
 
 	@Override
-	public Customer updateAccount(Customer customer) {
+	public CustomerDTO updateAccount(Customer customer) {
 		walletRepo.save(customer);
-		return customer;
+		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
-	public Customer addMoney(Wallet wallet, double amount) {
+	public CustomerDTO addMoney(Wallet wallet, double amount) {
 		Customer customer = walletRepo.findByWallet(wallet);
 		wallet = customer.getWallet();
 		wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(amount)));
 		customer.setWallet(wallet);
 		walletRepo.save(customer);
-		return customer;
+		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	private static boolean mobileNoValidation(String mobileNo) {

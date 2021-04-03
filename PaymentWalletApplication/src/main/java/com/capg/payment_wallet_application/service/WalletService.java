@@ -4,16 +4,17 @@ import java.util.List;
 
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Wallet;
+import com.capg.payment_wallet_application.dto.CustomerDTO;
 
 
 public interface WalletService {
-public Customer createAccount(String name ,String mobileno, BigDecimal amount);
-public Customer showBalance (String mobileno);
-public Customer fundTransfer (String sourceMobileNo,String targetMobileNo, BigDecimal amount);
-public Customer depositAmount (String mobileNo,BigDecimal amount );
-public Customer withdrawAmount(String mobileNo, BigDecimal amount);
-public List<Customer> getList();
-public Customer updateAccount(Customer customer);
-public Customer addMoney(Wallet wallet, double amount);
+public CustomerDTO createAccount(String name ,String mobileno, BigDecimal amount);
+public CustomerDTO showBalance (String mobileno);
+public CustomerDTO fundTransfer (String sourceMobileNo,String targetMobileNo, BigDecimal amount);
+public CustomerDTO depositAmount (String mobileNo,BigDecimal amount );
+public CustomerDTO withdrawAmount(String mobileNo, BigDecimal amount);
+public List<CustomerDTO> getList();
+public CustomerDTO updateAccount(Customer customer);
+public CustomerDTO addMoney(Wallet wallet, double amount);
 
 }
