@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
@@ -30,4 +31,8 @@ public class Exceptions {
 		return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_ACCEPTABLE);
 	}
 
+	@ExceptionHandler(value=MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<Object> exceptionMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException exception){
+		return new ResponseEntity<>("Invalid Date Format",HttpStatus.NOT_ACCEPTABLE);
+	}
 }
