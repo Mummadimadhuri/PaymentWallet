@@ -47,4 +47,5 @@ public class Wallet {
 	public String toString() {
 		return "Wallet [walletId=" + walletId + ", balance=" + balance 	+ "]";
 	}
+	
 }
