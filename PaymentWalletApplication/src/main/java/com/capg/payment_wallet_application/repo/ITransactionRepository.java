@@ -18,27 +18,14 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
 
 	final Logger LOGGER = LoggerFactory.getLogger(ITransactionRepository.class);
 	
-<<<<<<< HEAD
+
 	@Query("select t from Transaction t where t.wallet = :wallet")
 	public List<Transaction> viewAllTransactions (@Param(value = "wallet") Wallet wallet);
-=======
-	@Query("select t from transaction t where t.wallet = :wallet")
-	public List<Transaction> viewAllTransactions (Wallet wallet);
->>>>>>> branch 'master' of https://github.com/Mummadimadhuri/PaymentWallet
 	
-<<<<<<< HEAD
 	@Query("SELECT t FROM Transaction t WHERE t.transactionDate BETWEEN :from AND :to")
 	public List<Transaction> viewTransactionsByDate(@Param(value = "from") @DateTimeFormat(iso = ISO.DATE) LocalDate from,@Param(value = "to") @DateTimeFormat(iso = ISO.DATE) LocalDate to);
-=======
-	@Query("SELECT t FROM Transaction t WHERE t.transactiondate BETWEEN :from AND :to")
-	public List<Transaction> viewTransactionsByDate(LocalDate from,LocalDate to);
->>>>>>> branch 'master' of https://github.com/Mummadimadhuri/PaymentWallet
 	
-<<<<<<< HEAD
 	@Query("select t from Transaction t where t.transactionType = :type")
 	public List<Transaction> viewAllTransactions(@Param(value = "type") String type);
-=======
-	@Query("select t from transaction t where t.transactiontype=:type")
-	public List<Transaction> viewAllTransactions(String type);
->>>>>>> branch 'master' of https://github.com/Mummadimadhuri/PaymentWallet
+
 }
