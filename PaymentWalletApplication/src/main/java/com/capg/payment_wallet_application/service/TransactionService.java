@@ -34,6 +34,7 @@ public class TransactionService implements ITransactionService {
 
 	@Override
 	public List<TransactionDTO> viewAllTransactions(Wallet wallet) {
+
 		List<Transaction> list = transactionRepo.viewAllTransactions(wallet);
 		List<TransactionDTO> dtoList = TransactionUtils.convertToTransactionDtoList(list);
 		return dtoList;

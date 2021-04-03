@@ -57,6 +57,14 @@ public class Transaction {
 		this.amount = amount;
 		this.description = description;
 	}
+    
+	public int getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(int transactionId) {
+		this.transactionId = transactionId;
+	}
 
 	public String getTransactionType() {
 		return transactionType;

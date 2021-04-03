@@ -1,14 +1,17 @@
 package com.capg.payment_wallet_application.service;
 
+import java.util.List;
+
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
+import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 
 public interface IBenificiaryService {
 
-	public BenificiaryDetails addBenificiary(BenificiaryDetails bd);
-	public BenificiaryDetails updateBenificiary(BenificiaryDetails bd);
-	public BenificiaryDetails deleteBenificiary(BenificiaryDetails bd);
-	public BenificiaryDetails viewBenificiary(BenificiaryDetails bd);
-	public BenificiaryDetails viewAllBenificiary(Customer customer);
+	public BenificiaryDetailsDTO addBenificiary(BenificiaryDetails bd);
+	public BenificiaryDetailsDTO updateBenificiary(BenificiaryDetails bd);
+	public void deleteBenificiary(BenificiaryDetails bd);
+	public BenificiaryDetailsDTO viewBenificiary(BenificiaryDetails bd);
+	public List<BenificiaryDetailsDTO> viewAllBenificiary(Customer customer);
 	
 }

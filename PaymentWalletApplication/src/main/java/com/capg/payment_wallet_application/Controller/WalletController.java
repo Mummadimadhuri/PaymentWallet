@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Wallet;
+import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.service.WalletService;
 
 @RestController
@@ -24,42 +25,42 @@ public class WalletController {
 	private WalletService walletService;
 
 	@PostMapping("/createAccount/{name}/{mobileno}/{amount}")
-	public Customer createAccount(@PathVariable String name,@PathVariable String mobileno,@PathVariable BigDecimal amount) {
+	public CustomerDTO createAccount(@PathVariable String name,@PathVariable String mobileno,@PathVariable BigDecimal amount) {
 		return walletService.createAccount(name, mobileno, amount);
 	}
 	
 	@GetMapping("/showBalance/{mobileno}")
-	public Customer showBalance(@PathVariable String mobileno) {
+	public CustomerDTO showBalance(@PathVariable String mobileno) {
 		return walletService.showBalance(mobileno);
 	}
 
 	@PutMapping("/fundTransfer/{sourceMobileNo}/{targetMobileNo}/{amount}")
-	public Customer fundTransfer(@PathVariable String sourceMobileNo,@PathVariable String targetMobileNo,@PathVariable BigDecimal amount) {
+	public CustomerDTO fundTransfer(@PathVariable String sourceMobileNo,@PathVariable String targetMobileNo,@PathVariable BigDecimal amount) {
 		return walletService.fundTransfer(sourceMobileNo, targetMobileNo, amount);
 	}
 
 	@PutMapping("/depositAmount/{mobileNo}/{amount}")
-	public Customer depositAmount(@PathVariable String mobileNo,@PathVariable BigDecimal amount) {
+	public CustomerDTO depositAmount(@PathVariable String mobileNo,@PathVariable BigDecimal amount) {
 		return walletService.depositAmount(mobileNo, amount);
 	}
 
 	@PutMapping("/withdrawAmount/{mobileNo}/{amount}")
-	public Customer withdrawAmount(@PathVariable String mobileNo,@PathVariable BigDecimal amount) {
+	public CustomerDTO withdrawAmount(@PathVariable String mobileNo,@PathVariable BigDecimal amount) {
 		return walletService.withdrawAmount(mobileNo, amount);
 	}
 
 	@GetMapping("/getList")
-	public List<Customer> getList() {
+	public List<CustomerDTO> getList() {
 		return walletService.getList();
 	}
 
 	@PutMapping("/updateAccount")
-	public Customer updateAccount(@RequestBody Customer customer) {
+	public CustomerDTO updateAccount(@RequestBody Customer customer) {
 		return walletService.updateAccount(customer);
 	}
 
 	@PutMapping("/addMoney/{amount}")
-	public Customer addMoney(@RequestBody Wallet wallet,@PathVariable double amount) {
+	public CustomerDTO addMoney(@RequestBody Wallet wallet,@PathVariable double amount) {
 		return walletService.addMoney(wallet, amount);
 	}
 	

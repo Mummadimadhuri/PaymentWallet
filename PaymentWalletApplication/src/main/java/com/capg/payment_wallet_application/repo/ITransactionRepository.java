@@ -18,6 +18,7 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
 
 	final Logger LOGGER = LoggerFactory.getLogger(ITransactionRepository.class);
 	
+
 	@Query("select t from Transaction t where t.wallet = :wallet")
 	public List<Transaction> viewAllTransactions (@Param(value = "wallet") Wallet wallet);
 	
@@ -26,4 +27,5 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
 	
 	@Query("select t from Transaction t where t.transactionType = :type")
 	public List<Transaction> viewAllTransactions(@Param(value = "type") String type);
+
 }
