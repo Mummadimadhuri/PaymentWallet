@@ -4,18 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
-import org.springframework.stereotype.Component;
-
-@Component
 @Entity
 public class BenificiaryDetails {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Min(value=100)
 	private int benificiaryId;
 	
 	@Pattern(regexp="^[A-Za-z ]{3,30}$",message = "Name should be in the range of 3 to 30 characters")
