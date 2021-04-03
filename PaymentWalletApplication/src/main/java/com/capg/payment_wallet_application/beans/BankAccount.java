@@ -9,9 +9,13 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+
+import org.springframework.stereotype.Component;
+
 import com.sun.istack.NotNull;
 
-
+@Component
 @Entity
 public class BankAccount {
 
