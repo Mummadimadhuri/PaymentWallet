@@ -1,10 +1,8 @@
-package com.capg.payment_wallet_application.beans;
-
+package com.capg.payment_wallet_application.dto;
 
 import java.sql.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,14 +13,14 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
+import com.capg.payment_wallet_application.beans.Wallet;
 
-@Entity
-public class Transaction {
-	
+@Component
+public class TransactionDTO {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int transactionId;
-	
 	
 	private String transactionType;
 	
@@ -40,11 +38,11 @@ public class Transaction {
 	@Size(max = 100)
 	private String description;
 
-	public Transaction() {
+	public TransactionDTO() {
 		super();
 	}
 
-	public Transaction(int transactionId, String transactionType, Date transactionDate, Wallet wallet, double amount,
+	public TransactionDTO(int transactionId, String transactionType, Date transactionDate, Wallet wallet, double amount,
 			@Size(max = 100) String description) {
 		super();
 		this.transactionType = transactionType;
@@ -94,12 +92,5 @@ public class Transaction {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		return "Transaction [transactionId=" + transactionId + ", transactionType=" + transactionType
-				+ ", transactionDate=" + transactionDate + ", wallet=" + wallet + ", amount=" + amount
-				+ ", description=" + description + "]";
-	}
-	
-	
+
 }
