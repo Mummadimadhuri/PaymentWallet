@@ -16,12 +16,12 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
 
 	final Logger LOGGER = LoggerFactory.getLogger(ITransactionRepository.class);
 	
-	
-	public TransactionDTO viewAllTransactions (Wallet wallet);
+	@Query("select t from transaction t where t.wallet = :wallet")
+	public List<TransactionDTO> viewAllTransactions (Wallet wallet);
 	
 	@Query("SELECT t FROM Transaction t WHERE t.transactiondate BETWEEN :from AND :to")
 	public List<TransactionDTO> viewTransactionsByDate(LocalDate from,LocalDate to);
 	
-	
-	public TransactionDTO viewAllTransactions(String type);
+	@Query("select t from transaction t where t.transactiontype=:type")
+	public List<TransactionDTO> viewAllTransactions(String type);
 }

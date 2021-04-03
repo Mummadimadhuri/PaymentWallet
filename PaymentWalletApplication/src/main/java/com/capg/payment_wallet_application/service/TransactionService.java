@@ -30,9 +30,10 @@ public class TransactionService implements ITransactionService {
 	}
 
 	@Override
-	public TransactionDTO viewAllTransactions(Wallet wallet) {
+	public List<TransactionDTO> viewAllTransactions(Wallet wallet) {
 		// TODO Auto-generated method stub
-		return transactionRepo.viewAllTransactions(wallet);
+		List<TransactionDTO> list = transactionRepo.viewAllTransactions(wallet);
+		return list;
 	}
 
 	@Override
@@ -43,9 +44,10 @@ public class TransactionService implements ITransactionService {
 	}
 
 	@Override
-	public TransactionDTO viewAllTransactions(String type) {
+	public List<TransactionDTO> viewAllTransactions(String type) {
 		// TODO Auto-generated method stub
-		return transactionRepo.viewAllTransactions(type);
+		List<TransactionDTO> list =  transactionRepo.viewAllTransactions(type);
+		return list;
 	}
 
 }
