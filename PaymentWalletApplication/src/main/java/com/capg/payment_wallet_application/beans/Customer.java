@@ -2,6 +2,8 @@ package com.capg.payment_wallet_application.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
@@ -19,7 +21,7 @@ public class Customer {
 	private String name;
 	
 	@Id
-	@NotNull
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique = true)
 	@Pattern(regexp = "^[6-9]{1}[0-9]{9}")
 	private String mobileNo;
