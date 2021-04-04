@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
-import com.capg.payment_wallet_application.service.BenificiaryService;
+import com.capg.payment_wallet_application.service.IBenificiaryService;
 
 @RestController
 @RequestMapping("/BenifiaciaryDetails")
 public class BenificiaryDetailsController {
      
 	@Autowired
-	private BenificiaryService benificiaryservice;
+	private IBenificiaryService benificiaryservice;
 	
 	
 	@PostMapping(value = "/add", consumes = "application/json")
