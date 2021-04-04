@@ -28,7 +28,6 @@ public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;
 	
-	final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	@PostMapping(value = "/add", consumes = "application/json")
 	public TransactionDTO addTransaction (@RequestBody Transaction tran)
@@ -38,7 +37,6 @@ public class TransactionController {
 	
 	@GetMapping(value = "/get-wallet-transaction/{walletId}/{balance}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions (Wallet wallet) {
-		LOGGER.info("Get By wallet available");
 		return transactionService.viewAllTransactions(wallet);
 	}
 	

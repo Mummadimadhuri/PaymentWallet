@@ -14,8 +14,12 @@ public interface IAccountRepository extends JpaRepository<BankAccount, Integer> 
 //	public Wallet addAccount(BankAccount bacc);
 //	public Wallet removeAccount(BankAccount bacc);
 	
+    @Query("select ba from BankAccount ba where ba = :bacc")
+	public BankAccount findByBankAccount(@Param(value="bacc")BankAccount bacc);
+  
 	@Query("select bacc from BankAccount bacc where bacc = :bacc")
 	public BankAccount findByBankAccount(@Param(value="bacc") BankAccount bacc);
+
 	public List<BankAccount> findByWallet(Wallet wallet);
 	
 	

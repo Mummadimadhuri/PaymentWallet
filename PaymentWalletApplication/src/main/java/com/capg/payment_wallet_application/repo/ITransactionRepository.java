@@ -18,7 +18,6 @@ import com.capg.payment_wallet_application.beans.Wallet;
 @Repository
 public interface ITransactionRepository extends JpaRepository<Transaction, Integer>{
 
-	final Logger LOGGER = LoggerFactory.getLogger(ITransactionRepository.class);
 	
 
 	@Query("select t from Transaction t where t.wallet = :wallet")
