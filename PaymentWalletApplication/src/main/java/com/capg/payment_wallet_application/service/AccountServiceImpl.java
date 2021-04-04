@@ -18,8 +18,9 @@ public class AccountServiceImpl implements IAccountService{
 	@Override
 	public WalletDTO addAccount(BankAccount bacc) {
 		// TODO Auto-generated method stub
+		accountRepo.save(bacc);
 		Wallet wallet = bacc.getWallet();
-		return WalletUtils.convertToWalletDto(accountRepo.save(wallet));
+		return WalletUtils.convertToWalletDto(wallet);
 	}
 
 	@Override
