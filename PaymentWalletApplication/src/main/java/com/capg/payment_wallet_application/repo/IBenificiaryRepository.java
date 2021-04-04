@@ -18,4 +18,5 @@ public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails
     @Query("select bd from BenificiaryDetails bd")
 	public List<BenificiaryDetails> viewAllBenificiary(@Param(value="customer") Customer customer);
 	
+    public BenificiaryDetails findByMobileNumber(String mobileNumber);
 }

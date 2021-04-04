@@ -33,7 +33,11 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public void deleteBenificiary(BenificiaryDetails bd) {
-		// TODO Auto-generated method stub
+		if(ibenificiaryrepo.findByMobileNumber(bd.getMobileNumber())!=null) {
+			
+		}
+		ibenificiaryrepo.delete(bd);
+		
 		return;
 	}
 

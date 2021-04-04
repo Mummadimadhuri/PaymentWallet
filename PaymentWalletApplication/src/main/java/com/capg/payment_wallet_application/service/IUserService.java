@@ -1,8 +1,8 @@
 package com.capg.payment_wallet_application.service;
 
-import com.capg.payment_wallet_application.beans.Customer;
+import com.capg.payment_wallet_application.dto.CustomerDTO;
 
 public interface IUserService {
 
-	public Customer validateLogin(String mobileNumber,String password);
+	public CustomerDTO validateLogin(String mobileNumber,String password);
 }

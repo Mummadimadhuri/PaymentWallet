@@ -5,13 +5,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.validation.ConstraintViolationException;
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.Customer;
-import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
