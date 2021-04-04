@@ -10,10 +10,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+import org.springframework.stereotype.Repository;
 
 import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.beans.Wallet;
 
+@Repository
 public interface ITransactionRepository extends JpaRepository<Transaction, Integer>{
 
 	final Logger LOGGER = LoggerFactory.getLogger(ITransactionRepository.class);
