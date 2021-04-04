@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Wallet;
+import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
 import com.capg.payment_wallet_application.repo.IAccountRepository;
+import com.capg.payment_wallet_application.util.AccountUtils;
 import com.capg.payment_wallet_application.util.WalletUtils;
 
 @Service
@@ -17,33 +19,35 @@ public class AccountServiceImpl implements IAccountService{
 	IAccountRepository accountRepo;
 	@Override
 	public WalletDTO addAccount(BankAccount bacc) {
-		// TODO Auto-generated method stub
+
 		accountRepo.save(bacc);
 		Wallet wallet = bacc.getWallet();
-		return WalletUtils.convertToWalletDto(wallet);
+		WalletDTO walletDto = WalletUtils.convertToWalletDto(wallet);
+		return walletDto;
+
 	}
 
 	@Override
 	public WalletDTO removeAccount(BankAccount bacc) {
-		// TODO Auto-generated method stub
 		Wallet wallet = bacc.getWallet();
 		Wallet walletContainer = wallet;
-		accountRepo.delete(wallet);
+		accountRepo.delete(bacc);
 		return WalletUtils.convertToWalletDto(walletContainer);
 	}
 
 	@Override
-	public List<WalletDTO> viewAllAccounts(Wallet wallet) {
-		List<Wallet> walletList=accountRepo.findByWallet(wallet);
-		List<WalletDTO> walletDtoList=WalletUtils.convertToWalletDtoList(walletList);
-		
-		return walletDtoList;
+	public List<BankAccountDTO> viewAllAccounts(Wallet wallet) {
+		List<BankAccount> bankAccountList=accountRepo.findByWallet(wallet);
+		List<BankAccountDTO> BankAccountDtoList = AccountUtils.convertToBankAccountDtoList(bankAccountList);
+		return BankAccountDtoList;
 	}
 
 	@Override
 	public WalletDTO viewAccount(BankAccount bacc) {
 		// TODO Auto-generated method stub
-		Wallet wallet = accountRepo.findByBankAccount(bacc);
+		BankAccount bankAccount = accountRepo.findByBankAccount(bacc);
+		
+		Wallet wallet = bankAccount.getWallet();
 		
 		WalletDTO walletDto = WalletUtils.convertToWalletDto(wallet);
 		
