@@ -30,9 +30,8 @@ public class AccountServiceImpl implements IAccountService{
 	@Override
 	public WalletDTO removeAccount(BankAccount bacc) {
 		Wallet wallet = bacc.getWallet();
-		Wallet walletContainer = wallet;
 		accountRepo.delete(bacc);
-		return WalletUtils.convertToWalletDto(walletContainer);
+		return WalletUtils.convertToWalletDto(wallet);
 	}
 
 	@Override
