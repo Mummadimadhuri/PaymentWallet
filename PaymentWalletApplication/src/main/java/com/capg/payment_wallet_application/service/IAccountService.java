@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Wallet;
+import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
 
 public interface IAccountService {
@@ -11,7 +12,7 @@ public interface IAccountService {
 	public WalletDTO addAccount(BankAccount bacc);
 	public WalletDTO removeAccount(BankAccount bacc);
 	public WalletDTO viewAccount(BankAccount bacc);
-	public List<WalletDTO> viewAllAccounts(Wallet wallet);
+	public List<BankAccountDTO> viewAllAccounts(Wallet wallet);
 	
 	
 }

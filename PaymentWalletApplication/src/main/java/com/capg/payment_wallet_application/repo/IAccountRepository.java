@@ -7,12 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Wallet;
 
-public interface IAccountRepository extends JpaRepository<Wallet, Integer> {
+public interface IAccountRepository extends JpaRepository<BankAccount, Integer> {
 
 //	public Wallet addAccount(BankAccount bacc);
 //	public Wallet removeAccount(BankAccount bacc);
-	public Wallet findByBankAccount(BankAccount bacc);
-	public List<Wallet> findByWallet(Wallet wallet);
+	
+	public BankAccount findByBankAccount(BankAccount bacc);
+	public List<BankAccount> findByWallet(Wallet wallet);
 	
 	
 }
