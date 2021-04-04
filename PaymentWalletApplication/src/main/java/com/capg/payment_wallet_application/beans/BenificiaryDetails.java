@@ -21,6 +21,7 @@ public class BenificiaryDetails {
 	private String mobileNumber;
 
 	public BenificiaryDetails() {
+		
 		super();
 	}
 
