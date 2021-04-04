@@ -15,7 +15,6 @@ public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails
 
     @Query("select bd from BenificiaryDetails bd where bd = :bd ")
 	public BenificiaryDetails viewBenificiary(@Param(value="bd") BenificiaryDetails bd);
-    
     @Query("select bd from BenificiaryDetails bd")
 	public List<BenificiaryDetails> viewAllBenificiary(@Param(value="customer") Customer customer);
 	

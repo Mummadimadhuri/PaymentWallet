@@ -24,9 +24,9 @@ public class TransactionDTO {
 		super();
 	}
 
+
 	public TransactionDTO(int transactionId, String transactionType, LocalDate transactionDate, Wallet wallet, double amount,
 			String description) {
-
 		super();
 		this.transactionId = transactionId;
 		this.transactionType = transactionType;
