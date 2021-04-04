@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
+import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
 import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 
@@ -34,6 +35,12 @@ public class BenificiaryService implements IBenificiaryService {
 	@Override
 	public void deleteBenificiary(BenificiaryDetails bd) {
 		// TODO Auto-generated method stub
+		if(ibenificiaryrepo.findByMobileNumber(bd.getMobileNumber())!=null) {
+			ibenificiaryrepo.delete(bd);
+		}
+		else {
+			throw new InvalidInputException("Benificiary is not present in the data base");
+		}
 		return;
 	}
 
