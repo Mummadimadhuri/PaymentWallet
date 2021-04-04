@@ -19,10 +19,12 @@ public class AccountServiceImpl implements IAccountService{
 	IAccountRepository accountRepo;
 	@Override
 	public WalletDTO addAccount(BankAccount bacc) {
+
 		accountRepo.save(bacc);
 		Wallet wallet = bacc.getWallet();
 		WalletDTO walletDto = WalletUtils.convertToWalletDto(wallet);
 		return walletDto;
+
 	}
 
 	@Override
