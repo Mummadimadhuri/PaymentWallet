@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.BillPayment;
 import com.capg.payment_wallet_application.dto.BillPaymentDTO;
+import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.repo.IBillPaymentRepository;
 import com.capg.payment_wallet_application.util.BillPaymentUtil;
 
@@ -21,9 +22,16 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 	public BillPaymentDTO addBillPayment(BillPayment payment) {
 		BigDecimal currentBalance = payment.getWallet().getBalance();
 		BigDecimal amount = (BigDecimal.valueOf(payment.getAmount()));
+		if(amount.compareTo(currentBalance) < 0 )
+		{
 		currentBalance = currentBalance.subtract(amount);
 		payment.getWallet().setBalance(currentBalance);
 		return BillPaymentUtil.convertToBillPaymentDto(billRepo.save(payment));
+		}
+		else
+		{
+			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
+		}
 	}
 	@Override
 	public List<BillPaymentDTO> viewBillPayment(BillPayment payment) {
