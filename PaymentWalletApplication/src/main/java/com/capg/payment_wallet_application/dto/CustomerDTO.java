@@ -2,38 +2,30 @@ package com.capg.payment_wallet_application.dto;
 
 import org.springframework.stereotype.Component;
 
-import com.capg.payment_wallet_application.beans.Wallet;
-
 @Component
 public class CustomerDTO {
 
 	private String name;
 	private String mobileNo;
 	private String password;
-	private Wallet wallet;
+	private WalletDTO walletDto;
 
 	public CustomerDTO() {
-	}
-
-	public CustomerDTO( String name2,String mobileNo2, Wallet wallet2) {
-		this.name = name2;
-		mobileNo = mobileNo2;
-		// wallet=wallet2;
 	}
 
 	public CustomerDTO(String name,String mobileNo) {
 		super();
 		this.name = name;
 		this.mobileNo = mobileNo;
-		this.wallet = new Wallet(); 
+		this.walletDto = new WalletDTO(); 
 	}
 
-	public Wallet getWallet() {
-		return wallet;
+	public WalletDTO getWalletDto() {
+		return walletDto;
 	}
 
-	public void setWallet(Wallet wallet) {
-		this.wallet = wallet;
+	public void setWalletDto(WalletDTO wallet) {
+		this.walletDto = wallet;
 	}
 
 	public String getName() {
@@ -54,7 +46,15 @@ public class CustomerDTO {
 
 	@Override
 	public String toString() {
-		return "Customer name=" + name + ", mobileNo=" + mobileNo+wallet;
+		return "Customer name=" + name + ", mobileNo=" + mobileNo+walletDto;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

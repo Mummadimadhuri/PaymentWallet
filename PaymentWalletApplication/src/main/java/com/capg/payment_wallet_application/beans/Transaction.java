@@ -25,17 +25,14 @@ public class Transaction {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int transactionId;
 	
-	@NotNull
 	@Pattern(regexp = "SEND|RECEIVE",message = "Transaction type should be either SEND or RECEIVE")
 	private String transactionType;
 	
-	@NotNull
 	@Column(name = "transactiondate") 
 	@DateTimeFormat(iso = ISO.DATE)
 //	@Temporal(TemporalType.DATE)
 	private LocalDate transactionDate;
 	
-	@NotNull
 	@ManyToOne(cascade=CascadeType.ALL)
 	public Wallet wallet;
 	
@@ -50,7 +47,7 @@ public class Transaction {
 		super();
 	}
 
-	public Transaction(int transactionId, String transactionType, LocalDate transactionDate, Wallet wallet, double amount,
+	public Transaction(String transactionType, LocalDate transactionDate, Wallet wallet, double amount,
 			@Size(max = 100) String description) {
 		super();
 		this.transactionType = transactionType;

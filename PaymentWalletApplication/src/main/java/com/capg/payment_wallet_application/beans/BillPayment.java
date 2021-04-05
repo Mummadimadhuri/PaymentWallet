@@ -2,13 +2,16 @@ package com.capg.payment_wallet_application.beans;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -19,9 +22,11 @@ public class BillPayment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int billId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 	
+	@Min(value = 0)
+	@Max(value = 5)
 	private BillType billtype;
 	
 	@DecimalMin(value = "1.0", message="amount should be at least 1.0")

@@ -1,4 +1,4 @@
-package com.capg.payment_wallet_application.Controller;
+package com.capg.payment_wallet_application.controller;
 
 import java.util.List;
 
@@ -23,26 +23,26 @@ import com.capg.payment_wallet_application.service.AccountServiceImpl;
 public class AccountController {
 	@Autowired
 	AccountServiceImpl accountService;
-	final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@PostMapping("/add")
 	public WalletDTO addAccount(@RequestBody BankAccount bacc) {
-		LOGGER.info("Account added succesfully");
+		logger.info("Account added succesfully");
 		return accountService.addAccount(bacc);		
 	}
 	@DeleteMapping("/remove")
 	public WalletDTO removeAccount(@RequestBody BankAccount bacc) {
-		LOGGER.info("Account deleted");
+		logger.info("Account deleted");
 		return accountService.removeAccount(bacc);		
 	}
 	
 	@GetMapping("/view")
 	public WalletDTO viewAccount(@RequestBody BankAccount bacc) {
-		LOGGER.info("wallet for the account fetched");
+		logger.info("wallet for the account fetched");
 		return accountService.viewAccount(bacc);
 	}
 	@GetMapping("/viewAll")
 	public List<BankAccountDTO> viewAllAccounts(@RequestBody Wallet wallet){
-		LOGGER.info("all accounts linked with the wallet are fetched");
+		logger.info("all accounts linked with the wallet are fetched");
 		return accountService.viewAllAccounts(wallet);
 		
 	}

@@ -1,4 +1,4 @@
-package com.capg.payment_wallet_application.Controller;
+package com.capg.payment_wallet_application.controller;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class BenificiaryDetailsController {
 	@DeleteMapping("/delete")
 	public void deleteBenificiary(@RequestBody BenificiaryDetails bd)
 	{
-		return;
+		benificiaryservice.deleteBenificiary(bd);
 	}
 	
 	@GetMapping("/viewbenificiary")

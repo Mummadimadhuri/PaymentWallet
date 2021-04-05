@@ -1,12 +1,12 @@
 package com.capg.payment_wallet_application.beans;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -15,7 +15,6 @@ public class BankAccount {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Min(value=100000000000L,message = "Account number must be a 12 digit number")
 	private int accountNo;
 	
 	@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$",
@@ -29,7 +28,7 @@ public class BankAccount {
 	@DecimalMin(value="1000.0",message = "balance must be a number at least 1000")
 	private double balance;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 
 	public BankAccount() {

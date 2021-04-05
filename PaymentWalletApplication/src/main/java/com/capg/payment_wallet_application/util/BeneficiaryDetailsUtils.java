@@ -6,9 +6,13 @@ import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 
 public class BeneficiaryDetailsUtils {
+	
+	private BeneficiaryDetailsUtils() {
+		
+	}
 
 	public static List<BenificiaryDetailsDTO> convertToBenificiaryDetailsDtoList(List<BenificiaryDetails> list) {
-		List<BenificiaryDetailsDTO> dtolist = new ArrayList<BenificiaryDetailsDTO>();
+		List<BenificiaryDetailsDTO> dtolist = new ArrayList<>();
 		for (BenificiaryDetails BenificiaryDetails : list)
 			dtolist.add(convertToBenificiaryDetailsDto(BenificiaryDetails));
 		return dtolist;

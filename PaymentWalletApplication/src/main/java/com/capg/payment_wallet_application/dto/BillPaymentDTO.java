@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Component;
 
 import com.capg.payment_wallet_application.beans.BillType;
-import com.capg.payment_wallet_application.beans.Wallet;
 
 @Component
 public class BillPaymentDTO {
 	
 
 	private int billId;
-	private Wallet wallet;
+	private WalletDTO walletDto;
 	private BillType billtype;
 	private double amount;
 	private LocalDate paymentDate;
@@ -20,10 +19,10 @@ public class BillPaymentDTO {
 		
 	}
 	
-	public BillPaymentDTO(int billId, Wallet wallet, BillType billtype,  double amount, LocalDate paymentDate) {
+	public BillPaymentDTO(int billId, WalletDTO walletDto, BillType billtype,  double amount, LocalDate paymentDate) {
 		super();
 		this.billId = billId;
-		this.wallet = wallet;
+		this.walletDto = walletDto;
 		this.billtype = billtype;
 		this.amount = amount;
 		this.paymentDate = paymentDate;
@@ -36,11 +35,11 @@ public class BillPaymentDTO {
 	public void setBillId(int billId) {
 		this.billId = billId;
 	}
-	public Wallet getWallet() {
-		return wallet;
+	public WalletDTO getWalletDto() {
+		return walletDto;
 	}
-	public void setWallet(Wallet wallet) {
-		this.wallet = wallet;
+	public void setWalletDto(WalletDTO wallet) {
+		this.walletDto = wallet;
 	}
 	public BillType getBilltype() {
 		return billtype;
@@ -64,7 +63,7 @@ public class BillPaymentDTO {
 
 	@Override
 	public String toString() {
-		return "BillPaymentDTO [billId=" + billId + ", wallet=" + wallet + ", billtype=" + billtype + ", amount="
+		return "BillPaymentDTO [billId=" + billId + ", wallet=" + walletDto + ", billtype=" + billtype + ", amount="
 				+ amount + ", paymentDate=" + paymentDate + "]";
 	}
 }

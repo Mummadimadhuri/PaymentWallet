@@ -13,7 +13,7 @@ import com.capg.payment_wallet_application.beans.Wallet;
 @Repository
 public interface WalletRepo extends JpaRepository<Customer,Integer> {
 
-	public Customer save(Customer customer);
+	
 	
 	@Query("select c from Customer c where c.mobileNo = :mobileNo")
 	public Customer findOne(@Param(value = "mobileNo") String mobileNo);

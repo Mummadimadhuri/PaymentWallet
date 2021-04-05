@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 
 import org.springframework.stereotype.Component;
-import com.capg.payment_wallet_application.beans.Wallet;
 
 @Component
 public class TransactionDTO {
@@ -16,7 +15,7 @@ public class TransactionDTO {
 
 	private LocalDate transactionDate;
 	
-	private Wallet wallet;
+	private WalletDTO walletDto;
 	private double amount;
 	private String description;
 
@@ -25,13 +24,13 @@ public class TransactionDTO {
 	}
 
 
-	public TransactionDTO(int transactionId, String transactionType, LocalDate transactionDate, Wallet wallet, double amount,
+	public TransactionDTO(int transactionId, String transactionType, LocalDate transactionDate, WalletDTO walletDto, double amount,
 			String description) {
 		super();
 		this.transactionId = transactionId;
 		this.transactionType = transactionType;
 		this.transactionDate = transactionDate;
-		this.wallet = wallet;
+		this.walletDto = walletDto;
 		this.amount = amount;
 		this.description = description;
 	}
@@ -60,12 +59,12 @@ public class TransactionDTO {
 		this.transactionDate = localDate;
 	}
 
-	public Wallet getWallet() {
-		return wallet;
+	public WalletDTO getWalletDto() {
+		return walletDto;
 	}
 
-	public void setWallet(Wallet wallet) {
-		this.wallet = wallet;
+	public void setWalletDto(WalletDTO wallet) {
+		this.walletDto = wallet;
 	}
 
 	public double getAmount() {

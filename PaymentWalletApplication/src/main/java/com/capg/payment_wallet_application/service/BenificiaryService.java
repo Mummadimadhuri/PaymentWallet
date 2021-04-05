@@ -20,14 +20,12 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public BenificiaryDetailsDTO addBenificiary(BenificiaryDetails bd) {
-		// TODO Auto-generated method stub
 		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save( bd);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
 
 	@Override
 	public BenificiaryDetailsDTO updateBenificiary(BenificiaryDetails bd) {
-		// TODO Auto-generated method stub
 		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save( bd);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
@@ -44,16 +42,13 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public BenificiaryDetailsDTO viewBenificiary(BenificiaryDetails bd) {
-		// TODO Auto-generated method stub
-		
 		BenificiaryDetails benificiarydetails = ibenificiaryrepo.viewBenificiary(bd);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
 
 	@Override
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(Customer customer) {
-		// TODO Auto-generated method stub
-		 List<BenificiaryDetails> list  = ibenificiaryrepo.viewAllBenificiary(customer);
+		List<BenificiaryDetails> list  = ibenificiaryrepo.viewAllBenificiary(customer);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
 	}
 

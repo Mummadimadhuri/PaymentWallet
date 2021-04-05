@@ -1,4 +1,4 @@
-package com.capg.payment_wallet_application.Controller;
+package com.capg.payment_wallet_application.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

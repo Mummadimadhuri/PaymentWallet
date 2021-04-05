@@ -1,4 +1,4 @@
-package com.capg.payment_wallet_application.Controller;
+package com.capg.payment_wallet_application.controller;
 
 import javax.validation.ConstraintViolationException;
 

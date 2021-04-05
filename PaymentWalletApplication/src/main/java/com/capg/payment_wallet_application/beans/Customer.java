@@ -31,13 +31,6 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(@Pattern(regexp = "^[A-Za-z ]{3,20}$", message = "Name must only be alphabets and whitespaces from 3 to 20 characters") String name2,
-			@Pattern(regexp = "^[6-9]{1}[0-9]{9}") String mobileNo2, Wallet wallet2) {
-		this.name = name2;
-		mobileNo = mobileNo2;
-		// wallet=wallet2;
-	}
-
 	public Customer(
 			@Pattern(regexp = "^[A-Za-z ]{3,20}$", message = "Name must only be alphabets and whitespaces from 3 to 20 characters") String name,
 			@Pattern(regexp = "^[6-9]{1}[0-9]{9}") String mobileNo) {
