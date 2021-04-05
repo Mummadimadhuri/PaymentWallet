@@ -2,6 +2,8 @@ package com.capg.payment_wallet_application.Controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +21,18 @@ public class BillPaymentController {
 	@Autowired
 	IBillPaymentService billService;
 	
+	final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	
 	@PostMapping(value="/add_bill",consumes ="application/json")
 	public BillPayment addBillPayment(@RequestBody BillPayment payment) {
+		LOGGER.info("BillPayment added succesfully");
 		return billService.addBillPayment(payment);
 	}
 
 	
 	@GetMapping(value="/view", produces = "application/json")
 	public List<BillPayment> viewBillPayment(BillPayment payment) {
+		LOGGER.info("BillPayment is listed below");
 		return billService.viewBillPayment(payment);
 	}
 }

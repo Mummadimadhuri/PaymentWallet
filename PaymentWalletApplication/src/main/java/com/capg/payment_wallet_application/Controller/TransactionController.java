@@ -28,27 +28,32 @@ public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;
 	
+	final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	@PostMapping(value = "/add", consumes = "application/json")
 	public TransactionDTO addTransaction (@RequestBody Transaction tran)
 	{
+		LOGGER.info("transaction added succesfully");
 		return transactionService.addTransaction(tran);
 	}
 	
 	@GetMapping(value = "/get-wallet-transaction/{walletId}/{balance}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions (Wallet wallet) {
+		LOGGER.info("transaction viewed through wallet sucessfully");
 		return transactionService.viewAllTransactions(wallet);
 	}
 	
 	@GetMapping(value = "/get-all-betweendates/{from}/{to}", produces = "application/json")
 	public List<TransactionDTO> viewTransactionsByDate(@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate from,@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate to)
 	{
+		LOGGER.info("transaction viewed through Date sucessfully");
 		return transactionService.viewTransactionsByDate(from,to);
 	}
 	
 	@GetMapping(value = "/get-all-types/{type}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions(@PathVariable String type)
 	{
+		LOGGER.info("transaction viewed through type sucessfully");
 		return transactionService.viewAllTransactions(type);
 	}
 }
