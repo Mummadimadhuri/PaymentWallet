@@ -1,6 +1,7 @@
 package com.capg.payment_wallet_application.repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +12,7 @@ import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
 
 @Repository
-public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails,Integer> {
+public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails,String> {
 
     @Query("select bd from BenificiaryDetails bd where bd = :bd ")
 	public BenificiaryDetails viewBenificiary(@Param(value="bd") BenificiaryDetails bd);
@@ -19,5 +20,5 @@ public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails
     @Query("select bd from BenificiaryDetails bd")
 	public List<BenificiaryDetails> viewAllBenificiary(@Param(value="customer") Customer customer);
 	
-    public BenificiaryDetails findByMobileNumber(String mobileNumber);
+    public Optional<BenificiaryDetails> findById(String mobileNumber);
 }

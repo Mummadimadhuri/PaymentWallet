@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
+import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.IAccountRepository;
 import com.capg.payment_wallet_application.util.AccountUtils;
 import com.capg.payment_wallet_application.util.WalletUtils;
@@ -35,16 +37,22 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
-	public List<BankAccountDTO> viewAllAccounts(Wallet wallet) {
-		List<BankAccount> bankAccountList = accountRepo.findByWallet(wallet);
+	public List<BankAccountDTO> viewAllAccounts(int walletId) {
+		List<BankAccount> bankAccountList = accountRepo.findByWalletId(walletId);
 		return AccountUtils.convertToBankAccountDtoList(bankAccountList);
 	}
 
 	@Override
-	public WalletDTO viewAccount(BankAccount bacc) {
-		BankAccount bankAccount = accountRepo.findByBankAccount(bacc);
+	public WalletDTO viewAccount(int accountNo, String ifscCode) {
+		AccountId id = new AccountId(accountNo,ifscCode);
+		BankAccount bankAccount = accountRepo.findById(id).orElse(null);
+		if(bankAccount==null) {
+			throw new InvalidInputException("Wrong credentials");
+		}
 		Wallet wallet = bankAccount.getWallet();
 		return WalletUtils.convertToWalletDto(wallet);
 	}
+
+	
 
 }

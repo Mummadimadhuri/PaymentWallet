@@ -32,7 +32,7 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public void deleteBenificiary(BenificiaryDetails bd) {
-		if(ibenificiaryrepo.findByMobileNumber(bd.getMobileNumber())!=null) {
+		if(ibenificiaryrepo.findById(bd.getMobileNumber())!=null) {
 			ibenificiaryrepo.delete(bd);
 		}
 		else {
@@ -41,8 +41,11 @@ public class BenificiaryService implements IBenificiaryService {
 	}
 
 	@Override
-	public BenificiaryDetailsDTO viewBenificiary(BenificiaryDetails bd) {
-		BenificiaryDetails benificiarydetails = ibenificiaryrepo.viewBenificiary(bd);
+	public BenificiaryDetailsDTO viewBenificiary(String mobileNo) {
+		BenificiaryDetails benificiarydetails = ibenificiaryrepo.findById(mobileNo).orElse(null);
+		if(benificiarydetails==null) {
+			throw new InvalidInputException("Mobile no is not registered to any benificiary");
+		}
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
 

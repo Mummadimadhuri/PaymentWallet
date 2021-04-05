@@ -1,22 +1,24 @@
 package com.capg.payment_wallet_application.beans;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@IdClass(AccountId.class)
 public class BankAccount {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int accountNo;
 	
+	@Id
 	@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$",
 			message = "IFSC code must have 4 alphabets followed by 7 numbers total 11 characters")
 	private String ifscCode;
@@ -28,7 +30,7 @@ public class BankAccount {
 	@DecimalMin(value="1000.0",message = "balance must be a number at least 1000")
 	private double balance;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Wallet wallet;
 
 	public BankAccount() {
@@ -43,6 +45,14 @@ public class BankAccount {
 		this.bankName = bankName;
 		this.balance = balance;
 		this.wallet = wallet;
+	}
+
+	public int getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(int accountNo) {
+		this.accountNo = accountNo;
 	}
 
 	public String getIfscCode() {
