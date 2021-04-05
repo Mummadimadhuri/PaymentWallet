@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.payment_wallet_application.beans.BillPayment;
+import com.capg.payment_wallet_application.dto.BillPaymentDTO;
 import com.capg.payment_wallet_application.service.IBillPaymentService;
 
 @RestController
@@ -24,14 +25,14 @@ public class BillPaymentController {
 	final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	@PostMapping(value="/add_bill",consumes ="application/json")
-	public BillPayment addBillPayment(@RequestBody BillPayment payment) {
+	public BillPaymentDTO addBillPayment(@RequestBody BillPayment payment) {
 		LOGGER.info("BillPayment added succesfully");
 		return billService.addBillPayment(payment);
 	}
 
 	
 	@GetMapping(value="/view", produces = "application/json")
-	public List<BillPayment> viewBillPayment(BillPayment payment) {
+	public List<BillPaymentDTO> viewBillPayment(BillPayment payment) {
 		LOGGER.info("BillPayment is listed below");
 		return billService.viewBillPayment(payment);
 	}
