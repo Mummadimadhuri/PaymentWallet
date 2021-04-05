@@ -16,7 +16,7 @@ public class TransactionDTO {
 
 	private LocalDate transactionDate;
 	
-	public Wallet wallet;
+	private Wallet wallet;
 	private double amount;
 	private String description;
 
