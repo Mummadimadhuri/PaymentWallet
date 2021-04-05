@@ -18,35 +18,30 @@ import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
 import com.capg.payment_wallet_application.service.TransactionService;
 
-
-
 @RestController
 @RequestMapping("/transaction")
 public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;
-	
-	
+
 	@PostMapping(value = "/add", consumes = "application/json")
-	public TransactionDTO addTransaction (@RequestBody Transaction tran)
-	{
+	public TransactionDTO addTransaction(@RequestBody Transaction tran) {
 		return transactionService.addTransaction(tran);
 	}
-	
+
 	@GetMapping(value = "/get-wallet-transaction/{walletId}/{balance}", produces = "application/json")
-	public List<TransactionDTO> viewAllTransactions (Wallet wallet) {
+	public List<TransactionDTO> viewAllTransactions(Wallet wallet) {
 		return transactionService.viewAllTransactions(wallet);
 	}
-	
+
 	@GetMapping(value = "/get-all-betweendates/{from}/{to}", produces = "application/json")
-	public List<TransactionDTO> viewTransactionsByDate(@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate from,@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate to)
-	{
-		return transactionService.viewTransactionsByDate(from,to);
+	public List<TransactionDTO> viewTransactionsByDate(@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate from,
+			@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate to) {
+		return transactionService.viewTransactionsByDate(from, to);
 	}
-	
+
 	@GetMapping(value = "/get-all-types/{type}", produces = "application/json")
-	public List<TransactionDTO> viewAllTransactions(@PathVariable String type)
-	{
+	public List<TransactionDTO> viewAllTransactions(@PathVariable String type) {
 		return transactionService.viewAllTransactions(type);
 	}
 }
