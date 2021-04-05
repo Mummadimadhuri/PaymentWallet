@@ -14,7 +14,7 @@ public interface IBenificiaryService {
 
 	public void deleteBenificiary(BenificiaryDetails bd);
 
-	public BenificiaryDetailsDTO viewBenificiary(BenificiaryDetails bd);
+	public BenificiaryDetailsDTO viewBenificiary(String mobileNo);
 
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(Customer customer);
 
