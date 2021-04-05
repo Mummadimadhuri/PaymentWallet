@@ -2,5 +2,5 @@ package com.capg.payment_wallet_application.beans;
 
 public enum BillType {
 
-	DTH,MobilePrepaid,MobilePostpaid,CreditCard,LICPremium,LPG;
+	DTH,MOBILEPREPAID,MOBILEPOSTPAID,CREDITCARD,LICPREMIUM,LPG;
 }
