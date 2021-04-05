@@ -16,17 +16,16 @@ import com.capg.payment_wallet_application.service.IBillPaymentService;
 @RestController
 @RequestMapping("/bill-payment")
 public class BillPaymentController {
-	
+
 	@Autowired
 	IBillPaymentService billService;
-	
-	@PostMapping(value="/add_bill",consumes ="application/json")
+
+	@PostMapping(value = "/add_bill", consumes = "application/json")
 	public BillPaymentDTO addBillPayment(@RequestBody BillPayment payment) {
 		return billService.addBillPayment(payment);
 	}
 
-	
-	@GetMapping(value="/view", produces = "application/json")
+	@GetMapping(value = "/view", produces = "application/json")
 	public List<BillPaymentDTO> viewBillPayment(BillPayment payment) {
 		return billService.viewBillPayment(payment);
 	}

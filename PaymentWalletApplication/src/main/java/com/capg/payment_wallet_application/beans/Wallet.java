@@ -12,10 +12,10 @@ import javax.validation.constraints.DecimalMin;
 public class Wallet {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int walletId;
-	
-	@DecimalMin(value="1000.0",message="Balance must be atleast 1000.0")
+
+	@DecimalMin(value = "1000.0", message = "Balance must be atleast 1000.0")
 	private BigDecimal balance;
 
 	public Wallet() {
@@ -26,10 +26,11 @@ public class Wallet {
 		super();
 		this.balance = amount;
 	}
-	
+
 	public int getWalletId() {
 		return walletId;
 	}
+
 	public void setWalletId(int walletId) {
 		this.walletId = walletId;
 	}
@@ -44,9 +45,7 @@ public class Wallet {
 
 	@Override
 	public String toString() {
-		return "Wallet [walletId=" + walletId + ", balance=" + balance 	+ "]";
+		return "Wallet [walletId=" + walletId + ", balance=" + balance + "]";
 	}
-	
-	
-	
+
 }

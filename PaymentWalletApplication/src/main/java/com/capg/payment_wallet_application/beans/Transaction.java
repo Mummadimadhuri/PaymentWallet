@@ -1,6 +1,5 @@
 package com.capg.payment_wallet_application.beans;
 
-
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -20,26 +19,26 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Transaction {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int transactionId;
-	
-	@Pattern(regexp = "SEND|RECEIVE",message = "Transaction type should be either SEND or RECEIVE")
+
+	@Pattern(regexp = "SEND|RECEIVE", message = "Transaction type should be either SEND or RECEIVE")
 	private String transactionType;
-	
-	@Column(name = "transactiondate") 
+
+	@Column(name = "transactiondate")
 	@DateTimeFormat(iso = ISO.DATE)
 //	@Temporal(TemporalType.DATE)
 	private LocalDate transactionDate;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	public Wallet wallet;
-	
+
 	@NotNull
-	@DecimalMin(value="1.0", message = "amount should be at least 1.0")
+	@DecimalMin(value = "1.0", message = "amount should be at least 1.0")
 	private double amount;
-	
+
 	@Size(max = 100)
 	private String description;
 
@@ -56,7 +55,7 @@ public class Transaction {
 		this.amount = amount;
 		this.description = description;
 	}
-    
+
 	public int getTransactionId() {
 		return transactionId;
 	}
@@ -111,6 +110,5 @@ public class Transaction {
 				+ ", transactionDate=" + transactionDate + ", wallet=" + wallet + ", amount=" + amount
 				+ ", description=" + description + "]";
 	}
-	
-	
+
 }

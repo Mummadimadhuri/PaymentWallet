@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BankAccountDTO {
-	
+
 	private int accountNo;
 	private String ifscCode;
 	private String bankName;
@@ -15,7 +15,7 @@ public class BankAccountDTO {
 		super();
 	}
 
-	public BankAccountDTO(String ifscCode,String bankName, double balance,WalletDTO wallet) {
+	public BankAccountDTO(String ifscCode, String bankName, double balance, WalletDTO wallet) {
 		super();
 		this.ifscCode = ifscCode;
 		this.bankName = bankName;

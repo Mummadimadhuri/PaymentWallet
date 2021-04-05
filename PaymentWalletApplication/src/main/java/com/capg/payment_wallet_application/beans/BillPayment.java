@@ -19,27 +19,27 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 public class BillPayment {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int billId;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
-	
+
 	@Min(value = 0)
 	@Max(value = 5)
 	private BillType billtype;
-	
-	@DecimalMin(value = "1.0", message="amount should be at least 1.0")
+
+	@DecimalMin(value = "1.0", message = "amount should be at least 1.0")
 	private double amount;
-	
+
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate paymentDate;
-	
+
 	public BillPayment() {
 		super();
 	}
 
-	public BillPayment(Wallet wallet, BillType billtype, @DecimalMin("1000.0") double amount,LocalDate paymentDate) {
+	public BillPayment(Wallet wallet, BillType billtype, @DecimalMin("1000.0") double amount, LocalDate paymentDate) {
 		super();
 		this.wallet = wallet;
 		this.billtype = billtype;
@@ -84,6 +84,5 @@ public class BillPayment {
 		return "BillPayment [billId=" + billId + ", wallet=" + wallet + ", billtype=" + billtype + ", amount=" + amount
 				+ ", paymentDate=" + paymentDate + "]";
 	}
-	
-	
+
 }

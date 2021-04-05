@@ -14,19 +14,19 @@ import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 
 @Service
 public class BenificiaryService implements IBenificiaryService {
-	
+
 	@Autowired
-	IBenificiaryRepository ibenificiaryrepo ;
+	IBenificiaryRepository ibenificiaryrepo;
 
 	@Override
 	public BenificiaryDetailsDTO addBenificiary(BenificiaryDetails bd) {
-		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save( bd);
+		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save(bd);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
 
 	@Override
 	public BenificiaryDetailsDTO updateBenificiary(BenificiaryDetails bd) {
-		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save( bd);
+		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save(bd);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
 
@@ -34,8 +34,7 @@ public class BenificiaryService implements IBenificiaryService {
 	public void deleteBenificiary(BenificiaryDetails bd) {
 		if(ibenificiaryrepo.findById(bd.getMobileNumber())!=null) {
 			ibenificiaryrepo.delete(bd);
-		}
-		else {
+		} else {
 			throw new InvalidInputException("Benificiary is not present in the data base");
 		}
 	}
@@ -51,7 +50,7 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(Customer customer) {
-		List<BenificiaryDetails> list  = ibenificiaryrepo.viewAllBenificiary(customer);
+		List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(customer);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
 	}
 

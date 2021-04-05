@@ -10,17 +10,18 @@ import com.capg.payment_wallet_application.repo.IUserRepo;
 import com.capg.payment_wallet_application.util.CustomerUtils;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
 	@Autowired
 	private IUserRepo userRepo;
-	
+
 	@Override
 	public CustomerDTO validateLogin(String mobileNumber, String password) {
 		Customer customer = userRepo.validateLogin(mobileNumber, password);
+
 		if(customer==null) {
 			throw new InvalidInputException("Wrong Credentials");
-		}else {
+		} else {
 			return CustomerUtils.convertToCustomerDto(customer);
 		}
 	}

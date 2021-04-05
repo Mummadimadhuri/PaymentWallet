@@ -9,8 +9,11 @@ import com.capg.payment_wallet_application.dto.TransactionDTO;
 
 public interface ITransactionService {
 
-	public TransactionDTO addTransaction (Transaction tran);
-	public List<TransactionDTO> viewAllTransactions (Wallet wallet);
+	public TransactionDTO addTransaction(Transaction tran);
+
+	public List<TransactionDTO> viewAllTransactions(Wallet wallet);
+
 	public List<TransactionDTO> viewAllTransactions(String type);
+
 	public List<TransactionDTO> viewTransactionsByDate(LocalDate from, LocalDate to);
 }

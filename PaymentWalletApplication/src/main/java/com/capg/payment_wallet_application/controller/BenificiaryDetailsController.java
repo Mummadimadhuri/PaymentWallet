@@ -20,39 +20,33 @@ import com.capg.payment_wallet_application.service.IBenificiaryService;
 @RestController
 @RequestMapping("/BenifiaciaryDetails")
 public class BenificiaryDetailsController {
-     
+
 	@Autowired
 	private IBenificiaryService benificiaryservice;
-	
-	
+
 	@PostMapping(value = "/add", consumes = "application/json")
-	public BenificiaryDetailsDTO addBenificiary(@RequestBody BenificiaryDetails bd)
-	{
-		return benificiaryservice.addBenificiary(bd) ;
+	public BenificiaryDetailsDTO addBenificiary(@RequestBody BenificiaryDetails bd) {
+		return benificiaryservice.addBenificiary(bd);
 	}
-	
+
 	@PutMapping("/updateAccount")
-	public BenificiaryDetailsDTO updateBenificiary(@RequestBody BenificiaryDetails bd)
-	{
+	public BenificiaryDetailsDTO updateBenificiary(@RequestBody BenificiaryDetails bd) {
 		return benificiaryservice.updateBenificiary(bd);
 	}
-	
+
 	@DeleteMapping("/delete")
-	public void deleteBenificiary(@RequestBody BenificiaryDetails bd)
-	{
+	public void deleteBenificiary(@RequestBody BenificiaryDetails bd) {
 		benificiaryservice.deleteBenificiary(bd);
 	}
 	
 	@GetMapping("/viewbenificiary/{mobileNo}")
-	public BenificiaryDetailsDTO viewBenificiary(@PathVariable String mobileNo) 
-	{
+	public BenificiaryDetailsDTO viewBenificiary(@PathVariable String mobileNo) {
 		return benificiaryservice.viewBenificiary(mobileNo);		
 	}
-	
+
 	@GetMapping("/view-all-benificiary")
-	public List<BenificiaryDetailsDTO> viewAllBenificiary(@RequestBody Customer customer)
-	{
+	public List<BenificiaryDetailsDTO> viewAllBenificiary(@RequestBody Customer customer) {
 		return benificiaryservice.viewAllBenificiary(customer);
 	}
-	
+
 }

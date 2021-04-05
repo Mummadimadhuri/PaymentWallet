@@ -25,27 +25,29 @@ public class WalletController {
 	private WalletService walletService;
 
 	@PostMapping("/createAccount/{name}/{mobileno}/{amount}")
-	public CustomerDTO createAccount(@PathVariable String name,@PathVariable String mobileno,@PathVariable BigDecimal amount) {
+	public CustomerDTO createAccount(@PathVariable String name, @PathVariable String mobileno,
+			@PathVariable BigDecimal amount) {
 		return walletService.createAccount(name, mobileno, amount);
 	}
-	
+
 	@GetMapping("/showBalance/{mobileno}")
 	public CustomerDTO showBalance(@PathVariable String mobileno) {
 		return walletService.showBalance(mobileno);
 	}
 
 	@PutMapping("/fundTransfer/{sourceMobileNo}/{targetMobileNo}/{amount}")
-	public CustomerDTO fundTransfer(@PathVariable String sourceMobileNo,@PathVariable String targetMobileNo,@PathVariable BigDecimal amount) {
+	public CustomerDTO fundTransfer(@PathVariable String sourceMobileNo, @PathVariable String targetMobileNo,
+			@PathVariable BigDecimal amount) {
 		return walletService.fundTransfer(sourceMobileNo, targetMobileNo, amount);
 	}
 
 	@PutMapping("/depositAmount/{mobileNo}/{amount}")
-	public CustomerDTO depositAmount(@PathVariable String mobileNo,@PathVariable BigDecimal amount) {
+	public CustomerDTO depositAmount(@PathVariable String mobileNo, @PathVariable BigDecimal amount) {
 		return walletService.depositAmount(mobileNo, amount);
 	}
 
 	@PutMapping("/withdrawAmount/{mobileNo}/{amount}")
-	public CustomerDTO withdrawAmount(@PathVariable String mobileNo,@PathVariable BigDecimal amount) {
+	public CustomerDTO withdrawAmount(@PathVariable String mobileNo, @PathVariable BigDecimal amount) {
 		return walletService.withdrawAmount(mobileNo, amount);
 	}
 
@@ -60,8 +62,8 @@ public class WalletController {
 	}
 
 	@PutMapping("/addMoney/{amount}")
-	public CustomerDTO addMoney(@RequestBody Wallet wallet,@PathVariable double amount) {
+	public CustomerDTO addMoney(@RequestBody Wallet wallet, @PathVariable double amount) {
 		return walletService.addMoney(wallet, amount);
 	}
-	
+
 }

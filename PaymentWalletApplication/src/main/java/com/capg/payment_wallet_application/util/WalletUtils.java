@@ -7,9 +7,9 @@ import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.WalletDTO;
 
 public class WalletUtils {
-	
+
 	private WalletUtils() {
-		
+
 	}
 
 	public static List<WalletDTO> convertToWalletDtoList(List<Wallet> list) {
@@ -21,7 +21,7 @@ public class WalletUtils {
 
 	public static Wallet convertToWallet(WalletDTO dto) {
 		Wallet wallet = new Wallet();
-        wallet.setWalletId(dto.getWalletId());
+		wallet.setWalletId(dto.getWalletId());
 		wallet.setBalance(dto.getBalance());
 		return wallet;
 	}

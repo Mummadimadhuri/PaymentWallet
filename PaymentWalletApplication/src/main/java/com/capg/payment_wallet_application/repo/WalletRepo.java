@@ -11,18 +11,15 @@ import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Wallet;
 
 @Repository
-public interface WalletRepo extends JpaRepository<Customer,Integer> {
+public interface WalletRepo extends JpaRepository<Customer, Integer> {
 
-	
-	
 	@Query("select c from Customer c where c.mobileNo = :mobileNo")
 	public Customer findOne(@Param(value = "mobileNo") String mobileNo);
-	
+
 	@Query("select c from Customer c")
 	public List<Customer> getList();
-	
-	
+
 	public Customer findByWallet(Wallet wallet);
-	
+
 	public Customer findByMobileNo(String sourceMobileNo);
 }

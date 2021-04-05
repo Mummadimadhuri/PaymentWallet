@@ -7,6 +7,9 @@ import javax.validation.constraints.Pattern;
 @Entity
 public class BenificiaryDetails {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int benificiaryId;
 	
 	@Pattern(regexp="^[A-Za-z ]{3,30}$",message = "Name should be in the range of 3 to 30 characters")
 	private String name;
@@ -14,14 +17,16 @@ public class BenificiaryDetails {
 	@Id
 	@Pattern(regexp = "^[6-9]{1}[0-9]{9}$",
 			message = "Mobile number should have exactly 10 digits and start with a number 6 to 9")
+
 	private String mobileNumber;
 
 	public BenificiaryDetails() {
-		
+
 		super();
 	}
 
-	public BenificiaryDetails(@Pattern(regexp = "^[A-Za-z ]{3,30}$", message = "Name should be in the range of 3 to 30 characters") String name,
+	public BenificiaryDetails(
+			@Pattern(regexp = "^[A-Za-z ]{3,30}$", message = "Name should be in the range of 3 to 30 characters") String name,
 			@Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Mobile number should have exactly 10 digits and start with a number 6 to 9") String mobileNumber) {
 		super();
 		this.name = name;

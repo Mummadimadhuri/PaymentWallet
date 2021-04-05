@@ -1,7 +1,5 @@
 package com.capg.payment_wallet_application.dto;
 
-
-
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,11 +8,12 @@ public class BenificiaryDetailsDTO {
 	private int benificiaryId;
 	private String name;
 	private String mobileNumber;
+
 	public BenificiaryDetailsDTO() {
 		super();
 	}
 
-	public BenificiaryDetailsDTO( String name, String mobileNumber) {
+	public BenificiaryDetailsDTO(String name, String mobileNumber) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;

@@ -38,6 +38,7 @@ public class AccountController {
 		return accountService.removeAccount(bacc);
 	}
 
+
 	@GetMapping("/view/{accountNo}/{ifscCode}")
 	public WalletDTO viewAccount(@PathVariable int accountNo,@PathVariable String ifscCode) {
 		logger.info("wallet for the account fetched");
@@ -48,6 +49,7 @@ public class AccountController {
 	public List<BankAccountDTO> viewAllAccounts(@PathVariable int walletId) {
 		logger.info("all accounts linked with the wallet are fetched");
 		return accountService.viewAllAccounts(walletId);
+
 
 	}
 
