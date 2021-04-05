@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.capg.payment_wallet_application.beans.Customer;
 
 @Repository
-public interface IUserRepo extends JpaRepository<Customer,String>{
+public interface IUserRepo extends JpaRepository<Customer, String> {
 
 	@Query("select c from Customer c where c.mobileNo = :mobileNumber and c.password = :password")
-	public Customer validateLogin(@Param(value="mobileNumber") String mobileNumber,@Param(value="password") String password);
+	public Customer validateLogin(@Param(value = "mobileNumber") String mobileNumber,
+			@Param(value = "password") String password);
 }

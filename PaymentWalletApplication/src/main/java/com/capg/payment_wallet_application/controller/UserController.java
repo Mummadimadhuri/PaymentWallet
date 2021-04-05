@@ -15,9 +15,9 @@ public class UserController {
 
 	@Autowired
 	private IUserService userService;
-	
+
 	@GetMapping("/validate/{mobileNo}/{password}")
-	public CustomerDTO validateLogin(@PathVariable String mobileNo,@PathVariable String password) {
-		return userService.validateLogin(mobileNo, password); 
+	public CustomerDTO validateLogin(@PathVariable String mobileNo, @PathVariable String password) {
+		return userService.validateLogin(mobileNo, password);
 	}
 }

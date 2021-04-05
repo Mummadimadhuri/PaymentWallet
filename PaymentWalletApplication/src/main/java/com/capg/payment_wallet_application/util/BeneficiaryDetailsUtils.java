@@ -6,9 +6,9 @@ import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 
 public class BeneficiaryDetailsUtils {
-	
+
 	private BeneficiaryDetailsUtils() {
-		
+
 	}
 
 	public static List<BenificiaryDetailsDTO> convertToBenificiaryDetailsDtoList(List<BenificiaryDetails> list) {
@@ -17,20 +17,22 @@ public class BeneficiaryDetailsUtils {
 			dtolist.add(convertToBenificiaryDetailsDto(BenificiaryDetails));
 		return dtolist;
 	}
+
 	public static BenificiaryDetails convertToBenificiaryDetails(BenificiaryDetailsDTO dto) {
 		BenificiaryDetails benificiarydetails = new BenificiaryDetails();
-	
-		    benificiarydetails.setMobileNumber(dto.getMobileNumber());
-		    benificiarydetails.setName(dto.getName());
-			return benificiarydetails;
-		
+
+		benificiarydetails.setMobileNumber(dto.getMobileNumber());
+		benificiarydetails.setName(dto.getName());
+		return benificiarydetails;
+
 	}
+
 	public static BenificiaryDetailsDTO convertToBenificiaryDetailsDto(BenificiaryDetails benificiarydetails) {
 		BenificiaryDetailsDTO benificiarydetailsDTO = new BenificiaryDetailsDTO();
-	
-		    benificiarydetailsDTO.setMobileNumber( benificiarydetails.getMobileNumber());
-		    benificiarydetailsDTO.setName( benificiarydetails.getName());
-			return  benificiarydetailsDTO;
-		
+
+		benificiarydetailsDTO.setMobileNumber(benificiarydetails.getMobileNumber());
+		benificiarydetailsDTO.setName(benificiarydetails.getName());
+		return benificiarydetailsDTO;
+
 	}
 }

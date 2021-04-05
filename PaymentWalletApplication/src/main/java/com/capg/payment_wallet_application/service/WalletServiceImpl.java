@@ -24,16 +24,17 @@ public class WalletServiceImpl implements WalletService {
 
 	String invalidMobileNo = "Mobile number should be a 10 digit number with first digit from 6 to 9";
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
-	
+
 	@Override
-	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount) throws ConstraintViolationException {
+	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount)
+			throws ConstraintViolationException {
 		Customer customer = new Customer(name, mobileno);
 		Wallet wallet = customer.getWallet();
 		wallet.setBalance(amount);
 		customer.setWallet(wallet);
-	    return CustomerUtils.convertToCustomerDto(walletRepo.save(customer));
-	} 
-	
+		return CustomerUtils.convertToCustomerDto(walletRepo.save(customer));
+	}
+
 	@Override
 	public CustomerDTO showBalance(String mobileno) {
 		Customer customer = null;
@@ -58,22 +59,22 @@ public class WalletServiceImpl implements WalletService {
 		}
 		Customer source = walletRepo.findByMobileNo(sourceMobileNo);
 		Customer target = walletRepo.findByMobileNo(targetMobileNo);
-		if(source==null) {
+		if (source == null) {
 			throw new InvalidInputException(unregisteredMobileNo);
 		}
-		if(target==null) {
+		if (target == null) {
 			throw new InvalidInputException(unregisteredMobileNo);
 		}
 		Wallet sourceWallet = source.getWallet();
 		Wallet targetWallet = target.getWallet();
-		if(sourceWallet.getBalance().compareTo(amount)>=0) {
+		if (sourceWallet.getBalance().compareTo(amount) >= 0) {
 			throw new InsufficientBalanceException("Source doesn't have enough balance");
 		}
 		sourceWallet.setBalance(sourceWallet.getBalance().subtract(amount));
 		targetWallet.setBalance(targetWallet.getBalance().add(amount));
 		walletRepo.save(source);
 		walletRepo.save(target);
-		return  CustomerUtils.convertToCustomerDto(source);
+		return CustomerUtils.convertToCustomerDto(source);
 	}
 
 	@Override
@@ -117,7 +118,7 @@ public class WalletServiceImpl implements WalletService {
 
 	@Override
 	public List<CustomerDTO> getList() {
-		List<Customer> list= walletRepo.getList();
+		List<Customer> list = walletRepo.getList();
 		return CustomerUtils.convertToCustomerDtoList(list);
 	}
 

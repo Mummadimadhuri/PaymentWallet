@@ -10,9 +10,11 @@ import com.capg.payment_wallet_application.dto.WalletDTO;
 public interface IAccountService {
 
 	public WalletDTO addAccount(BankAccount bacc);
+
 	public WalletDTO removeAccount(BankAccount bacc);
+
 	public WalletDTO viewAccount(BankAccount bacc);
+
 	public List<BankAccountDTO> viewAllAccounts(Wallet wallet);
-	
-	
+
 }

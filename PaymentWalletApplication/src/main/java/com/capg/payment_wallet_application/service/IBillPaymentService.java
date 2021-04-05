@@ -8,5 +8,6 @@ import com.capg.payment_wallet_application.dto.BillPaymentDTO;
 public interface IBillPaymentService {
 
 	public BillPaymentDTO addBillPayment(BillPayment payment);
+
 	public List<BillPaymentDTO> viewBillPayment(BillPayment payment);
 }

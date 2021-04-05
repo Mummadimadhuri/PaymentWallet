@@ -14,20 +14,19 @@ import javax.validation.constraints.Size;
 public class BankAccount {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int accountNo;
-	
-	@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$",
-			message = "IFSC code must have 4 alphabets followed by 7 numbers total 11 characters")
+
+	@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$", message = "IFSC code must have 4 alphabets followed by 7 numbers total 11 characters")
 	private String ifscCode;
-	
+
 	@Pattern(regexp = "^[A-Za-z ]{3,20}$")
-	@Size(max=20,message = "Bank name should be less than 30 characters")
+	@Size(max = 20, message = "Bank name should be less than 30 characters")
 	private String bankName;
-	
-	@DecimalMin(value="1000.0",message = "balance must be a number at least 1000")
+
+	@DecimalMin(value = "1000.0", message = "balance must be a number at least 1000")
 	private double balance;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 
@@ -82,7 +81,5 @@ public class BankAccount {
 		return "BankAccount [accountNo=" + accountNo + ", ifscCode=" + ifscCode + ", bankName=" + bankName
 				+ ", balance=" + balance + ", wallet=" + wallet + "]";
 	}
-	
-	
-	
+
 }

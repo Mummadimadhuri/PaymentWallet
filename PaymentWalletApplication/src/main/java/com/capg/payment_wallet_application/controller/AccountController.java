@@ -24,27 +24,30 @@ public class AccountController {
 	@Autowired
 	AccountServiceImpl accountService;
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@PostMapping("/add")
 	public WalletDTO addAccount(@RequestBody BankAccount bacc) {
 		logger.info("Account added succesfully");
-		return accountService.addAccount(bacc);		
+		return accountService.addAccount(bacc);
 	}
+
 	@DeleteMapping("/remove")
 	public WalletDTO removeAccount(@RequestBody BankAccount bacc) {
 		logger.info("Account deleted");
-		return accountService.removeAccount(bacc);		
+		return accountService.removeAccount(bacc);
 	}
-	
+
 	@GetMapping("/view")
 	public WalletDTO viewAccount(@RequestBody BankAccount bacc) {
 		logger.info("wallet for the account fetched");
 		return accountService.viewAccount(bacc);
 	}
+
 	@GetMapping("/viewAll")
-	public List<BankAccountDTO> viewAllAccounts(@RequestBody Wallet wallet){
+	public List<BankAccountDTO> viewAllAccounts(@RequestBody Wallet wallet) {
 		logger.info("all accounts linked with the wallet are fetched");
 		return accountService.viewAllAccounts(wallet);
-		
+
 	}
-	
+
 }
