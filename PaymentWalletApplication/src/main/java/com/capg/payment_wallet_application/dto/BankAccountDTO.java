@@ -1,10 +1,6 @@
 package com.capg.payment_wallet_application.dto;
 
-
-
 import org.springframework.stereotype.Component;
-
-import com.capg.payment_wallet_application.beans.Wallet;
 
 @Component
 public class BankAccountDTO {
@@ -13,18 +9,18 @@ public class BankAccountDTO {
 	private String ifscCode;
 	private String bankName;
 	private double balance;
-	private Wallet wallet;
+	private WalletDTO walletDto;
 
 	public BankAccountDTO() {
 		super();
 	}
 
-	public BankAccountDTO( String ifscCode,String bankName, double balance,Wallet wallet) {
+	public BankAccountDTO(String ifscCode,String bankName, double balance,WalletDTO wallet) {
 		super();
 		this.ifscCode = ifscCode;
 		this.bankName = bankName;
 		this.balance = balance;
-		this.wallet = wallet;
+		this.walletDto = wallet;
 	}
 
 	public String getIfscCode() {
@@ -51,17 +47,17 @@ public class BankAccountDTO {
 		this.balance = balance;
 	}
 
-	public Wallet getWallet() {
-		return wallet;
+	public WalletDTO getWalletDto() {
+		return walletDto;
 	}
 
-	public void setWallet(Wallet wallet) {
-		this.wallet = wallet;
+	public void setWalletDto(WalletDTO wallet) {
+		this.walletDto = wallet;
 	}
 
 	@Override
 	public String toString() {
 		return "BankAccount [accountNo=" + accountNo + ", ifscCode=" + ifscCode + ", bankName=" + bankName
-				+ ", balance=" + balance + ", wallet=" + wallet + "]";
+				+ ", balance=" + balance + ", wallet=" + walletDto + "]";
 	}
 }

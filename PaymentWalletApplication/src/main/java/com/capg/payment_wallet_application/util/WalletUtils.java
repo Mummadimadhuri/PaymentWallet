@@ -7,9 +7,13 @@ import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.WalletDTO;
 
 public class WalletUtils {
+	
+	private WalletUtils() {
+		
+	}
 
 	public static List<WalletDTO> convertToWalletDtoList(List<Wallet> list) {
-		List<WalletDTO> dtolist = new ArrayList<WalletDTO>();
+		List<WalletDTO> dtolist = new ArrayList<>();
 		for (Wallet Wallet : list)
 			dtolist.add(convertToWalletDto(Wallet));
 		return dtolist;
@@ -24,8 +28,8 @@ public class WalletUtils {
 
 	public static WalletDTO convertToWalletDto(Wallet wallet) {
 		WalletDTO walletdto = new WalletDTO();
-		walletdto.setWalletId(walletdto.getWalletId());
-		walletdto.setBalance(walletdto.getBalance());
+		walletdto.setWalletId(wallet.getWalletId());
+		walletdto.setBalance(wallet.getBalance());
 		return walletdto;
 	}
 

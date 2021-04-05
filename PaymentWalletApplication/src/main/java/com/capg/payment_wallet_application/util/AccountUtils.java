@@ -8,8 +8,12 @@ import com.capg.payment_wallet_application.dto.BankAccountDTO;
 
 public class AccountUtils {
 
+	private AccountUtils() {
+		
+	}
+	
 	public static List<BankAccountDTO> convertToBankAccountDtoList(List<BankAccount> list){
-		List<BankAccountDTO> dtoList = new ArrayList<BankAccountDTO>();
+		List<BankAccountDTO> dtoList = new ArrayList<>();
 		for(BankAccount BankAccount : list)
 			dtoList.add(convertToBankAccountDto(BankAccount));
 		return dtoList;
@@ -20,7 +24,7 @@ public class AccountUtils {
 		bankAcc.setBalance(dto.getBalance());
 		bankAcc.setBankName(dto.getBankName());
 		bankAcc.setIfscCode(dto.getIfscCode());
-		bankAcc.setWallet(dto.getWallet());
+		bankAcc.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
 		return bankAcc;
 	}
 	
@@ -30,7 +34,7 @@ public class AccountUtils {
 		dto.setBalance(bankAcc.getBalance());
 		dto.setBankName(bankAcc.getBankName());
 		dto.setIfscCode(bankAcc.getIfscCode());
-		dto.setWallet(bankAcc.getWallet());
+		dto.setWalletDto(WalletUtils.convertToWalletDto(bankAcc.getWallet()));
 		
 		return dto;
 	}

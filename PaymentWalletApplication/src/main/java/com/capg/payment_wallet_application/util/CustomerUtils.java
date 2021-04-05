@@ -8,8 +8,13 @@ import com.capg.payment_wallet_application.dto.CustomerDTO;
 
 
 public class CustomerUtils {
+
+	private CustomerUtils() {
+		
+	}
+	
 	public static List<CustomerDTO> convertToCustomerDtoList(List<Customer> list) {
-		List<CustomerDTO> dtolist = new ArrayList<CustomerDTO>();
+		List<CustomerDTO> dtolist = new ArrayList<>();
 		for (Customer Customer : list)
 			dtolist.add(convertToCustomerDto(Customer));
 		return dtolist;
@@ -19,7 +24,7 @@ public class CustomerUtils {
 	
 			customer.setMobileNo(dto.getMobileNo());
 			customer.setName(dto.getName());
-			customer.setWallet(dto.getWallet());
+			customer.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
 			return customer;
 		
 	}
@@ -28,7 +33,7 @@ public class CustomerUtils {
 		CustomerDTO customerdto = new CustomerDTO();
 		customerdto.setMobileNo(customer.getMobileNo());
 		customerdto.setName(customer.getMobileNo());
-	    customerdto.setWallet(customer.getWallet());
+	    customerdto.setWalletDto(WalletUtils.convertToWalletDto(customer.getWallet()));
 		return customerdto;
   }
 }

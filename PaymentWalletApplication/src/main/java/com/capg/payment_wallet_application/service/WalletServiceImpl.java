@@ -139,7 +139,7 @@ public class WalletServiceImpl implements WalletService {
 
 	private static boolean mobileNoValidation(String mobileNo) {
 		boolean flag = false;
-		if (Pattern.matches("^[6-9]{1}[0-9]{9}", mobileNo)) {
+		if (Pattern.matches("^[6-9][0-9]{9}$", mobileNo)) {
 			flag = true;
 		}
 		return flag;

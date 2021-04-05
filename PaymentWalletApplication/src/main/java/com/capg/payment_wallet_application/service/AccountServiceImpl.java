@@ -14,16 +14,16 @@ import com.capg.payment_wallet_application.util.AccountUtils;
 import com.capg.payment_wallet_application.util.WalletUtils;
 
 @Service
-public class AccountServiceImpl implements IAccountService{
+public class AccountServiceImpl implements IAccountService {
+
 	@Autowired
 	IAccountRepository accountRepo;
+
 	@Override
 	public WalletDTO addAccount(BankAccount bacc) {
-
 		accountRepo.save(bacc);
 		Wallet wallet = bacc.getWallet();
-		WalletDTO walletDto = WalletUtils.convertToWalletDto(wallet);
-		return walletDto;
+		return WalletUtils.convertToWalletDto(wallet);
 
 	}
 
@@ -36,21 +36,15 @@ public class AccountServiceImpl implements IAccountService{
 
 	@Override
 	public List<BankAccountDTO> viewAllAccounts(Wallet wallet) {
-		List<BankAccount> bankAccountList=accountRepo.findByWallet(wallet);
-		List<BankAccountDTO> BankAccountDtoList = AccountUtils.convertToBankAccountDtoList(bankAccountList);
-		return BankAccountDtoList;
+		List<BankAccount> bankAccountList = accountRepo.findByWallet(wallet);
+		return AccountUtils.convertToBankAccountDtoList(bankAccountList);
 	}
 
 	@Override
 	public WalletDTO viewAccount(BankAccount bacc) {
-		// TODO Auto-generated method stub
 		BankAccount bankAccount = accountRepo.findByBankAccount(bacc);
-		
 		Wallet wallet = bankAccount.getWallet();
-		
-		WalletDTO walletDto = WalletUtils.convertToWalletDto(wallet);
-		
-		return walletDto;
+		return WalletUtils.convertToWalletDto(wallet);
 	}
 
 }

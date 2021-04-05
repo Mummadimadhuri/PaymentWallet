@@ -2,7 +2,6 @@ package com.capg.payment_wallet_application.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,8 +46,7 @@ public class TransactionService implements ITransactionService {
 	public List<TransactionDTO> viewAllTransactions(Wallet wallet) {
 
 		List<Transaction> list = transactionRepo.viewAllTransactions(wallet);
-		List<TransactionDTO> dtoList = TransactionUtils.convertToTransactionDtoList(list);
-		return dtoList;
+		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
 	@Override
@@ -59,23 +57,20 @@ public class TransactionService implements ITransactionService {
 		} else {
 			throw new InvalidInputException("Transaction types are only either SEND or RECEIVE");
 		}
-		List<TransactionDTO> dtoList = TransactionUtils.convertToTransactionDtoList(list);
-		return dtoList;
+		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
 	@Override
 	public List<TransactionDTO> viewTransactionsByDate(@DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@DateTimeFormat(iso = ISO.DATE) LocalDate to) {
 		List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
-		List<TransactionDTO> dtoList = TransactionUtils.convertToTransactionDtoList(list);
-		return dtoList;
+		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
 	private static boolean transactionTypeValidation(String type) {
-		boolean flag = true;
-		List<String> list = Arrays.asList(new String[] { "SEND", "RECEIVE" });
-		if (!list.contains(type)) {
-			flag = false;
+		boolean flag = false;
+		if (type.equals("SEND") || type.equals("RECEIVE")) {
+			flag = true;
 		}
 		return flag;
 	}
