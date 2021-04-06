@@ -15,7 +15,7 @@ public class Wallet {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int walletId;
 
-	@DecimalMin(value = "1000.0", message = "Balance must be atleast 1000.0")
+	@DecimalMin(value = "1.0", message = "Balance must be atleast 1.0")
 	private BigDecimal balance;
 
 	public Wallet() {

@@ -10,6 +10,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 @ControllerAdvice
 public class Exceptions {
@@ -35,5 +36,13 @@ public class Exceptions {
 	public ResponseEntity<Object> exceptionMethodArgumentTypeMismatchException(
 			MethodArgumentTypeMismatchException exception) {
 		return new ResponseEntity<>("Invalid Date Format", HttpStatus.NOT_ACCEPTABLE);
+	}
+	
+	@ExceptionHandler(value=InvalidFormatException.class)
+	public ResponseEntity<Object> exceptionInvalidFormatException(InvalidFormatException exception){
+		if(exception.getTargetType()==com.capg.payment_wallet_application.beans.BillType.class) {
+			return new ResponseEntity<>("Enter a valid bill type",HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(exception.getTargetType(),HttpStatus.NOT_ACCEPTABLE);
 	}
 }

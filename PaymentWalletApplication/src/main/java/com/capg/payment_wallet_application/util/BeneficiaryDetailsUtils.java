@@ -23,6 +23,7 @@ public class BeneficiaryDetailsUtils {
 
 		benificiarydetails.setMobileNumber(dto.getMobileNumber());
 		benificiarydetails.setName(dto.getName());
+		benificiarydetails.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
 		return benificiarydetails;
 
 	}
@@ -32,6 +33,7 @@ public class BeneficiaryDetailsUtils {
 
 		benificiarydetailsDTO.setMobileNumber(benificiarydetails.getMobileNumber());
 		benificiarydetailsDTO.setName(benificiarydetails.getName());
+		benificiarydetailsDTO.setWalletDto(WalletUtils.convertToWalletDto(benificiarydetails.getWallet()));
 		return benificiarydetailsDTO;
 
 	}

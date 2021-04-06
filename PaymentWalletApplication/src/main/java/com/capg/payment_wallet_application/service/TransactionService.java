@@ -25,7 +25,7 @@ public class TransactionService implements ITransactionService {
 	public TransactionDTO addTransaction(Transaction tran) {
 		BigDecimal currentBalance = tran.getWallet().getBalance();
 		BigDecimal amount = (BigDecimal.valueOf(tran.getAmount()));
-		if ((amount.compareTo(currentBalance) < 0) && (tran.getTransactionType().equals("SEND"))) {
+		if ((amount.compareTo(currentBalance) <= 0) && (tran.getTransactionType().equals("SEND"))) {
 			currentBalance = currentBalance.subtract(amount);
 			tran.getWallet().setBalance(currentBalance);
 			Transaction transaction = transactionRepo.save(tran);

@@ -1,19 +1,26 @@
 package com.capg.payment_wallet_application.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
+import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
+import com.capg.payment_wallet_application.repo.ITransactionRepository;
 import com.capg.payment_wallet_application.repo.WalletRepo;
+import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 import com.capg.payment_wallet_application.util.CustomerUtils;
 
 @Service
@@ -21,7 +28,13 @@ public class WalletServiceImpl implements WalletService {
 
 	@Autowired
 	private WalletRepo walletRepo;
+	
+	@Autowired
+	private ITransactionRepository transactionRepo;
 
+	@Autowired
+	private IBenificiaryRepository benificiaryRepo;
+	
 	String invalidMobileNo = "Mobile number should be a 10 digit number with first digit from 6 to 9";
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 
@@ -50,6 +63,7 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	@Override
+	@Transactional
 	public CustomerDTO fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount) {
 		if (!mobileNoValidation(sourceMobileNo)) {
 			throw new InvalidInputException(invalidMobileNo);
@@ -67,11 +81,24 @@ public class WalletServiceImpl implements WalletService {
 		}
 		Wallet sourceWallet = source.getWallet();
 		Wallet targetWallet = target.getWallet();
-		if (sourceWallet.getBalance().compareTo(amount) >= 0) {
+		if (sourceWallet.getBalance().compareTo(amount) <= 0) {
 			throw new InsufficientBalanceException("Source doesn't have enough balance");
 		}
 		sourceWallet.setBalance(sourceWallet.getBalance().subtract(amount));
 		targetWallet.setBalance(targetWallet.getBalance().add(amount));
+		Transaction sourceTransaction = 
+				new Transaction("SEND",LocalDate.now(),sourceWallet,Double.parseDouble(amount.toString()),
+						"sending"+amount+"to"+targetMobileNo);
+		Transaction targetTransaction = 
+				new Transaction("RECEIVE",LocalDate.now(),targetWallet,Double.parseDouble(amount.toString()),
+						"receiving"+amount+"from"+sourceMobileNo);
+		BenificiaryDetails benificiary = new BenificiaryDetails(target.getName(),target.getMobileNo());
+		benificiary.setWallet(sourceWallet);
+		benificiaryRepo.save(benificiary);
+		transactionRepo.save(sourceTransaction);
+		transactionRepo.save(targetTransaction);
+		transactionRepo.save(sourceTransaction);
+		transactionRepo.save(targetTransaction);
 		walletRepo.save(source);
 		walletRepo.save(target);
 		return CustomerUtils.convertToCustomerDto(source);
