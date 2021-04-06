@@ -12,7 +12,7 @@ public interface IBenificiaryService {
 
 	public BenificiaryDetailsDTO updateBenificiary(BenificiaryDetails bd);
 
-	public void deleteBenificiary(BenificiaryDetails bd);
+	public String deleteBenificiary(BenificiaryDetails bd);
 
 	public BenificiaryDetailsDTO viewBenificiary(String mobileNo);
 

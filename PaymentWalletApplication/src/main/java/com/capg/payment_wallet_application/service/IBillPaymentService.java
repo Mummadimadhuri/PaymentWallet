@@ -9,5 +9,5 @@ public interface IBillPaymentService {
 
 	public BillPaymentDTO addBillPayment(BillPayment payment);
 
-	public List<BillPaymentDTO> viewBillPayment(BillPayment payment);
+	public BillPaymentDTO viewBillPayment(int billId);
 }

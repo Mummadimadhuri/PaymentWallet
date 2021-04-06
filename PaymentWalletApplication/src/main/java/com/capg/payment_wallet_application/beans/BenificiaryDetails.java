@@ -6,10 +6,6 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 public class BenificiaryDetails {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int benificiaryId;
 	
 	@Pattern(regexp="^[A-Za-z ]{3,30}$",message = "Name should be in the range of 3 to 30 characters")
 	private String name;
@@ -21,7 +17,6 @@ public class BenificiaryDetails {
 	private String mobileNumber;
 
 	public BenificiaryDetails() {
-
 		super();
 	}
 

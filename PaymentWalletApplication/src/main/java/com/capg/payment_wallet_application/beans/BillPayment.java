@@ -22,7 +22,7 @@ public class BillPayment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int billId;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Wallet wallet;
 
 	@Min(value = 0)

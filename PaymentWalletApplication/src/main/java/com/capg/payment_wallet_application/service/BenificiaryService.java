@@ -31,9 +31,10 @@ public class BenificiaryService implements IBenificiaryService {
 	}
 
 	@Override
-	public void deleteBenificiary(BenificiaryDetails bd) {
+	public String deleteBenificiary(BenificiaryDetails bd) {
 		if(ibenificiaryrepo.findById(bd.getMobileNumber())!=null) {
 			ibenificiaryrepo.delete(bd);
+			return "Benificiary Details is Deleted";
 		} else {
 			throw new InvalidInputException("Benificiary is not present in the data base");
 		}
