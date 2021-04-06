@@ -1,15 +1,13 @@
 package com.capg.payment_wallet_application.service;
 
 import java.math.BigDecimal;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.capg.payment_wallet_application.beans.BillPayment;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.BillPaymentDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
+import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.IBillPaymentRepository;
 import com.capg.payment_wallet_application.util.BillPaymentUtil;
 
@@ -35,9 +33,12 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 	}
 
 	@Override
-	public List<BillPaymentDTO> viewBillPayment(BillPayment payment) {
+	public BillPaymentDTO viewBillPayment(int billId) {
 
-		return BillPaymentUtil.convertToBillPaymentDtoList(billRepo.findAll());
-	}
-
+		BillPayment payment = billRepo.findById(billId).orElse(null);
+		if (payment == null) {
+			throw new InvalidInputException("Wrong Credentials");
+		} 
+	     return BillPaymentUtil.convertToBillPaymentDto(payment);
+		}
 }

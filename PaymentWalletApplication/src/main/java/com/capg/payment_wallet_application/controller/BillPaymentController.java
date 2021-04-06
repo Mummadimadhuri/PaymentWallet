@@ -26,7 +26,7 @@ public class BillPaymentController {
 	}
 
 	@GetMapping(value = "/view", produces = "application/json")
-	public List<BillPaymentDTO> viewBillPayment(BillPayment payment) {
-		return billService.viewBillPayment(payment);
+	public BillPaymentDTO viewBillPayment(int billId) {
+		return billService.viewBillPayment(billId);
 	}
 }
