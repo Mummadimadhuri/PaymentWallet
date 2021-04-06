@@ -22,7 +22,6 @@ import com.capg.payment_wallet_application.repo.IAccountRepository;
 import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
 import com.capg.payment_wallet_application.repo.ITransactionRepository;
 import com.capg.payment_wallet_application.repo.WalletRepo;
-import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 import com.capg.payment_wallet_application.util.CustomerUtils;
 
 @Service
@@ -44,9 +43,9 @@ public class WalletServiceImpl implements WalletService {
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 
 	@Override
-	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount)
+	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password)
 			throws ConstraintViolationException {
-		Customer customer = new Customer(name, mobileno);
+		Customer customer = new Customer(name, mobileno,Integer.valueOf(password.hashCode()).toString()/*password*/);
 		Wallet wallet = customer.getWallet();
 		wallet.setBalance(amount);
 		customer.setWallet(wallet);

@@ -14,8 +14,6 @@ class BenificiaryServiceTest {
 	
     @Autowired
 	BenificiaryService benificiaryService;
-    
- 
 	
 	@Test
 	void testAddBenificiary() {

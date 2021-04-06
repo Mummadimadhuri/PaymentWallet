@@ -24,10 +24,10 @@ public class WalletController {
 	@Autowired
 	private WalletService walletService;
 
-	@PostMapping("/createAccount/{name}/{mobileno}/{amount}")
+	@PostMapping("/createAccount/{name}/{mobileno}/{amount}/{password}")
 	public CustomerDTO createAccount(@PathVariable String name, @PathVariable String mobileno,
-			@PathVariable BigDecimal amount) {
-		return walletService.createAccount(name, mobileno, amount);
+			@PathVariable BigDecimal amount,@PathVariable String password) {
+		return walletService.createAccount(name, mobileno, amount,password);
 	}
 
 	@GetMapping("/showBalance/{mobileno}")
