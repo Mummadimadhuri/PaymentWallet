@@ -10,6 +10,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Transaction;
@@ -17,6 +18,7 @@ import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.capg.payment_wallet_application.repo.IAccountRepository;
 import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
 import com.capg.payment_wallet_application.repo.ITransactionRepository;
 import com.capg.payment_wallet_application.repo.WalletRepo;
@@ -34,6 +36,9 @@ public class WalletServiceImpl implements WalletService {
 
 	@Autowired
 	private IBenificiaryRepository benificiaryRepo;
+	
+	@Autowired
+	private IAccountRepository accountRepo;
 	
 	String invalidMobileNo = "Mobile number should be a 10 digit number with first digit from 6 to 9";
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
@@ -116,6 +121,7 @@ public class WalletServiceImpl implements WalletService {
 			throw new InvalidInputException(unregisteredMobileNo);
 		}
 		customer.getWallet().setBalance(customer.getWallet().getBalance().add(amount));
+		
 		walletRepo.save(customer);
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
@@ -159,6 +165,19 @@ public class WalletServiceImpl implements WalletService {
 	public CustomerDTO addMoney(Wallet wallet, double amount) {
 		Customer customer = walletRepo.findByWallet(wallet);
 		wallet = customer.getWallet();
+		List<BankAccount> accounts = accountRepo.findByWalletId(wallet.getWalletId());
+		BankAccount currAccount = null;
+		for(BankAccount account:accounts) {
+			if(account.getBalance()>=amount) {
+				currAccount = account;
+				break;
+			}
+		}
+		if(currAccount==null) {
+			throw new InsufficientBalanceException("None of your accounts have enough money");
+		}
+		currAccount.setBalance(currAccount.getBalance()-amount);
+		accountRepo.save(currAccount);
 		wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(amount)));
 		customer.setWallet(wallet);
 		walletRepo.save(customer);
