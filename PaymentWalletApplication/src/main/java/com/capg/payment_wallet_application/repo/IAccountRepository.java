@@ -11,12 +11,6 @@ import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.dto.WalletDTO;
 
 public interface IAccountRepository extends JpaRepository<BankAccount, AccountId> {
-	
-    @Query("select ba from BankAccount ba where ba = :bacc")
-    public WalletDTO viewAccount(@Param(value="bacc")BankAccount bacc);
-  
-	@Query("select bacc from BankAccount bacc where bacc = :bacc")
-	public BankAccount findByBankAccount(@Param(value="bacc") BankAccount bacc);
 
 	@Query("select bacc from BankAccount bacc where bacc.wallet.walletId=:walletId")
 	public List<BankAccount> findByWalletId(@Param("walletId") int walletId);

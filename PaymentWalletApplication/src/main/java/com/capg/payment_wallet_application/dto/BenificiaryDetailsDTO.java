@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class BenificiaryDetailsDTO {
 
-	private int benificiaryId;
 	private String name;
 	private String mobileNumber;
+	private WalletDTO walletDto;
 
 	public BenificiaryDetailsDTO() {
 		super();
@@ -37,7 +37,15 @@ public class BenificiaryDetailsDTO {
 
 	@Override
 	public String toString() {
-		return "BenificiaryDetails [benificiaryId=" + benificiaryId + ", name=" + name + ", mobileNumber="
+		return "BenificiaryDetails [ name=" + name + ", mobileNumber="
 				+ mobileNumber + "]";
+	}
+
+	public WalletDTO getWalletDto() {
+		return walletDto;
+	}
+
+	public void setWalletDto(WalletDTO walletDto) {
+		this.walletDto = walletDto;
 	}
 }
