@@ -17,8 +17,8 @@ public class UserService implements IUserService {
 
 	@Override
 	public CustomerDTO validateLogin(String mobileNumber, String password) {
-		Customer customer = userRepo.validateLogin(mobileNumber, Integer.valueOf(password.hashCode()).toString()/*password*/);
-
+		password = Integer.valueOf(password.hashCode()).toString();
+		Customer customer = userRepo.validateLogin(mobileNumber, password);
 		if(customer==null) {
 			throw new InvalidInputException("Wrong Credentials");
 		} else {
