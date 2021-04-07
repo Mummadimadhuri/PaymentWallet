@@ -26,7 +26,6 @@ public class AccountServiceImpl implements IAccountService {
 		accountRepo.save(bacc);
 		Wallet wallet = bacc.getWallet();
 		return WalletUtils.convertToWalletDto(wallet);
-
 	}
 
 	@Override
@@ -52,7 +51,4 @@ public class AccountServiceImpl implements IAccountService {
 		Wallet wallet = bankAccount.getWallet();
 		return WalletUtils.convertToWalletDto(wallet);
 	}
-
-	
-
 }

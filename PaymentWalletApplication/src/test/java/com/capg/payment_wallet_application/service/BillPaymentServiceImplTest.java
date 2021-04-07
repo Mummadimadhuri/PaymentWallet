@@ -27,7 +27,7 @@ class BillPaymentServiceImplTest {
 		LocalDate date = LocalDate.parse("2000-03-11");
 		BillPayment payment = new BillPayment(wallet,BillType.MOBILEPREPAID,33000,date);
 		BillPaymentDTO billPayment = billServiceImpl.addBillPayment(payment);
-		assertNotNull(billPayment);
+		assertEquals(33000,billPayment.getAmount());
 	}
 
 	@Test
