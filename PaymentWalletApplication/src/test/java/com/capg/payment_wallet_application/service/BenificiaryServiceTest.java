@@ -56,8 +56,7 @@ class BenificiaryServiceTest {
 
 	@Test
 	void testViewAllBenificiary() {
-		Customer customer = new Customer("Deepan Chakravarthy", "9789269680");
-		List<BenificiaryDetailsDTO> benificiaryDetails = benificiaryService.viewAllBenificiary(customer);
+		List<BenificiaryDetailsDTO> benificiaryDetails = benificiaryService.viewAllBenificiary(40);
 		assertNotNull(benificiaryDetails);
 	}
 }
