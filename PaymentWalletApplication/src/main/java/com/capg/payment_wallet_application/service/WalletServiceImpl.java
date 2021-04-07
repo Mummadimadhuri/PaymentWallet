@@ -22,7 +22,6 @@ import com.capg.payment_wallet_application.repo.IAccountRepository;
 import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
 import com.capg.payment_wallet_application.repo.ITransactionRepository;
 import com.capg.payment_wallet_application.repo.WalletRepo;
-import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 import com.capg.payment_wallet_application.util.CustomerUtils;
 
 @Service
@@ -44,9 +43,14 @@ public class WalletServiceImpl implements WalletService {
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 
 	@Override
-	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount)
+	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password)
 			throws ConstraintViolationException {
-		Customer customer = new Customer(name, mobileno);
+		if(!validatePassword(password)) {
+			throw new InvalidInputException("Password should contain at least one Capital letter, "
+					+ "one small letter, one number and one special character");
+		}
+		password = Integer.valueOf(password.hashCode()).toString();
+		Customer customer = new Customer(name, mobileno,password);
 		Wallet wallet = customer.getWallet();
 		wallet.setBalance(amount);
 		customer.setWallet(wallet);
@@ -187,6 +191,14 @@ public class WalletServiceImpl implements WalletService {
 	private static boolean mobileNoValidation(String mobileNo) {
 		boolean flag = false;
 		if (Pattern.matches("^[6-9][0-9]{9}$", mobileNo)) {
+			flag = true;
+		}
+		return flag;
+	}
+	
+	private static boolean validatePassword(String password) {
+		boolean flag = false;
+		if(Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", password)) {
 			flag = true;
 		}
 		return flag;

@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
-import com.capg.payment_wallet_application.dto.WalletDTO;
 
 public interface IAccountRepository extends JpaRepository<BankAccount, AccountId> {
 

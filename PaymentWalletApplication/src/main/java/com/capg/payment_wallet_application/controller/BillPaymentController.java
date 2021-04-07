@@ -1,10 +1,8 @@
 package com.capg.payment_wallet_application.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +18,7 @@ public class BillPaymentController {
 	@Autowired
 	IBillPaymentService billService;
 
-	@PostMapping(value = "/add_bill", consumes = "application/json")
+	@PutMapping(value = "/add_bill", consumes = "application/json")
 	public BillPaymentDTO addBillPayment(@RequestBody BillPayment payment) {
 		return billService.addBillPayment(payment);
 	}
