@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 
+@SpringBootTest
 class UserServiceTest {
 	
 	@Autowired
@@ -13,7 +16,7 @@ class UserServiceTest {
 
 	@Test
 	void testValidateLogin() {
-		CustomerDTO customer = userService.validateLogin("9876543210", "@Aa1@Aa1");
+		CustomerDTO customer = userService.validateLogin("9344479110", "Rohith@2000");
 		assertNotNull(customer);
 	}
 
