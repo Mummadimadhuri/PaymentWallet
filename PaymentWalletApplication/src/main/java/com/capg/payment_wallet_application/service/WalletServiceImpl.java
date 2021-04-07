@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +42,15 @@ public class WalletServiceImpl implements WalletService {
 	@Autowired
 	private IAccountRepository accountRepo;
 	
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	String invalidMobileNo = "Mobile number should be a 10 digit number with first digit from 6 to 9";
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 
 	@Override
 	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password)
 			throws ConstraintViolationException {
+		logger.info("createAccount() is get intiated");
 		if(!validatePassword(password)) {
 			throw new InvalidInputException("Password should contain at least one Capital letter, "
 					+ "one small letter, one number and one special character");
@@ -54,11 +60,13 @@ public class WalletServiceImpl implements WalletService {
 		Wallet wallet = customer.getWallet();
 		wallet.setBalance(amount);
 		customer.setWallet(wallet);
+		logger.info("createAccount() is get executed");
 		return CustomerUtils.convertToCustomerDto(walletRepo.save(customer));
 	}
 
 	@Override
 	public CustomerDTO showBalance(String mobileno) {
+		logger.info("showBalance() is get intiated");
 		Customer customer = null;
 		if (mobileNoValidation(mobileno)) {
 			customer = walletRepo.findOne(mobileno);
@@ -68,12 +76,14 @@ public class WalletServiceImpl implements WalletService {
 		if (customer == null) {
 			throw new InvalidInputException(unregisteredMobileNo);
 		}
+		logger.info("showBalance() is get executed");
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
 	@Transactional
 	public CustomerDTO fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount) {
+		logger.info("fundTransfer() is get intiated");
 		if (!mobileNoValidation(sourceMobileNo)) {
 			throw new InvalidInputException(invalidMobileNo);
 		}
@@ -108,12 +118,14 @@ public class WalletServiceImpl implements WalletService {
 		transactionRepo.save(targetTransaction);
 		walletRepo.save(source);
 		walletRepo.save(target);
+		logger.info("showBalance() is get executed");
 		return CustomerUtils.convertToCustomerDto(source);
 	}
 
 	@Override
 	public CustomerDTO depositAmount(String mobileNo, BigDecimal amount) {
 		Customer customer = null;
+		logger.info("depositAmount() is get intiated");
 		if (mobileNoValidation(mobileNo)) {
 			customer = walletRepo.findByMobileNo(mobileNo);
 		} else {
@@ -123,13 +135,14 @@ public class WalletServiceImpl implements WalletService {
 			throw new InvalidInputException(unregisteredMobileNo);
 		}
 		customer.getWallet().setBalance(customer.getWallet().getBalance().add(amount));
-		
 		walletRepo.save(customer);
+		logger.info("depositAmount() is get executed");
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
 	public CustomerDTO withdrawAmount(String mobileNo, BigDecimal amount) {
+		logger.info("withdrawAmount() is get intiated()");
 		Customer customer = null;
 		if (mobileNoValidation(mobileNo)) {
 			customer = walletRepo.findByMobileNo(mobileNo);
@@ -148,23 +161,29 @@ public class WalletServiceImpl implements WalletService {
 		}
 		customer.getWallet().setBalance(currentBalance);
 		walletRepo.save(customer);
+		logger.info("withdrawAmount() is get executed");
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
 	public List<CustomerDTO> getList() {
+		logger.info("list of customer is intiated");
 		List<Customer> list = walletRepo.getList();
+		logger.info("list of customer is get executed");
 		return CustomerUtils.convertToCustomerDtoList(list);
 	}
 
 	@Override
 	public CustomerDTO updateAccount(Customer customer) {
+		logger.info("updateAccount() is get intiated");
 		walletRepo.save(customer);
+		logger.info("updateAccount() is get executed");
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
 	@Override
 	public CustomerDTO addMoney(Wallet wallet, double amount) {
+		logger.info("addMoney() is get intiated");
 		Customer customer = walletRepo.findByWallet(wallet);
 		wallet = customer.getWallet();
 		List<BankAccount> accounts = accountRepo.findByWalletId(wallet.getWalletId());
@@ -183,6 +202,7 @@ public class WalletServiceImpl implements WalletService {
 		wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(amount)));
 		customer.setWallet(wallet);
 		walletRepo.save(customer);
+		logger.info("addMoney() is get executed");
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 

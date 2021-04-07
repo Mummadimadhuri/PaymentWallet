@@ -3,9 +3,10 @@ package com.capg.payment_wallet_application.service;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Wallet;
@@ -21,29 +22,36 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Autowired
 	IAccountRepository accountRepo;
-
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
 	public WalletDTO addAccount(BankAccount bacc) {
+		logger.info("addAccount() is get intiated");
 		accountRepo.save(bacc);
 		Wallet wallet = bacc.getWallet();
+		logger.info("addAccount() is get executed");
 		return WalletUtils.convertToWalletDto(wallet);
 	}
 
 	@Override
 	public WalletDTO removeAccount(BankAccount bacc) {
+		logger.info("removeAccount() is get intiated");
 		Wallet wallet = bacc.getWallet();
 		accountRepo.delete(bacc);
+		logger.info("removeAccount() is get exectued");
 		return WalletUtils.convertToWalletDto(wallet);
 	}
 
 	@Override
 	public List<BankAccountDTO> viewAllAccounts(int walletId) {
+		logger.info("viewAllAccounts() is get intiated");
 		List<BankAccount> bankAccountList = accountRepo.findByWalletId(walletId);
+		logger.info("viewAllAccounts() is get executed");
 		return AccountUtils.convertToBankAccountDtoList(bankAccountList);
 	}
 
 	@Override
 	public WalletDTO viewAccount(int accountNo, String ifscCode) {
+		logger.info("viewAccount() is get intiated");
 		if(validateIfscCode(ifscCode)) {
 			throw new InvalidInputException("IFSC code must have 4 alphabets followed by 7 numbers total 11 characters");
 		}
@@ -53,14 +61,17 @@ public class AccountServiceImpl implements IAccountService {
 			throw new InvalidInputException("Wrong credentials");
 		}
 		Wallet wallet = bankAccount.getWallet();
+		logger.info("viewAccount() is get executed");
 		return WalletUtils.convertToWalletDto(wallet);
 	}
 	
 	private boolean validateIfscCode(String ifscCode) {
+		logger.info("validateIfscCode() validation is start intiated");
 		boolean flag = true;
 		if(!Pattern.matches("^[A-Z]{4}[0-9]{7}$", ifscCode)) {
-			flag = false;
+		flag = false;
 		}
+		logger.info("validateIfscCode() validation is  get executed");
 		return flag;
 	}
 }

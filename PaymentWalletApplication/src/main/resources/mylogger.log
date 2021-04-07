@@ -1,0 +1,136 @@
+2021-04-07 20:59:04.625  INFO 11664 --- [main] c.c.p.PaymentWalletApplication           : Starting PaymentWalletApplication using Java 15.0.1 on DEEPAN with PID 11664 (C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication\bin\main started by ELCOT in C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication)
+2021-04-07 20:59:04.632  INFO 11664 --- [main] c.c.p.PaymentWalletApplication           : No active profile set, falling back to default profiles: default
+2021-04-07 20:59:07.428  INFO 11664 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-07 20:59:07.722  INFO 11664 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 270 ms. Found 6 JPA repository interfaces.
+2021-04-07 20:59:09.023  INFO 11664 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9191 (http)
+2021-04-07 20:59:09.045  INFO 11664 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-07 20:59:09.046  INFO 11664 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-04-07 20:59:09.336  INFO 11664 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-07 20:59:09.338  INFO 11664 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4546 ms
+2021-04-07 20:59:09.788  INFO 11664 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-07 20:59:09.982  INFO 11664 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-04-07 20:59:10.315  INFO 11664 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-04-07 20:59:10.578  INFO 11664 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-07 20:59:10.908  INFO 11664 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-07 20:59:11.069  INFO 11664 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-04-07 20:59:14.443  INFO 11664 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-07 20:59:14.463  INFO 11664 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-07 20:59:19.474  WARN 11664 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-07 20:59:19.868  INFO 11664 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-04-07 20:59:20.123  INFO 11664 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-07 20:59:20.691  WARN 11664 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 9191 is already in use
+2021-04-07 20:59:20.692  INFO 11664 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-07 20:59:20.702  INFO 11664 --- [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-07 20:59:20.707  INFO 11664 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-07 20:59:20.727  INFO 11664 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-07 20:59:20.734  INFO 11664 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-04-07 20:59:20.796  INFO 11664 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-04-07 20:59:20.854 ERROR 11664 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9191 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9191 or configure this application to listen on another port.
+
+2021-04-07 21:00:54.407  INFO 14624 --- [main] c.c.p.PaymentWalletApplication           : Starting PaymentWalletApplication using Java 15.0.1 on DEEPAN with PID 14624 (C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication\bin\main started by ELCOT in C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication)
+2021-04-07 21:00:54.425  INFO 14624 --- [main] c.c.p.PaymentWalletApplication           : No active profile set, falling back to default profiles: default
+2021-04-07 21:00:57.569  INFO 14624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-07 21:00:57.771  INFO 14624 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 182 ms. Found 6 JPA repository interfaces.
+2021-04-07 21:00:59.006  INFO 14624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9191 (http)
+2021-04-07 21:00:59.027  INFO 14624 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-07 21:00:59.028  INFO 14624 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.44]
+2021-04-07 21:00:59.275  INFO 14624 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-07 21:00:59.277  INFO 14624 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4561 ms
+2021-04-07 21:00:59.678  INFO 14624 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-07 21:00:59.791  INFO 14624 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.29.Final
+2021-04-07 21:01:00.154  INFO 14624 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-04-07 21:01:00.395  INFO 14624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-07 21:01:00.762  INFO 14624 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-07 21:01:00.837  INFO 14624 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2021-04-07 21:01:04.090  INFO 14624 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-07 21:01:04.115  INFO 14624 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-07 21:01:06.075  WARN 14624 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-07 21:01:06.501  INFO 14624 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-04-07 21:01:06.742  INFO 14624 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-07 21:01:07.164  INFO 14624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9191 (http) with context path ''
+2021-04-07 21:01:07.166  INFO 14624 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-04-07 21:01:07.216  INFO 14624 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-04-07 21:01:07.279  INFO 14624 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-04-07 21:01:07.956  INFO 14624 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: viewAllTransactionsUsingGET_1
+2021-04-07 21:01:08.096  INFO 14624 --- [main] c.c.p.PaymentWalletApplication           : Started PaymentWalletApplication in 16.569 seconds (JVM running for 21.009)
+2021-04-07 21:04:10.224  INFO 14624 --- [RMI TCP Connection(12)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-04-07 21:04:10.484  INFO 14624 --- [RMI TCP Connection(12)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-07 21:04:10.503  INFO 14624 --- [RMI TCP Connection(12)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-07 21:04:10.541  INFO 14624 --- [RMI TCP Connection(12)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-07 21:04:10.736  INFO 14624 --- [RMI TCP Connection(12)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+07-04-2021 21:04:23 - INFO  com.capg.payment_wallet_application.PaymentWalletApplication : Starting PaymentWalletApplication using Java 15.0.1 on DEEPAN with PID 5196 (C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication\bin\main started by ELCOT in C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication)
+07-04-2021 21:04:23 - INFO  com.capg.payment_wallet_application.PaymentWalletApplication : No active profile set, falling back to default profiles: default
+07-04-2021 21:04:26 - INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07-04-2021 21:04:26 - INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 210 ms. Found 6 JPA repository interfaces.
+07-04-2021 21:04:27 - INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 9191 (http)
+07-04-2021 21:04:28 - INFO  org.apache.catalina.core.StandardService : Starting service [Tomcat]
+07-04-2021 21:04:28 - INFO  org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.44]
+07-04-2021 21:04:28 - INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+07-04-2021 21:04:28 - INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4705 ms
+07-04-2021 21:04:28 - INFO  org.hibernate.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+07-04-2021 21:04:28 - INFO  org.hibernate.Version : HHH000412: Hibernate ORM core version 5.4.29.Final
+07-04-2021 21:04:29 - INFO  org.hibernate.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+07-04-2021 21:04:29 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+07-04-2021 21:04:29 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+07-04-2021 21:04:29 - INFO  org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+07-04-2021 21:04:33 - INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-04-2021 21:04:33 - INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-04-2021 21:04:35 - WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-04-2021 21:04:35 - INFO  springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+07-04-2021 21:04:35 - INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor : Initializing ExecutorService 'applicationTaskExecutor'
+07-04-2021 21:04:36 - INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 9191 (http) with context path ''
+07-04-2021 21:04:36 - INFO  springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper : Context refreshed
+07-04-2021 21:04:36 - INFO  springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+07-04-2021 21:04:36 - INFO  springfox.documentation.spring.web.scanners.ApiListingReferenceScanner : Scanning for api listing references
+07-04-2021 21:04:37 - INFO  springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator : Generating unique operation named: viewAllTransactionsUsingGET_1
+07-04-2021 21:04:37 - INFO  com.capg.payment_wallet_application.PaymentWalletApplication : Started PaymentWalletApplication in 15.648 seconds (JVM running for 19.192)
+07-04-2021 21:23:18 - INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+07-04-2021 21:23:18 - INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor : Shutting down ExecutorService 'applicationTaskExecutor'
+07-04-2021 21:23:18 - INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+07-04-2021 21:23:18 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+07-04-2021 21:23:18 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+07-04-2021 21:23:30 - INFO  com.capg.payment_wallet_application.PaymentWalletApplication : Starting PaymentWalletApplication using Java 15.0.1 on DEEPAN with PID 552 (C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication\bin\main started by ELCOT in C:\Users\ELCOT\git\PaymentWallet\PaymentWalletApplication)
+07-04-2021 21:23:30 - INFO  com.capg.payment_wallet_application.PaymentWalletApplication : No active profile set, falling back to default profiles: default
+07-04-2021 21:23:34 - INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+07-04-2021 21:23:34 - INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 214 ms. Found 6 JPA repository interfaces.
+07-04-2021 21:23:35 - INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port(s): 9191 (http)
+07-04-2021 21:23:35 - INFO  org.apache.catalina.core.StandardService : Starting service [Tomcat]
+07-04-2021 21:23:35 - INFO  org.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/9.0.44]
+07-04-2021 21:23:36 - INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+07-04-2021 21:23:36 - INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5433 ms
+07-04-2021 21:23:36 - INFO  org.hibernate.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+07-04-2021 21:23:36 - INFO  org.hibernate.Version : HHH000412: Hibernate ORM core version 5.4.29.Final
+07-04-2021 21:23:37 - INFO  org.hibernate.annotations.common.Version : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+07-04-2021 21:23:37 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+07-04-2021 21:23:38 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+07-04-2021 21:23:38 - INFO  org.hibernate.dialect.Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+07-04-2021 21:23:41 - INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-04-2021 21:23:41 - INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-04-2021 21:23:43 - WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-04-2021 21:23:43 - INFO  springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+07-04-2021 21:23:43 - INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor : Initializing ExecutorService 'applicationTaskExecutor'
+07-04-2021 21:23:44 - INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port(s): 9191 (http) with context path ''
+07-04-2021 21:23:44 - INFO  springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper : Context refreshed
+07-04-2021 21:23:44 - INFO  springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+07-04-2021 21:23:44 - INFO  springfox.documentation.spring.web.scanners.ApiListingReferenceScanner : Scanning for api listing references
+07-04-2021 21:23:45 - INFO  springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator : Generating unique operation named: viewAllTransactionsUsingGET_1
+07-04-2021 21:23:45 - INFO  com.capg.payment_wallet_application.PaymentWalletApplication : Started PaymentWalletApplication in 15.897 seconds (JVM running for 19.264)
+07-04-2021 21:26:56 - INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+07-04-2021 21:26:56 - INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor : Shutting down ExecutorService 'applicationTaskExecutor'
+07-04-2021 21:26:56 - INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+07-04-2021 21:26:56 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+07-04-2021 21:26:56 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.

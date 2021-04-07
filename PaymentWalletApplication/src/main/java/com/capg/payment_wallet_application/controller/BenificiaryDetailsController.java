@@ -2,6 +2,8 @@ package com.capg.payment_wallet_application.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,29 +27,36 @@ public class BenificiaryDetailsController {
 	@Autowired
 	private IBenificiaryService benificiaryservice;
 
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@PostMapping(value = "/add", consumes = "application/json")
 	public BenificiaryDetailsDTO addBenificiary(@RequestBody BenificiaryDetails bd) {
+		logger.info("Benificiary details added sucessfully");
 		return benificiaryservice.addBenificiary(bd);
 	}
 
 	@PutMapping("/updateAccount")
 	public BenificiaryDetailsDTO updateBenificiary(@RequestBody BenificiaryDetails bd) {
+		logger.info("Benificiary Details Updated sucessfully");
 		return benificiaryservice.updateBenificiary(bd);
 	}
 
 	@DeleteMapping("/delete")
 	public ResponseEntity<String>  deleteBenificiary(@RequestBody BenificiaryDetails bd) {
+		 logger.info("Benificiary Details deleted sucessfully");
 		 String response =benificiaryservice.deleteBenificiary(bd);
 		 return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@GetMapping("/viewbenificiary/{mobileNo}")
 	public BenificiaryDetailsDTO viewBenificiary(@PathVariable String mobileNo) {
+		logger.info("Details Of particular benificary is displayed sucessfully");
 		return benificiaryservice.viewBenificiary(mobileNo);		
 	}
 
 	@GetMapping("/view-all-benificiary/{walletId}")
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(@PathVariable int walletId) {
+		logger.info("Benificiary of particular wallet is displayed sucessfully");
 		return benificiaryservice.viewAllBenificiary(walletId);
 	}
 

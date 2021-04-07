@@ -81,5 +81,4 @@ public class BillPayment {
 		return "BillPayment [billId=" + billId + ", wallet=" + wallet + ", billtype=" + billType + ", amount=" + amount
 				+ ", paymentDate=" + paymentDate + "]";
 	}
-
 }

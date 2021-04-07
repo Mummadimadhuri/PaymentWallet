@@ -1,6 +1,9 @@
 package com.capg.payment_wallet_application.service;
 
 import java.math.BigDecimal;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.capg.payment_wallet_application.beans.BillPayment;
@@ -22,8 +25,11 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 	@Autowired
 	private WalletRepo walletRepo;
 	
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	public BillPaymentDTO addBillPayment(BillPayment payment) {
+		logger.info("addBillPayment() is get intiated");
 		BigDecimal currentBalance = payment.getWallet().getBalance();
 		BigDecimal amount = (BigDecimal.valueOf(payment.getAmount()));
 		if (amount.compareTo(currentBalance) <= 0) {
@@ -34,6 +40,7 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 			Customer customer = walletRepo.findByWallet(wallet);
 			customer.setWallet(wallet);
 			walletRepo.save(customer);
+			logger.info("addBillPayment() is get executed");
 			return BillPaymentUtil.convertToBillPaymentDto(billRepo.save(payment));
 		} else {
 			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
@@ -42,11 +49,12 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 
 	@Override
 	public BillPaymentDTO viewBillPayment(int billId) {
-
+		logger.info("viewBillPayment() is get intiated");
 		BillPayment payment = billRepo.findById(billId).orElse(null);
 		if (payment == null) {
 			throw new InvalidInputException("Wrong Credentials");
 		} 
+		logger.info("viewBillPayment() is get executed");
 	     return BillPaymentUtil.convertToBillPaymentDto(payment);
 		}
 }
