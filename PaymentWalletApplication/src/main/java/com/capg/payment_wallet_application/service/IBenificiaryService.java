@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
+import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 
 public interface IBenificiaryService {
@@ -16,6 +17,6 @@ public interface IBenificiaryService {
 
 	public BenificiaryDetailsDTO viewBenificiary(String mobileNo);
 
-	public List<BenificiaryDetailsDTO> viewAllBenificiary(Customer customer);
+	public List<BenificiaryDetailsDTO> viewAllBenificiary(int walletId);
 
 }

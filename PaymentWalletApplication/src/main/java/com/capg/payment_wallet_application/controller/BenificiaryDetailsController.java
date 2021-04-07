@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
-import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 import com.capg.payment_wallet_application.service.IBenificiaryService;
 
@@ -47,9 +46,9 @@ public class BenificiaryDetailsController {
 		return benificiaryservice.viewBenificiary(mobileNo);		
 	}
 
-	@GetMapping("/view-all-benificiary")
-	public List<BenificiaryDetailsDTO> viewAllBenificiary(@RequestBody Customer customer) {
-		return benificiaryservice.viewAllBenificiary(customer);
+	@GetMapping("/view-all-benificiary/{walletId}")
+	public List<BenificiaryDetailsDTO> viewAllBenificiary(@PathVariable int walletId) {
+		return benificiaryservice.viewAllBenificiary(walletId);
 	}
 
 }

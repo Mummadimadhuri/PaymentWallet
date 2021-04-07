@@ -50,8 +50,8 @@ public class BenificiaryService implements IBenificiaryService {
 	}
 
 	@Override
-	public List<BenificiaryDetailsDTO> viewAllBenificiary(Customer customer) {
-		List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(customer);
+	public List<BenificiaryDetailsDTO> viewAllBenificiary(int walletId) {
+		List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(walletId);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
 	}
 
