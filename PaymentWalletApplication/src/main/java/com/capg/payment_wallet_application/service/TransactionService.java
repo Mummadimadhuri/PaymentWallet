@@ -25,19 +25,19 @@ public class TransactionService implements ITransactionService {
 	public TransactionDTO addTransaction(Transaction tran) {
 		BigDecimal currentBalance = tran.getWallet().getBalance();
 		BigDecimal amount = (BigDecimal.valueOf(tran.getAmount()));
+		Transaction transaction = null;
 		if ((amount.compareTo(currentBalance) <= 0) && (tran.getTransactionType().equals("SEND"))) {
 			currentBalance = currentBalance.subtract(amount);
 			tran.getWallet().setBalance(currentBalance);
-			Transaction transaction = transactionRepo.save(tran);
-			return TransactionUtils.convertToTransactionDto(transaction);
+		    transaction = transactionRepo.save(tran);
 		} else if (tran.getTransactionType().equals("RECEIVE")) {
 			currentBalance = currentBalance.add(amount);
 			tran.getWallet().setBalance(currentBalance);
-			Transaction transaction = transactionRepo.save(tran);
-			return TransactionUtils.convertToTransactionDto(transaction);
+		     transaction = transactionRepo.save(tran);
 		} else {
 			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
 		}
+		return TransactionUtils.convertToTransactionDto(transaction);
 	}
 
 	@Override
