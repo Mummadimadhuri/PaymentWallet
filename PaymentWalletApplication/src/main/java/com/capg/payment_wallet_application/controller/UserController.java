@@ -10,7 +10,7 @@ import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.service.IUserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/pwa/user")
 public class UserController {
 
 	@Autowired

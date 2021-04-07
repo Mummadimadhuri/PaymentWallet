@@ -11,7 +11,7 @@ public interface ITransactionService {
 
 	public TransactionDTO addTransaction(Transaction tran);
 
-	public List<TransactionDTO> viewAllTransactions(Wallet wallet);
+	public List<TransactionDTO> viewAllTransactions(int walletId);
 
 	public List<TransactionDTO> viewAllTransactions(String type);
 

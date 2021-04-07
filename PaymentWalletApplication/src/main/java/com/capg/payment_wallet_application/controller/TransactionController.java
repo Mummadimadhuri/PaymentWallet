@@ -19,7 +19,7 @@ import com.capg.payment_wallet_application.dto.TransactionDTO;
 import com.capg.payment_wallet_application.service.TransactionService;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/api/pwa/transaction")
 public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;
@@ -29,9 +29,9 @@ public class TransactionController {
 		return transactionService.addTransaction(tran);
 	}
 
-	@GetMapping(value = "/get-wallet-transaction/{walletId}/{balance}", produces = "application/json")
-	public List<TransactionDTO> viewAllTransactions(Wallet wallet) {
-		return transactionService.viewAllTransactions(wallet);
+	@GetMapping(value = "/get-wallet-transaction/{walletId}", produces = "application/json")
+	public List<TransactionDTO> viewAllTransactions(@PathVariable int walletId) {
+		return transactionService.viewAllTransactions(walletId);
 	}
 
 	@GetMapping(value = "/get-all-betweendates/{from}/{to}", produces = "application/json")

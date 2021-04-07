@@ -12,13 +12,13 @@ import com.capg.payment_wallet_application.dto.BillPaymentDTO;
 import com.capg.payment_wallet_application.service.IBillPaymentService;
 
 @RestController
-@RequestMapping("/bill-payment")
+@RequestMapping("/api/pwa/bill-payment")
 public class BillPaymentController {
 
 	@Autowired
-	IBillPaymentService billService;
+	private IBillPaymentService billService;
 
-	@PutMapping(value = "/add_bill", consumes = "application/json")
+	@PutMapping(value = "/add-bill", consumes = "application/json")
 	public BillPaymentDTO addBillPayment(@RequestBody BillPayment payment) {
 		return billService.addBillPayment(payment);
 	}

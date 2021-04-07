@@ -19,7 +19,7 @@ import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 import com.capg.payment_wallet_application.service.IBenificiaryService;
 
 @RestController
-@RequestMapping("/BenifiaciaryDetails")
+@RequestMapping("/api/pwa/BenifiaciaryDetails")
 public class BenificiaryDetailsController {
 
 	@Autowired

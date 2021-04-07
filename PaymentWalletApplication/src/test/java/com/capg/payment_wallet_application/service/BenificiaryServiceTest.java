@@ -17,7 +17,7 @@ import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 class BenificiaryServiceTest {
 
 	@Autowired
-	BenificiaryService benificiaryService;
+	private BenificiaryService benificiaryService;
 	@Test
 	void testAddBenificiary() {
 		BigDecimal amount = new BigDecimal(10000);

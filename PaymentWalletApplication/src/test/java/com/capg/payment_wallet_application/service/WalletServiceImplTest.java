@@ -17,7 +17,7 @@ import com.capg.payment_wallet_application.dto.CustomerDTO;
 class WalletServiceImplTest {
 	
 	@Autowired
-	WalletServiceImpl walletService;
+	private WalletServiceImpl walletService;
 
 	@Test
 	void testCreateAccount() {

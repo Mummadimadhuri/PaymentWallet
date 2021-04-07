@@ -106,8 +106,6 @@ public class WalletServiceImpl implements WalletService {
 		benificiaryRepo.save(benificiary);
 		transactionRepo.save(sourceTransaction);
 		transactionRepo.save(targetTransaction);
-		transactionRepo.save(sourceTransaction);
-		transactionRepo.save(targetTransaction);
 		walletRepo.save(source);
 		walletRepo.save(target);
 		return CustomerUtils.convertToCustomerDto(source);

@@ -18,8 +18,8 @@ public interface ITransactionRepository extends JpaRepository<Transaction, Integ
 
 	
 
-	@Query("select t from Transaction t where t.wallet = :wallet")
-	public List<Transaction> viewAllTransactions (@Param(value = "wallet") Wallet wallet);
+	@Query("select t from Transaction t where t.wallet.walletId = :walletId")
+	public List<Transaction> viewAllTransactions (@Param(value = "walletId") int walletId);
 	
 	@Query("SELECT t FROM Transaction t WHERE t.transactionDate BETWEEN :from AND :to")
 	public List<Transaction> viewTransactionsByDate(@Param(value = "from") @DateTimeFormat(iso = ISO.DATE) LocalDate from,@Param(value = "to") @DateTimeFormat(iso = ISO.DATE) LocalDate to);

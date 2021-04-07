@@ -19,11 +19,11 @@ import com.capg.payment_wallet_application.dto.WalletDTO;
 import com.capg.payment_wallet_application.service.AccountServiceImpl;
 
 @RestController
-@RequestMapping("/account")
+@RequestMapping("/api/pwa/account")
 public class AccountController {
 
 	@Autowired
-	AccountServiceImpl accountService;
+	private AccountServiceImpl accountService;
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@PostMapping("/add")

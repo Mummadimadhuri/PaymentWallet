@@ -15,7 +15,7 @@ import com.capg.payment_wallet_application.dto.TransactionDTO;
 class TransactionServiceTest {
 
 	@Autowired
-	TransactionService transactionService;
+	private TransactionService transactionService;
 
 	@Test
 	void testAddTransaction() {
@@ -28,10 +28,7 @@ class TransactionServiceTest {
 
 	@Test
 	void testViewAllTransactionsWallet() {
-		BigDecimal balance = new BigDecimal(10000);
-		Wallet wallet = new Wallet(balance);
-		wallet.setWalletId(17);
-		List<TransactionDTO> tran = transactionService.viewAllTransactions(wallet);
+		List<TransactionDTO> tran = transactionService.viewAllTransactions(17);
 		assertNotNull(tran);
 	}
 

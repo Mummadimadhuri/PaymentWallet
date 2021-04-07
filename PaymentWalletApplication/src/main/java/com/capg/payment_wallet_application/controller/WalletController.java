@@ -18,7 +18,7 @@ import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.service.WalletService;
 
 @RestController
-@RequestMapping("/wallet")
+@RequestMapping("/api/pwa/wallet")
 public class WalletController {
 
 	@Autowired

@@ -24,7 +24,7 @@ public class BillPayment {
 	private Wallet wallet;
 
 	@Enumerated(EnumType.STRING)
-	private BillType billtype;
+	private BillType billType;
 
 	@DecimalMin(value = "1.0", message = "amount should be at least 1.0")
 	private double amount;
@@ -39,7 +39,7 @@ public class BillPayment {
 	public BillPayment(Wallet wallet, BillType billtype, @DecimalMin("1.0") double amount, LocalDate paymentDate) {
 		super();
 		this.wallet = wallet;
-		this.billtype = billtype;
+		this.billType = billtype;
 		this.amount = amount;
 		this.paymentDate = paymentDate;
 	}
@@ -53,11 +53,11 @@ public class BillPayment {
 	}
 
 	public BillType getBilltype() {
-		return billtype;
+		return billType;
 	}
 
 	public void setBilltype(BillType billtype) {
-		this.billtype = billtype;
+		this.billType = billtype;
 	}
 
 	public double getAmount() {
@@ -78,7 +78,7 @@ public class BillPayment {
 
 	@Override
 	public String toString() {
-		return "BillPayment [billId=" + billId + ", wallet=" + wallet + ", billtype=" + billtype + ", amount=" + amount
+		return "BillPayment [billId=" + billId + ", wallet=" + wallet + ", billtype=" + billType + ", amount=" + amount
 				+ ", paymentDate=" + paymentDate + "]";
 	}
 
