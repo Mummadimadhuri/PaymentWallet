@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
+import com.capg.payment_wallet_application.beans.Wallet;
 
 @Repository
 public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails,String> {
@@ -17,8 +18,9 @@ public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails
     @Query("select bd from BenificiaryDetails bd where bd = :bd ")
 	public BenificiaryDetails viewBenificiary(@Param(value="bd") BenificiaryDetails bd);
 
-    @Query("select bd from BenificiaryDetails bd")
-	public List<BenificiaryDetails> viewAllBenificiary(@Param(value="customer") Customer customer);
+//    @Query("select bacc from BankAccount bacc where bacc.wallet.walletId=:walletId")
+    @Query("select bd from BenificiaryDetails bd where bd.wallet.walletId=:walletId")
+	public List<BenificiaryDetails> viewAllBenificiary(@Param("walletId") int walletId);
 	
     public Optional<BenificiaryDetails> findById(String mobileNumber);
 }
