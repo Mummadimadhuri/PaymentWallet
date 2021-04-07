@@ -1,5 +1,10 @@
 package com.capg.payment_wallet_application.service;
 
+/* Author: Dharaniya Shree.T
+*  Date: 07-04-2021
+*  Description: This is Bill Payment Service Layer
+*/
+
 import java.math.BigDecimal;
 
 import org.slf4j.Logger;
@@ -27,6 +32,11 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 	
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	/* Author: Dharaniya Shree.T
+	*  Description: This method adds payment 
+	*  Input Params: BillPayment
+	*  Return value: BillPaymentDTO object
+	*/
 	@Override
 	public BillPaymentDTO addBillPayment(BillPayment payment) {
 		logger.info("addBillPayment() is get intiated");
@@ -46,7 +56,12 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
 		}
 	}
-
+	
+	/* Author: Dharaniya Shree.T
+	*  Description: This method adds payment 
+	*  Input Params: int
+	*  Return value: BillPaymentDTO object
+	*/
 	@Override
 	public BillPaymentDTO viewBillPayment(int billId) {
 		logger.info("viewBillPayment() is get intiated");

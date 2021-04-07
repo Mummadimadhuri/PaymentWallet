@@ -1,5 +1,10 @@
 package com.capg.payment_wallet_application.controller;
 
+/* Author: Dharaniya Shree.T
+*  Date: 07-04-2021
+*  Description: This is Bill Payment Controller Layer
+*/
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +27,22 @@ public class BillPaymentController {
 	
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	/* Author: Dharaniya Shree.T
+	*  Description: This method adds payment 
+	*  Input Params: BillPayment
+	*  Return value: BillPaymentDTO object
+	*/
 	@PutMapping(value = "/add-bill", consumes = "application/json")
 	public BillPaymentDTO addBillPayment(@RequestBody BillPayment payment) {
 		logger.info("BillPayment is added sucessfully");
 		return billService.addBillPayment(payment);
 	}
-
+	
+	/* Author: Dharaniya Shree.T
+	*  Description: This method adds payment 
+	*  Input Params: int
+	*  Return value: BillPaymentDTO object
+	*/
 	@GetMapping(value = "/view", produces = "application/json")
 	public BillPaymentDTO viewBillPayment(int billId) {
 		logger.info("BillPayment is displayed sucessfully through billId");
