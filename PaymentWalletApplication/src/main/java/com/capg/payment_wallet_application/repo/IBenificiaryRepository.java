@@ -9,8 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
-import com.capg.payment_wallet_application.beans.Customer;
-import com.capg.payment_wallet_application.beans.Wallet;
 
 @Repository
 public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails,String> {

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
-import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
