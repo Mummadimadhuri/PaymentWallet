@@ -22,7 +22,7 @@ class WalletServiceImplTest {
 	@Test
 	void testCreateAccount() {
 		BigDecimal amount = new BigDecimal(10000);
-		CustomerDTO createAccount = walletService.createAccount("ArunKumar","9344567801",amount,"Arun@2000");
+		CustomerDTO createAccount = walletService.createAccount("ArunKumar","9344567802",amount,"Arun@2000");
 		assertNotNull(createAccount);
 	}
 
