@@ -19,7 +19,6 @@ class BenificiaryServiceTest {
 
 	@Autowired
 	BenificiaryService benificiaryService;
-
 	@Test
 	void testAddBenificiary() {
 		BigDecimal amount = new BigDecimal(10000);
