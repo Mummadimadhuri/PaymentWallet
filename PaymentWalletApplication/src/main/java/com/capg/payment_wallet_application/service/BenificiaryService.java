@@ -1,6 +1,7 @@
 package com.capg.payment_wallet_application.service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public BenificiaryDetailsDTO viewBenificiary(String mobileNo) {
+		if(!mobileNoValidation(mobileNo)) {
+			throw new InvalidInputException("Mobile number should be a 10 digit number with first digit from 6 to 9");
+		}
 		BenificiaryDetails benificiarydetails = ibenificiaryrepo.findById(mobileNo).orElse(null);
 		if(benificiarydetails==null) {
 			throw new InvalidInputException("Mobile no is not registered to any benificiary");
@@ -52,6 +56,14 @@ public class BenificiaryService implements IBenificiaryService {
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(int walletId) {
 		List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(walletId);
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
+	}
+	
+	private static boolean mobileNoValidation(String mobileNo) {
+		boolean flag = false;
+		if (Pattern.matches("^[6-9][0-9]{9}$", mobileNo)) {
+			flag = true;
+		}
+		return flag;
 	}
 
 }
