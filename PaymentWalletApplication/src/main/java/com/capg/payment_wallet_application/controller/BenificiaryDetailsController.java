@@ -47,7 +47,7 @@ public class BenificiaryDetailsController {
 		return benificiaryservice.viewBenificiary(mobileNo);		
 	}
 
-	@GetMapping("/view-all-benificiary")
+	@PutMapping("/view-all-benificiary")
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(@RequestBody Customer customer) {
 		return benificiaryservice.viewAllBenificiary(customer);
 	}
