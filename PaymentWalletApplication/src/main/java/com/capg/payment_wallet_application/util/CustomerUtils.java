@@ -21,7 +21,6 @@ public class CustomerUtils {
 
 	public static Customer convertToCustomer(CustomerDTO dto) {
 		Customer customer = new Customer();
-
 		customer.setMobileNo(dto.getMobileNo());
 		customer.setName(dto.getName());
 		customer.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
@@ -31,9 +30,8 @@ public class CustomerUtils {
 
 	public static CustomerDTO convertToCustomerDto(Customer customer) {
 		CustomerDTO customerdto = new CustomerDTO();
-
 		customerdto.setMobileNo(customer.getMobileNo());
-		customerdto.setName(customer.getMobileNo());
+		customerdto.setName(customer.getName());
 		customerdto.setWalletDto(WalletUtils.convertToWalletDto(customer.getWallet()));
 		return customerdto;
 	}

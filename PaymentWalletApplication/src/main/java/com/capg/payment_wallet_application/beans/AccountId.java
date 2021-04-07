@@ -35,4 +35,34 @@ public class AccountId implements Serializable{
 	public void setIfscCode(String ifscCode) {
 		this.ifscCode = ifscCode;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + accountNo;
+		result = prime * result + ((ifscCode == null) ? 0 : ifscCode.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AccountId other = (AccountId) obj;
+		if (accountNo != other.accountNo)
+			return false;
+		if (ifscCode == null) {
+			if (other.ifscCode != null)
+				return false;
+		} else if (!ifscCode.equals(other.ifscCode))
+			return false;
+		return true;
+	}
+	
+	
 }
