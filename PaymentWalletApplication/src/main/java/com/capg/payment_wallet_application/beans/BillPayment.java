@@ -36,7 +36,7 @@ public class BillPayment {
 		super();
 	}
 
-	public BillPayment(Wallet wallet, BillType billtype, @DecimalMin("1000.0") double amount, LocalDate paymentDate) {
+	public BillPayment(Wallet wallet, BillType billtype, @DecimalMin("1.0") double amount, LocalDate paymentDate) {
 		super();
 		this.wallet = wallet;
 		this.billtype = billtype;

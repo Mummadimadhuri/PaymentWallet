@@ -77,7 +77,7 @@ public class WalletServiceImpl implements WalletService {
 		if (!mobileNoValidation(sourceMobileNo)) {
 			throw new InvalidInputException(invalidMobileNo);
 		}
-		if (!mobileNoValidation(sourceMobileNo)) {
+		if (!mobileNoValidation(targetMobileNo)) {
 			throw new InvalidInputException(invalidMobileNo);
 		}
 		Customer source = walletRepo.findByMobileNo(sourceMobileNo);
