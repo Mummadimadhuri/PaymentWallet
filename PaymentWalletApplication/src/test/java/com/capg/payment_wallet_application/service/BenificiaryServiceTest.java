@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
-import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 
