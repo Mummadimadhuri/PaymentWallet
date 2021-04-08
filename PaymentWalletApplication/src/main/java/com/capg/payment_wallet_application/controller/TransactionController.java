@@ -33,21 +33,33 @@ public class TransactionController {
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	//Controller for adding Transaction.
+	/* Author       : T.Deepan Chakravarthy
+	*  Description  : This method add transaction 
+	*  Input Params : Transaction
+	*  Return value : TransactionDTO object
+	*/
 	@PostMapping(value = "/add", consumes = "application/json")
 	public TransactionDTO addTransaction(@RequestBody Transaction tran) {
 		logger.info("Transaction is added Sucessfully");
 		return transactionService.addTransaction(tran);
 	}
 
-	//Controller to view all transactions which is fetched from a particular Wallet.
+	/* Author       : T.Deepan Chakravarthy
+	*  Description  : This method is used to view transaction through wallet Id 
+	*  Input Params : Transaction
+	*  Return value : TransactionDTO List
+	*/
 	@GetMapping(value = "/get-wallet-transaction/{walletId}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions(@PathVariable int walletId) {
 		logger.info("Transaction done through the given wallet is viewed sucessfully");
 		return transactionService.viewAllTransactions(walletId);
 	}
 
-	//Controller to view all transaction between given dates
+	/* Author       : T.Deepan Chakravarthy
+	*  Description  : This method used to view all transaction between dates 
+	*  Input Params : Transaction
+	*  Return value : TransactionDTO List
+	*/
 	@GetMapping(value = "/get-all-betweendates/{from}/{to}", produces = "application/json")
 	public List<TransactionDTO> viewTransactionsByDate(@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate to) {
@@ -55,7 +67,12 @@ public class TransactionController {
 		return transactionService.viewTransactionsByDate(from, to);
 	}
     
-	//Controller to view all transaction of particular type
+	
+	/* Author       : T.Deepan Chakravarthy
+	*  Description  : This method used to view all transaction of particular type 
+	*  Input Params : Transaction
+	*  Return value : TransactionDTO List
+	*/
 	@GetMapping(value = "/get-all-types/{type}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions(@PathVariable String type) {
 		logger.info("Transaction of the particular type is displayed sucessfully");
