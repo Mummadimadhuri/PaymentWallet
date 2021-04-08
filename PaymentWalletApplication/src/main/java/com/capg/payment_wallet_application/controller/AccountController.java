@@ -17,7 +17,12 @@ import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
 import com.capg.payment_wallet_application.service.AccountServiceImpl;
-
+/**
+ * Author: Bhavish Reddy
+ * Version: 1.0
+ * Date: 05-04-2021
+ * Description: This is Account Controller Layer
+ */
 @RestController
 @RequestMapping("/api/pwa/account")
 public class AccountController {
@@ -27,15 +32,15 @@ public class AccountController {
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@PostMapping("/add")
-	public WalletDTO addAccount(@RequestBody BankAccount bacc) {
+	public WalletDTO addAccount(@RequestBody BankAccount bankAccount) {
 		logger.info("Account added succesfully");
-		return accountService.addAccount(bacc);
+		return accountService.addAccount(bankAccount);
 	}
 
 	@DeleteMapping("/remove")
-	public WalletDTO removeAccount(@RequestBody BankAccount bacc) {
+	public WalletDTO removeAccount(@RequestBody BankAccount bankAccount) {
 		logger.info("Account deleted");
-		return accountService.removeAccount(bacc);
+		return accountService.removeAccount(bankAccount);
 	}
 
 

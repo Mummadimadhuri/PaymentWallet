@@ -1,7 +1,12 @@
 package com.capg.payment_wallet_application.dto;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * Author: Bhavish Reddy
+ * Version: 1.0
+ * Date: 03-04-2021
+ * Description: This is Bank Account Data Transfer Object
+ */
 @Component
 public class BankAccountDTO {
 

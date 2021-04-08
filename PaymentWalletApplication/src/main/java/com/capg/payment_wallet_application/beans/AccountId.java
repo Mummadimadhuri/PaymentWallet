@@ -1,7 +1,12 @@
 package com.capg.payment_wallet_application.beans;
 
 import java.io.Serializable;
-
+/**
+ * Author: Bhavish Reddy
+ * Version: 1.0
+ * Date: 06-04-2021
+ * Description: This is AccountId composite key
+ */
 public class AccountId implements Serializable{
 
 	private static final long serialVersionUID = 1L;

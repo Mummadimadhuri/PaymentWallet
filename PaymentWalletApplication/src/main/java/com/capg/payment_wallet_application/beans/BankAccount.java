@@ -10,6 +10,13 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * Author: Bhavish Reddy
+ * Version: 1.0
+ * Date: 02-04-2021
+ * Description: This is Bank Account Entity Layer
+ */
+
 @Entity
 @IdClass(AccountId.class)
 public class BankAccount {

@@ -16,31 +16,51 @@ import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.IAccountRepository;
 import com.capg.payment_wallet_application.util.AccountUtils;
 import com.capg.payment_wallet_application.util.WalletUtils;
-
+/**
+ * Author: Bhavish Reddy
+ * Version: 1.0
+ * Date: 03-04-2021
+ * Description: This is Account Service Implementation
+ */
 @Service
 public class AccountServiceImpl implements IAccountService {
 
 	@Autowired
-	IAccountRepository accountRepo;
+	private IAccountRepository accountRepo;
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	/**
+	 * Description: Add Bank Account
+	 * Input Parameters: Bank Account Object
+	 * Return value: Wallet Data Transfer Object
+	 */
 	@Override
-	public WalletDTO addAccount(BankAccount bacc) {
+	public WalletDTO addAccount(BankAccount bankAccount) {
 		logger.info("addAccount() is get intiated");
-		accountRepo.save(bacc);
-		Wallet wallet = bacc.getWallet();
+		accountRepo.save(bankAccount);
+		Wallet wallet = bankAccount.getWallet();
 		logger.info("addAccount() is get executed");
 		return WalletUtils.convertToWalletDto(wallet);
 	}
 
+	/**
+	 * Description: Remove Bank Account
+	 * Input Parameters: Bank Account Object
+	 * Return value: Wallet Data Transfer Object
+	 */
 	@Override
-	public WalletDTO removeAccount(BankAccount bacc) {
+	public WalletDTO removeAccount(BankAccount bankAccount) {
 		logger.info("removeAccount() is get intiated");
-		Wallet wallet = bacc.getWallet();
-		accountRepo.delete(bacc);
+		Wallet wallet = bankAccount.getWallet();
+		accountRepo.delete(bankAccount);
 		logger.info("removeAccount() is get exectued");
 		return WalletUtils.convertToWalletDto(wallet);
 	}
-
+	
+	/**
+	 * Description: View all accounts linked to a wallet
+	 * Input Parameters: int walletId
+	 * Return value: List of Bank Accounts
+	 */
 	@Override
 	public List<BankAccountDTO> viewAllAccounts(int walletId) {
 		logger.info("viewAllAccounts() is get intiated");
@@ -48,7 +68,12 @@ public class AccountServiceImpl implements IAccountService {
 		logger.info("viewAllAccounts() is get executed");
 		return AccountUtils.convertToBankAccountDtoList(bankAccountList);
 	}
-
+	/**
+	 * Description: View wallet linked with Bank Account
+	 * Input Parameters: int accountNo, String ifscCode
+	 * Return value: Wallet Data Transfer Object
+	 * Exception: InvalidInputException
+	 */
 	@Override
 	public WalletDTO viewAccount(int accountNo, String ifscCode) {
 		logger.info("viewAccount() is get intiated");
@@ -64,7 +89,11 @@ public class AccountServiceImpl implements IAccountService {
 		logger.info("viewAccount() is get executed");
 		return WalletUtils.convertToWalletDto(wallet);
 	}
-	
+	/**
+	 * Description: Validate IFSC code
+	 * Input Parameters: String ifscCode
+	 * Return value: boolean flag
+	 */
 	private boolean validateIfscCode(String ifscCode) {
 		logger.info("validateIfscCode() validation is start intiated");
 		boolean flag = true;

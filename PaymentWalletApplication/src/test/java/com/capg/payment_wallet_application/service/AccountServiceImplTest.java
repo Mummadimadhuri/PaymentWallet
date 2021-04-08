@@ -14,7 +14,12 @@ import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
-
+/**
+ * Author: Bhavish Reddy
+ * Version: 1.0
+ * Date: 06-04-2021
+ * Description: Test cases for AccountServiceImpl
+ */
 @SpringBootTest
 @Disabled
 class AccountServiceImplTest {
