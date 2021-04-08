@@ -62,7 +62,7 @@ public class TransactionService implements ITransactionService {
 
 	/* Author      : T.Deepan Chakravarthy
 	*  Description : Service to viewAlltransactions() of the given wallet is written here,It will display each and every fundtransfer done by specific wallet. 
-	*  Input Params: Transaction
+	*  Input Params: int walletId
 	*  Return value: TransactionDTO List
 	*/
 	@Override
@@ -75,10 +75,9 @@ public class TransactionService implements ITransactionService {
 
 	/* Author      : T.Deepan Chakravarthy
 	*  Description : Service to viewAlltransactions() of the given transaction type is written here.
-	*  Input Params: Transaction
+	*  Input Params: String type
 	*  Return value: TransactionDTO List
 	*/
-	
 	@Override
 	public List<TransactionDTO> viewAllTransactions(String type) {
 		logger.info("viewAlltransactions() is get intiated");
@@ -94,7 +93,7 @@ public class TransactionService implements ITransactionService {
     
 	/* Author      : T.Deepan Chakravarthy
 	*  Description : Service to provide transaction between given dates.
-	*  Input Params: Transaction
+	*  Input Params: LocalDate
 	*  Return value: TransactionDTO List
 	*/
 	@Override

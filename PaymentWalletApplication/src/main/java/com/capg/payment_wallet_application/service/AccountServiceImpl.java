@@ -52,7 +52,7 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public WalletDTO viewAccount(int accountNo, String ifscCode) {
 		logger.info("viewAccount() is get intiated");
-		if(validateIfscCode(ifscCode)) {
+		if(!validateIfscCode(ifscCode)) {
 			throw new InvalidInputException("IFSC code must have 4 alphabets followed by 7 numbers total 11 characters");
 		}
 		AccountId id = new AccountId(accountNo,ifscCode);

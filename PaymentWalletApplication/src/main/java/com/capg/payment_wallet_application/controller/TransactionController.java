@@ -46,7 +46,7 @@ public class TransactionController {
 
 	/* Author       : T.Deepan Chakravarthy
 	*  Description  : This method is used to view transaction through wallet Id 
-	*  Input Params : Transaction
+	*  Input Params : int walletId
 	*  Return value : TransactionDTO List
 	*/
 	@GetMapping(value = "/get-wallet-transaction/{walletId}", produces = "application/json")
@@ -57,7 +57,7 @@ public class TransactionController {
 
 	/* Author       : T.Deepan Chakravarthy
 	*  Description  : This method used to view all transaction between dates 
-	*  Input Params : Transaction
+	*  Input Params : localDate
 	*  Return value : TransactionDTO List
 	*/
 	@GetMapping(value = "/get-all-betweendates/{from}/{to}", produces = "application/json")
@@ -70,7 +70,7 @@ public class TransactionController {
 	
 	/* Author       : T.Deepan Chakravarthy
 	*  Description  : This method used to view all transaction of particular type 
-	*  Input Params : Transaction
+	*  Input Params : String type
 	*  Return value : TransactionDTO List
 	*/
 	@GetMapping(value = "/get-all-types/{type}", produces = "application/json")
