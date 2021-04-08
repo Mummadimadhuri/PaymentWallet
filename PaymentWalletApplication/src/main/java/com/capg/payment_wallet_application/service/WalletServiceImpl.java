@@ -27,6 +27,14 @@ import com.capg.payment_wallet_application.repo.ITransactionRepository;
 import com.capg.payment_wallet_application.repo.WalletRepo;
 import com.capg.payment_wallet_application.util.CustomerUtils;
 
+/*
+ * Implemented Service Name : Wallet Service
+ * Author                   : Arun Kumar M
+ * Implementation Start Date: 2021-04-05
+ * implementation End Date  : 2021-04-06
+ * Used Annotation          : @Service,@Autowired,@Override,@Transactional
+ * Validation               : Validation are done at Required Place
+ * */
 @Service
 public class WalletServiceImpl implements WalletService {
 
@@ -47,6 +55,7 @@ public class WalletServiceImpl implements WalletService {
 	String invalidMobileNo = "Mobile number should be a 10 digit number with first digit from 6 to 9";
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 
+	//A new customer is created with a new wallet
 	@Override
 	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password)
 			throws ConstraintViolationException {
@@ -64,6 +73,7 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDto(walletRepo.save(customer));
 	}
 
+	//Returns the customer object with its wallet balance
 	@Override
 	public CustomerDTO showBalance(String mobileno) {
 		logger.info("showBalance() is get intiated");
@@ -80,6 +90,10 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
+	/*Transfers money from one customer to another using the mobile number of two customers
+	 * Also adds the transaction object for both sender and receiver customers
+	 * Also adds a benificiary object of the receiver for sender
+	*/
 	@Override
 	@Transactional
 	public CustomerDTO fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount) {
@@ -90,8 +104,8 @@ public class WalletServiceImpl implements WalletService {
 		if (!mobileNoValidation(targetMobileNo)) {
 			throw new InvalidInputException(invalidMobileNo);
 		}
-		Customer source = walletRepo.findByMobileNo(sourceMobileNo);
-		Customer target = walletRepo.findByMobileNo(targetMobileNo);
+		Customer source = walletRepo.findById(sourceMobileNo).orElse(null);
+		Customer target = walletRepo.findById(targetMobileNo).orElse(null);
 		if (source == null) {
 			throw new InvalidInputException(unregisteredMobileNo);
 		}
@@ -122,12 +136,13 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDto(source);
 	}
 
+	//Adds amount to the wallet of the customer
 	@Override
 	public CustomerDTO depositAmount(String mobileNo, BigDecimal amount) {
 		Customer customer = null;
 		logger.info("depositAmount() is get intiated");
 		if (mobileNoValidation(mobileNo)) {
-			customer = walletRepo.findByMobileNo(mobileNo);
+			customer = walletRepo.findById(mobileNo).orElse(null);
 		} else {
 			throw new InvalidInputException(invalidMobileNo);
 		}
@@ -140,12 +155,13 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
+	//Withdraws money from the wallet
 	@Override
 	public CustomerDTO withdrawAmount(String mobileNo, BigDecimal amount) {
 		logger.info("withdrawAmount() is get intiated()");
 		Customer customer = null;
 		if (mobileNoValidation(mobileNo)) {
-			customer = walletRepo.findByMobileNo(mobileNo);
+			customer = walletRepo.findById(mobileNo).orElse(null);
 		} else {
 			throw new InvalidInputException(invalidMobileNo);
 		}
@@ -165,6 +181,7 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
+	//Gives the list of all the customers
 	@Override
 	public List<CustomerDTO> getList() {
 		logger.info("list of customer is intiated");
@@ -173,6 +190,7 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDtoList(list);
 	}
 
+	//Updates the customer details
 	@Override
 	public CustomerDTO updateAccount(Customer customer) {
 		logger.info("updateAccount() is get intiated");
@@ -181,11 +199,13 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
+	//Adds money to wallet from a customer's bank account
 	@Override
-	public CustomerDTO addMoney(Wallet wallet, double amount) {
+	@Transactional
+	public CustomerDTO addMoney(int walletId, double amount) {
 		logger.info("addMoney() is get intiated");
-		Customer customer = walletRepo.findByWallet(wallet);
-		wallet = customer.getWallet();
+		Customer customer = walletRepo.findByWalletId(walletId);
+		Wallet wallet = customer.getWallet();
 		List<BankAccount> accounts = accountRepo.findByWalletId(wallet.getWalletId());
 		BankAccount currAccount = null;
 		for(BankAccount account:accounts) {
@@ -206,6 +226,7 @@ public class WalletServiceImpl implements WalletService {
 		return CustomerUtils.convertToCustomerDto(customer);
 	}
 
+	//Validates the mobile number based on given standards
 	private static boolean mobileNoValidation(String mobileNo) {
 		boolean flag = false;
 		if (Pattern.matches("^[6-9][0-9]{9}$", mobileNo)) {
@@ -214,6 +235,7 @@ public class WalletServiceImpl implements WalletService {
 		return flag;
 	}
 	
+	//Validates the password based on the standards
 	private static boolean validatePassword(String password) {
 		boolean flag = false;
 		if(Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", password)) {

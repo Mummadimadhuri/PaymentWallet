@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.capg.payment_wallet_application.beans.Customer;
-import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 
 public interface WalletService {
@@ -22,6 +21,6 @@ public interface WalletService {
 
 	public CustomerDTO updateAccount(Customer customer);
 
-	public CustomerDTO addMoney(Wallet wallet, double amount);
+	public CustomerDTO addMoney(int walletId, double amount);
 
 }

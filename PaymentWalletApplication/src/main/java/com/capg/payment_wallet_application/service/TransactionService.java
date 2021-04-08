@@ -19,7 +19,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Service;
 import com.capg.payment_wallet_application.beans.Transaction;
-import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
