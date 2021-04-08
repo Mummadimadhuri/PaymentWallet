@@ -1,3 +1,11 @@
+/*
+ * Implemented Service Name : Transaction Service
+ * Author                   : T.Deepan Chakravarthy
+ * Implementation Start Date: 2021-04-05
+ * implementation End Date  : 2021-04-06
+ * Used Annotation          : @Service,@Autowired,@Override
+ * Validation               : Validation are done at Required Place
+ * */
 package com.capg.payment_wallet_application.service;
 
 import java.math.BigDecimal;
@@ -26,6 +34,7 @@ public class TransactionService implements ITransactionService {
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	//Service for addtransaction() method is written in which balance of wallet is get updated after each transaction.
 	@Override
 	public TransactionDTO addTransaction(Transaction tran) {
 		logger.info("addTransaction() is get intiated()");
@@ -47,6 +56,7 @@ public class TransactionService implements ITransactionService {
 		return TransactionUtils.convertToTransactionDto(transaction);
 	}
 
+	//Service to viewAlltransactions() of the given wallet is written here,It will display each and every fundtransfer done by specific wallet.  
 	@Override
 	public List<TransactionDTO> viewAllTransactions(int walletId) {
         logger.info("viewAlltransactions() is get intiated");
@@ -55,6 +65,7 @@ public class TransactionService implements ITransactionService {
 		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
+	//Service to viewAlltransactions() of the given transaction type is written here.
 	@Override
 	public List<TransactionDTO> viewAllTransactions(String type) {
 		logger.info("viewAlltransactions() is get intiated");
@@ -67,7 +78,8 @@ public class TransactionService implements ITransactionService {
 		logger.info("viewAllTransaction() is get executed");
 		return TransactionUtils.convertToTransactionDtoList(list);
 	}
-
+    
+	//Service to viewTransactionByDate() ,which is used to display transaction between the dates.
 	@Override
 	public List<TransactionDTO> viewTransactionsByDate(@DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@DateTimeFormat(iso = ISO.DATE) LocalDate to) {
@@ -77,6 +89,7 @@ public class TransactionService implements ITransactionService {
 		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
+	//Validation to provide transaction type as "SEND" and "RECIEVE".
 	private static boolean transactionTypeValidation(String type) {
 		boolean flag = false;
 		if (type.equals("SEND") || type.equals("RECEIVE")) {

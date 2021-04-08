@@ -1,8 +1,15 @@
+/*
+ * Controller Name          : Transaction Controller
+ * Author                   : T.Deepan Chakravarthy
+ * Implementation Start Date: 2021-04-06
+ * implementation End Date  : 2021-04-07
+ * Used Annotation          : @RestController,@RequestMapping,@Autowired,@PostMapping,@GetMapping
+ * Swagger                  : Swagger is enabled
+ * */
 package com.capg.payment_wallet_application.controller;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.capg.payment_wallet_application.beans.Transaction;
-import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
 import com.capg.payment_wallet_application.service.TransactionService;
 
@@ -28,25 +33,29 @@ public class TransactionController {
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	//Controller for adding Transaction.
 	@PostMapping(value = "/add", consumes = "application/json")
 	public TransactionDTO addTransaction(@RequestBody Transaction tran) {
 		logger.info("Transaction is added Sucessfully");
 		return transactionService.addTransaction(tran);
 	}
 
+	//Controller to view all transactions which is fetched from a particular Wallet.
 	@GetMapping(value = "/get-wallet-transaction/{walletId}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions(@PathVariable int walletId) {
 		logger.info("Transaction done through the given wallet is viewed sucessfully");
 		return transactionService.viewAllTransactions(walletId);
 	}
 
+	//Controller to view all transaction between given dates
 	@GetMapping(value = "/get-all-betweendates/{from}/{to}", produces = "application/json")
 	public List<TransactionDTO> viewTransactionsByDate(@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate to) {
 		logger.info("Transaction done between the dates is displayed sucessfully");
 		return transactionService.viewTransactionsByDate(from, to);
 	}
-
+    
+	//Controller to view all transaction of particular type
 	@GetMapping(value = "/get-all-types/{type}", produces = "application/json")
 	public List<TransactionDTO> viewAllTransactions(@PathVariable String type) {
 		logger.info("Transaction of the particular type is displayed sucessfully");

@@ -1,3 +1,11 @@
+/*
+ * Entity Name              : Transaction
+ * Author                   : T.Deepan Chakravarthy
+ * Implementation Start Date: 2021-04-01
+ * implementation End Date  : 2021-04-02
+ * Used Annotation          : @Entity,@Id(primary key),@GeneratedValue(auto generation),@Pattern,@Column,@DateTimeFormat,@NotNull,@DecimalMin,@Size
+ * validation               : Bean validation is enabled
+ * */
 package com.capg.payment_wallet_application.beans;
 
 import java.time.LocalDate;
@@ -23,18 +31,22 @@ public class Transaction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int transactionId;
-
+ 
+	//Bean validation to check The constraints of transaction type.
 	@Pattern(regexp = "SEND|RECEIVE", message = "Transaction type should be either SEND or RECEIVE")
 	private String transactionType;
-
+    
+	//Creating a column of name transactionDate in ISO date format.
 	@Column(name = "transactiondate")
 	@DateTimeFormat(iso = ISO.DATE)
 //	@Temporal(TemporalType.DATE)
 	private LocalDate transactionDate;
 
+	//ManyToOne mapping is done between transaction and wallet .
 	@ManyToOne(cascade = CascadeType.ALL)
 	public Wallet wallet;
 
+	//Amount should be atleast 1.0
 	@NotNull
 	@DecimalMin(value = "1.0", message = "amount should be at least 1.0")
 	private double amount;
