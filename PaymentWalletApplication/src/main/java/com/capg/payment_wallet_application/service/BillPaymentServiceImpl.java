@@ -47,7 +47,7 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 			Wallet wallet = payment.getWallet();
 			wallet.setBalance(currentBalance);
 			payment.setWallet(wallet);
-			Customer customer = walletRepo.findByWallet(wallet);
+			Customer customer = walletRepo.findByWalletId(wallet.getWalletId());
 			customer.setWallet(wallet);
 			walletRepo.save(customer);
 			logger.info("addBillPayment() is get executed");

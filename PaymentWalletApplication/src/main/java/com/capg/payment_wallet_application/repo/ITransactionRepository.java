@@ -19,7 +19,6 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Repository;
 
 import com.capg.payment_wallet_application.beans.Transaction;
-import com.capg.payment_wallet_application.beans.Wallet;
 
 @Repository
 public interface ITransactionRepository extends JpaRepository<Transaction, Integer>{

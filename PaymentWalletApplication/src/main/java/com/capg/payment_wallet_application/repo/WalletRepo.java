@@ -8,18 +8,27 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.capg.payment_wallet_application.beans.Customer;
-import com.capg.payment_wallet_application.beans.Wallet;
 
+/*
+ * Repository Name          : WalletRepo
+ * Author                   : Arun Kumar M
+ * Implementation Start Date: 2021-04-05
+ * implementation End Date  : 2021-04-06
+ * Used Annotation          : @Repository,@Query,@Param 
+ * JpaRepository            : JpaRepository is extended
+ * */
 @Repository
-public interface WalletRepo extends JpaRepository<Customer, Integer> {
+public interface WalletRepo extends JpaRepository<Customer, String> {
 
+	//JPQL query to get the customer object using its mobile no
 	@Query("select c from Customer c where c.mobileNo = :mobileNo")
 	public Customer findOne(@Param(value = "mobileNo") String mobileNo);
 
+	//JPQL query to get the list of all the customers
 	@Query("select c from Customer c")
 	public List<Customer> getList();
 
-	public Customer findByWallet(Wallet wallet);
-
-	public Customer findByMobileNo(String sourceMobileNo);
+	//JPQL query to get a customer object based on its wallet id
+	@Query("select c from Customer c where c.wallet.walletId = :walletId")
+	public Customer findByWalletId(int walletId);
 }

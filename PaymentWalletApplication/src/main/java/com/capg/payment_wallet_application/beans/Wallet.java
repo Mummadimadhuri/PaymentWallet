@@ -8,6 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.DecimalMin;
 
+/*
+ * Entity Name              : Wallet
+ * Author                   : Arun Kumar M
+ * Implementation Start Date: 2021-04-01
+ * implementation End Date  : 2021-04-02
+ * Used Annotation          : @Entity,@Id(primary key),@GeneratedValue(auto generation),DecimalMin
+ * validation               : Bean validation is enabled
+ * */
 @Entity
 public class Wallet {
 
@@ -15,6 +23,7 @@ public class Wallet {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int walletId;
 
+	//Bean validation to check if the balance is atleast 1.0
 	@DecimalMin(value = "1.0", message = "Balance must be atleast 1.0")
 	private BigDecimal balance;
 

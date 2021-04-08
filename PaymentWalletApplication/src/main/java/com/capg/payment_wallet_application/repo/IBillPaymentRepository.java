@@ -8,7 +8,4 @@ import com.capg.payment_wallet_application.beans.BillPayment;
 @Repository
 public interface IBillPaymentRepository extends JpaRepository<BillPayment,Integer> {
 
-	
-	
-
 }

@@ -13,10 +13,6 @@ import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 @Repository
 public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails,String> {
 
-    @Query("select bd from BenificiaryDetails bd where bd = :bd ")
-	public BenificiaryDetails viewBenificiary(@Param(value="bd") BenificiaryDetails bd);
-
-//    @Query("select bacc from BankAccount bacc where bacc.wallet.walletId=:walletId")
     @Query("select bd from BenificiaryDetails bd where bd.wallet.walletId=:walletId")
 	public List<BenificiaryDetails> viewAllBenificiary(@Param("walletId") int walletId);
 	

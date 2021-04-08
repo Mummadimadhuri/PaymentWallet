@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.capg.payment_wallet_application.beans.Transaction;
-import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
 
 public interface ITransactionService {

@@ -71,7 +71,7 @@ class WalletServiceImplTest {
 		BigDecimal amount = new BigDecimal(20000);
 		Wallet wallet = new Wallet(amount);
 		wallet.setWalletId(40);
-		CustomerDTO addMoney = walletService.addMoney(wallet,1000);
+		CustomerDTO addMoney = walletService.addMoney(wallet.getWalletId(),1000);
 	    assertNotNull(addMoney);
 	}
 
