@@ -33,7 +33,11 @@ public class TransactionService implements ITransactionService {
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	//Service for addtransaction() method is written in which balance of wallet is get updated after each transaction.
+	/* Author      : T.Deepan Chakravarthy
+	*  Description : Service for addtransaction() method is written in which balance of wallet is get updated after each transaction. 
+	*  Input Params: Transaction
+	*  Return value: TransactionDTO object
+	*/
 	@Override
 	public TransactionDTO addTransaction(Transaction tran) {
 		logger.info("addTransaction() is get intiated()");
@@ -55,7 +59,11 @@ public class TransactionService implements ITransactionService {
 		return TransactionUtils.convertToTransactionDto(transaction);
 	}
 
-	//Service to viewAlltransactions() of the given wallet is written here,It will display each and every fundtransfer done by specific wallet.  
+	/* Author      : T.Deepan Chakravarthy
+	*  Description : Service to viewAlltransactions() of the given wallet is written here,It will display each and every fundtransfer done by specific wallet. 
+	*  Input Params: int walletId
+	*  Return value: TransactionDTO List
+	*/
 	@Override
 	public List<TransactionDTO> viewAllTransactions(int walletId) {
         logger.info("viewAlltransactions() is get intiated");
@@ -64,7 +72,11 @@ public class TransactionService implements ITransactionService {
 		return TransactionUtils.convertToTransactionDtoList(list);
 	}
 
-	//Service to viewAlltransactions() of the given transaction type is written here.
+	/* Author      : T.Deepan Chakravarthy
+	*  Description : Service to viewAlltransactions() of the given transaction type is written here.
+	*  Input Params: String type
+	*  Return value: TransactionDTO List
+	*/
 	@Override
 	public List<TransactionDTO> viewAllTransactions(String type) {
 		logger.info("viewAlltransactions() is get intiated");
@@ -78,7 +90,11 @@ public class TransactionService implements ITransactionService {
 		return TransactionUtils.convertToTransactionDtoList(list);
 	}
     
-	//Service to viewTransactionByDate() ,which is used to display transaction between the dates.
+	/* Author      : T.Deepan Chakravarthy
+	*  Description : Service to provide transaction between given dates.
+	*  Input Params: LocalDate
+	*  Return value: TransactionDTO List
+	*/
 	@Override
 	public List<TransactionDTO> viewTransactionsByDate(@DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@DateTimeFormat(iso = ISO.DATE) LocalDate to) {
