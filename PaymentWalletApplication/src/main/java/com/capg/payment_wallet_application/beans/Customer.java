@@ -68,5 +68,16 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getPassword() {
+		return this.password;
+	}
 
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", mobileNo=" + mobileNo + ", password=" + password + ", wallet=" + wallet
+				+ "]";
+	}
+
+	
 }
