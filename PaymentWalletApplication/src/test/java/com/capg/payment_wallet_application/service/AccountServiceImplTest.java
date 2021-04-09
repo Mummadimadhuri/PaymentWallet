@@ -5,15 +5,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.capg.payment_wallet_application.beans.BankAccount;
+import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
+import com.capg.payment_wallet_application.util.CustomerUtils;
 
 @SpringBootTest
 @Disabled
@@ -21,6 +25,20 @@ class AccountServiceImplTest {
 
 	@Autowired
 	private AccountServiceImpl accountService;
+	
+	@Autowired
+	private WalletServiceImpl walletService;
+	
+	@Before
+	public void before() {
+		Customer customer = 
+				CustomerUtils.convertToCustomer
+				(walletService.createAccount("Eshwar", "6789067890", BigDecimal.valueOf(1500), "Eshwar@2000"));
+		Wallet wallet = customer.getWallet();
+		BankAccount bankAccount = new BankAccount("SBIN0000023","STATEBANK",20000,wallet);
+		WalletDTO bankAcc = accountService.addAccount(bankAccount);
+		
+	}
 	
 	@Test
 	void testAddAccount() {

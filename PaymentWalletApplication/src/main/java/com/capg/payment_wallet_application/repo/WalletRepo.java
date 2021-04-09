@@ -30,5 +30,5 @@ public interface WalletRepo extends JpaRepository<Customer, String> {
 
 	//JPQL query to get a customer object based on its wallet id
 	@Query("select c from Customer c where c.wallet.walletId = :walletId")
-	public Customer findByWalletId(int walletId);
+	public Customer findByWalletId(@Param(value="walletId") int walletId);
 }
