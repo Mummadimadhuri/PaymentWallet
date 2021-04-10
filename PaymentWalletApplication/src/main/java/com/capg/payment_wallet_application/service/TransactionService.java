@@ -51,6 +51,8 @@ public class TransactionService implements ITransactionService {
 		BigDecimal currentBalance = tran.getWallet().getBalance();
 		BigDecimal amount = (BigDecimal.valueOf(tran.getAmount()));
 		Transaction transaction = null;
+		if(transactionTypeValidation(tran.getTransactionType()))
+		{
 		if ((amount.compareTo(currentBalance) <= 0) && (tran.getTransactionType().equals("SEND"))) {
 			currentBalance = currentBalance.subtract(amount);
 			tran.getWallet().setBalance(currentBalance);
@@ -62,8 +64,15 @@ public class TransactionService implements ITransactionService {
 		} else {
 			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
 		}
+		}
+		else
+		{
+			throw new InvalidInputException("The given input is invalid");
+		}
+		
 		logger.info("addTransaction() is get executed()");
 		return TransactionUtils.convertToTransactionDto(transaction);
+		
 	}
 
 	/* Author      : T.Deepan Chakravarthy

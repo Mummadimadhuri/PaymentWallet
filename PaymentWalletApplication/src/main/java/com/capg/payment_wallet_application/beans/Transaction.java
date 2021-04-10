@@ -43,7 +43,7 @@ public class Transaction {
 	private LocalDate transactionDate;
 
 	//ManyToOne mapping is done between transaction and wallet .
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	public Wallet wallet;
 
 	//Amount should be atleast 1.0

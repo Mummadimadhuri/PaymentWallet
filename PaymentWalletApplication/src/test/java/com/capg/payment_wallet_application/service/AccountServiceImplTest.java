@@ -37,8 +37,7 @@ class AccountServiceImplTest {
 		double amount = 23000;
 		double amount1 = 500;
 		CustomerDTO customer = walletService.createAccount("Bhavish", "9998765432", new BigDecimal(1000), "Bhavish@2000");
-		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());		
-		
+		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());	
 		BankAccount bankAccount = new BankAccount(ifscCode, bankName, amount, wallet);
 		WalletDTO bankAccWallet = accountService.addAccount(bankAccount);
 		assertNotNull(bankAccWallet);
