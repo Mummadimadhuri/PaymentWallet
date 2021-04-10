@@ -9,19 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
+import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.capg.payment_wallet_application.exception.WalletNotFoundException;
 import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
+import com.capg.payment_wallet_application.repo.WalletRepo;
 import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 
 @Service
 public class BenificiaryService implements IBenificiaryService {
 
 	@Autowired
-	IBenificiaryRepository ibenificiaryrepo;
+	private IBenificiaryRepository ibenificiaryrepo;
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
+	private WalletRepo walletRepo;
+
 	@Override
 	public BenificiaryDetailsDTO addBenificiary(BenificiaryDetails bd) {
 		logger.info("addBenificiary() is get intiated");
@@ -41,7 +46,7 @@ public class BenificiaryService implements IBenificiaryService {
 	@Override
 	public String deleteBenificiary(BenificiaryDetails bd) {
 		logger.info("deleteBenificiary() is get intiated");
-		if(ibenificiaryrepo.findById(bd.getMobileNumber())!=null) {
+		if (ibenificiaryrepo.findById(bd.getMobileNumber()) != null) {
 			ibenificiaryrepo.delete(bd);
 			logger.info("deleteBenificiary() is get executed");
 			return "Benificiary Details is Deleted";
@@ -53,11 +58,11 @@ public class BenificiaryService implements IBenificiaryService {
 	@Override
 	public BenificiaryDetailsDTO viewBenificiary(String mobileNo) {
 		logger.info("viewBenificiary() is get intiated");
-		if(!mobileNoValidation(mobileNo)) {
+		if (!mobileNoValidation(mobileNo)) {
 			throw new InvalidInputException("Mobile number should be a 10 digit number with first digit from 6 to 9");
 		}
 		BenificiaryDetails benificiarydetails = ibenificiaryrepo.findById(mobileNo).orElse(null);
-		if(benificiarydetails==null) {
+		if (benificiarydetails == null) {
 			throw new InvalidInputException("Mobile no is not registered to any benificiary");
 		}
 		logger.info("viewBenificiary() is get executed");
@@ -66,12 +71,17 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(int walletId) {
-		logger.info("viewAllBenificiary() is get intiated");
-		List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(walletId);
-		logger.info("viewAllBenificiary() is get executed");
-		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
+		Customer wallet = walletRepo.findByWalletId(walletId);
+		if (wallet != null) {
+			logger.info("viewAllBenificiary() is get intiated");
+			List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(walletId);
+			logger.info("viewAllBenificiary() is get executed");
+			return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
+		} else {
+			throw new WalletNotFoundException("The Given wallet is not Found");
+		}
 	}
-	
+
 	private static boolean mobileNoValidation(String mobileNo) {
 		boolean flag = false;
 		if (Pattern.matches("^[6-9][0-9]{9}$", mobileNo)) {

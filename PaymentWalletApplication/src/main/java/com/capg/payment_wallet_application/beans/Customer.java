@@ -17,7 +17,6 @@ public class Customer {
 	@Pattern(regexp = "^[6-9]{1}[0-9]{9}", message = "Mobile number should be a 10 digit number with first digit from 6 to 9")
 	private String mobileNo;
 
-	@SuppressWarnings("unused")
 	private String password;
 
 	@Autowired
