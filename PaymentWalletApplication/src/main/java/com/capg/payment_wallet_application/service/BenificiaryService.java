@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
+import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.capg.payment_wallet_application.exception.WalletNotFoundException;
 import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
+import com.capg.payment_wallet_application.repo.WalletRepo;
 import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 
 @Service
@@ -19,6 +22,9 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Autowired
 	IBenificiaryRepository ibenificiaryrepo;
+	
+	@Autowired
+    WalletRepo walletRepo;
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -66,10 +72,18 @@ public class BenificiaryService implements IBenificiaryService {
 
 	@Override
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(int walletId) {
+		Customer wallet =  walletRepo.findByWalletId(walletId);
+	    if(wallet != null)
+	    {
 		logger.info("viewAllBenificiary() is get intiated");
 		List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(walletId);
 		logger.info("viewAllBenificiary() is get executed");
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
+	    }
+	    else
+	    {
+	    	throw new WalletNotFoundException("The Given wallet is not Found");
+	    }
 	}
 	
 	private static boolean mobileNoValidation(String mobileNo) {

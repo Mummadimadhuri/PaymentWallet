@@ -18,11 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Service;
+
+import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Transaction;
+import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.capg.payment_wallet_application.exception.WalletNotFoundException;
 import com.capg.payment_wallet_application.repo.ITransactionRepository;
+import com.capg.payment_wallet_application.repo.WalletRepo;
 import com.capg.payment_wallet_application.util.TransactionUtils;
 
 @Service
@@ -30,6 +35,10 @@ public class TransactionService implements ITransactionService {
 
 	@Autowired
 	ITransactionRepository transactionRepo;
+	
+	@Autowired
+	WalletRepo walletRepo;
+	
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -44,6 +53,8 @@ public class TransactionService implements ITransactionService {
 		BigDecimal currentBalance = tran.getWallet().getBalance();
 		BigDecimal amount = (BigDecimal.valueOf(tran.getAmount()));
 		Transaction transaction = null;
+		String type = tran.getTransactionType();
+		if (transactionTypeValidation(type)) {
 		if ((amount.compareTo(currentBalance) <= 0) && (tran.getTransactionType().equals("SEND"))) {
 			currentBalance = currentBalance.subtract(amount);
 			tran.getWallet().setBalance(currentBalance);
@@ -54,6 +65,9 @@ public class TransactionService implements ITransactionService {
 		     transaction = transactionRepo.save(tran);
 		} else {
 			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
+		}
+		} else {
+			throw new InvalidInputException("Transaction types are only either SEND or RECEIVE");
 		}
 		logger.info("addTransaction() is get executed()");
 		return TransactionUtils.convertToTransactionDto(transaction);
@@ -66,11 +80,20 @@ public class TransactionService implements ITransactionService {
 	*/
 	@Override
 	public List<TransactionDTO> viewAllTransactions(int walletId) {
+		Customer wallet =  walletRepo.findByWalletId(walletId);
+	    if(wallet != null)
+	    {
         logger.info("viewAlltransactions() is get intiated");
 		List<Transaction> list = transactionRepo.viewAllTransactions(walletId);
 		logger.info("viewAllTransaction() is get executed");
 		return TransactionUtils.convertToTransactionDtoList(list);
+	    }
+	    else
+	    {
+	    	throw new WalletNotFoundException("Wallet is not found");
+	    }
 	}
+	    
 
 	/* Author      : T.Deepan Chakravarthy
 	*  Description : Service to viewAlltransactions() of the given transaction type is written here.
@@ -98,10 +121,17 @@ public class TransactionService implements ITransactionService {
 	@Override
 	public List<TransactionDTO> viewTransactionsByDate(@DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@DateTimeFormat(iso = ISO.DATE) LocalDate to) {
+		if(from.isBefore(to))
+		{
 		logger.info("viewTransactionByDate() is get intiated");
 		List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
 		logger.info("viewTransactionByDate() is get executed");
 		return TransactionUtils.convertToTransactionDtoList(list);
+		}
+		else
+		{
+			throw new InvalidInputException("From date must be before than to date");
+		}
 	}
 
 	//Validation to provide transaction type as "SEND" and "RECIEVE".
@@ -111,6 +141,5 @@ public class TransactionService implements ITransactionService {
 			flag = true;
 		}
 		return flag;
-	}
-
+	}	
 }

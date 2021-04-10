@@ -10,6 +10,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.capg.payment_wallet_application.exception.WalletNotFoundException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 @ControllerAdvice
@@ -27,6 +28,11 @@ public class Exceptions {
 		return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 
+	@ExceptionHandler(value = WalletNotFoundException.class)
+	public ResponseEntity<Object> exceptionWalletNotFoundException(WalletNotFoundException exception) {
+		return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+	
 	@ExceptionHandler(value = InvalidInputException.class)
 	public ResponseEntity<Object> exceptionInvalidInputException(InvalidInputException exception) {
 		return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
