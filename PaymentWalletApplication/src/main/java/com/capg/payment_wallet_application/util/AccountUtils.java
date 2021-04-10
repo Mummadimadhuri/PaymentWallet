@@ -21,6 +21,7 @@ public class AccountUtils {
 
 	public static BankAccount convertToBankAccount(BankAccountDTO dto) {
 		BankAccount bankAcc = new BankAccount();
+		bankAcc.setAccountNo(dto.getAccountNo());
 		bankAcc.setBalance(dto.getBalance());
 		bankAcc.setBankName(dto.getBankName());
 		bankAcc.setIfscCode(dto.getIfscCode());
@@ -31,6 +32,7 @@ public class AccountUtils {
 	public static BankAccountDTO convertToBankAccountDto(BankAccount bankAcc) {
 		BankAccountDTO dto = new BankAccountDTO();
 
+		dto.setAccountNo(bankAcc.getAccountNo());
 		dto.setBalance(bankAcc.getBalance());
 		dto.setBankName(bankAcc.getBankName());
 		dto.setIfscCode(bankAcc.getIfscCode());

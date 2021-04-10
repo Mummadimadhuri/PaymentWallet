@@ -17,7 +17,6 @@ public class BankAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int accountNo;
-
 	
 	@Id
 	@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$",

@@ -44,15 +44,11 @@ public class AccountServiceImpl implements IAccountService {
 	public WalletDTO removeAccount(BankAccount bacc) {
 		logger.info("removeAccount() is get intiated");
 		AccountId id = new AccountId(bacc.getAccountNo(), bacc.getIfscCode());
-		BankAccount bankAcc = accountRepo.findById(id).orElse(null);
-		if (bankAcc != null) {
-			Wallet wallet = bacc.getWallet();
-			accountRepo.delete(bacc);
-			logger.info("removeAccount() is get exectued");
-			return WalletUtils.convertToWalletDto(wallet);
-		} else {
-			throw new InvalidInputException("Given Account no is not present");
-		}
+		accountRepo.findById(id).orElseThrow(()->new InvalidInputException("Given Account no is not present"));
+		Wallet wallet = bacc.getWallet();
+		accountRepo.delete(bacc);
+		logger.info("removeAccount() is get exectued");
+		return WalletUtils.convertToWalletDto(wallet);
 	}
 
 	@Override
