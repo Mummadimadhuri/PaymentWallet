@@ -20,7 +20,6 @@ import com.capg.payment_wallet_application.dto.WalletDTO;
 import com.capg.payment_wallet_application.util.CustomerUtils;
 
 @SpringBootTest
-@Disabled
 class AccountServiceImplTest {
 
 	@Autowired
@@ -68,7 +67,7 @@ class AccountServiceImplTest {
 
 	@Test
 	void testViewAccount() {
-		WalletDTO wallet= accountService.viewAccount(86,"SBIN0000134");
+		WalletDTO wallet= accountService.viewAccount(87,"SBIN0000148");
 		assertNotNull(wallet);
 	}
 

@@ -1022,4 +1022,4 @@
 10-04-2021 09:22:23 - INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor : Shutting down ExecutorService 'applicationTaskExecutor'
 10-04-2021 09:22:23 - INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 10-04-2021 09:22:23 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
-10-04-2021 09:22:23 - INFO  com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+10-04-2021 09:22:23 - INFO  com.zaxxer.hikari.HikariDataSource 
