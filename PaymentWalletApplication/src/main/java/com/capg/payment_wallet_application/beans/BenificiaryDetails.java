@@ -31,6 +31,7 @@ public class BenificiaryDetails {
 		this.mobileNumber = mobileNumber;
 	}
 
+	
 	public String getName() {
 		return name;
 	}

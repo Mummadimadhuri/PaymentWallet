@@ -44,6 +44,14 @@ public class BillPayment {
 		this.paymentDate = paymentDate;
 	}
 
+	public int getBillId() {
+		return billId;
+	}
+
+	public void setBillId(int billId) {
+		this.billId = billId;
+	}
+
 	public Wallet getWallet() {
 		return wallet;
 	}

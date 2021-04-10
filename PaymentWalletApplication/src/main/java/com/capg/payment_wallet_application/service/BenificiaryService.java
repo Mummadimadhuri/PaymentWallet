@@ -25,6 +25,7 @@ public class BenificiaryService implements IBenificiaryService {
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
 	private WalletRepo walletRepo;
 
 	@Override
