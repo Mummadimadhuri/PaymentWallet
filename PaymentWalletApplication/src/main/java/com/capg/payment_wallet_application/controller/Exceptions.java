@@ -28,6 +28,7 @@ public class Exceptions {
 		return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 
+	
 	@ExceptionHandler(value = WalletNotFoundException.class)
 	public ResponseEntity<Object> exceptionWalletNotFoundException(WalletNotFoundException exception) {
 		return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
