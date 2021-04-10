@@ -18,20 +18,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Service;
+
+import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
+import com.capg.payment_wallet_application.exception.WalletNotFoundException;
 import com.capg.payment_wallet_application.repo.ITransactionRepository;
+import com.capg.payment_wallet_application.repo.WalletRepo;
 import com.capg.payment_wallet_application.util.TransactionUtils;
 
 @Service
 public class TransactionService implements ITransactionService {
 
 	@Autowired
-	ITransactionRepository transactionRepo;
+	private ITransactionRepository transactionRepo;
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private WalletRepo walletRepo;
 	
 	//Service for addtransaction() method is written in which balance of wallet is get updated after each transaction.
 	@Override
@@ -58,10 +65,15 @@ public class TransactionService implements ITransactionService {
 	//Service to viewAlltransactions() of the given wallet is written here,It will display each and every fundtransfer done by specific wallet.  
 	@Override
 	public List<TransactionDTO> viewAllTransactions(int walletId) {
-        logger.info("viewAlltransactions() is get intiated");
-		List<Transaction> list = transactionRepo.viewAllTransactions(walletId);
-		logger.info("viewAllTransaction() is get executed");
-		return TransactionUtils.convertToTransactionDtoList(list);
+		Customer wallet = walletRepo.findByWalletId(walletId);
+		if (wallet != null) {
+			logger.info("viewAlltransactions() is get intiated");
+			List<Transaction> list = transactionRepo.viewAllTransactions(walletId);
+			logger.info("viewAllTransaction() is get executed");
+			return TransactionUtils.convertToTransactionDtoList(list);
+		} else {
+			throw new WalletNotFoundException("Wallet is not found");
+		}
 	}
 
 	//Service to viewAlltransactions() of the given transaction type is written here.
@@ -82,10 +94,14 @@ public class TransactionService implements ITransactionService {
 	@Override
 	public List<TransactionDTO> viewTransactionsByDate(@DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@DateTimeFormat(iso = ISO.DATE) LocalDate to) {
-		logger.info("viewTransactionByDate() is get intiated");
-		List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
-		logger.info("viewTransactionByDate() is get executed");
-		return TransactionUtils.convertToTransactionDtoList(list);
+		if (from.isBefore(to)) {
+			logger.info("viewTransactionByDate() is get intiated");
+			List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
+			logger.info("viewTransactionByDate() is get executed");
+			return TransactionUtils.convertToTransactionDtoList(list);
+		} else {
+			throw new InvalidInputException("From date must be before than to date");
+		}
 	}
 
 	//Validation to provide transaction type as "SEND" and "RECIEVE".
