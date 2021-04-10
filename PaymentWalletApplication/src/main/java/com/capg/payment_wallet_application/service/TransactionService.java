@@ -35,18 +35,17 @@ public class TransactionService implements ITransactionService {
 
 	@Autowired
 	ITransactionRepository transactionRepo;
-	
+
 	@Autowired
 	WalletRepo walletRepo;
-	
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	/* Author      : T.Deepan Chakravarthy
-	*  Description : Service for addtransaction() method is written in which balance of wallet is get updated after each transaction. 
-	*  Input Params: Transaction
-	*  Return value: TransactionDTO object
-	*/
+
+	/*
+	 * Author : T.Deepan Chakravarthy Description : Service for addtransaction()
+	 * method is written in which balance of wallet is get updated after each
+	 * transaction. Input Params: Transaction Return value: TransactionDTO object
+	 */
 	@Override
 	public TransactionDTO addTransaction(Transaction tran) {
 		logger.info("addTransaction() is get intiated()");
@@ -55,17 +54,17 @@ public class TransactionService implements ITransactionService {
 		Transaction transaction = null;
 		String type = tran.getTransactionType();
 		if (transactionTypeValidation(type)) {
-		if ((amount.compareTo(currentBalance) <= 0) && (tran.getTransactionType().equals("SEND"))) {
-			currentBalance = currentBalance.subtract(amount);
-			tran.getWallet().setBalance(currentBalance);
-		    transaction = transactionRepo.save(tran);
-		} else if (tran.getTransactionType().equals("RECEIVE")) {
-			currentBalance = currentBalance.add(amount);
-			tran.getWallet().setBalance(currentBalance);
-		     transaction = transactionRepo.save(tran);
-		} else {
-			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
-		}
+			if ((amount.compareTo(currentBalance) <= 0) && (tran.getTransactionType().equals("SEND"))) {
+				currentBalance = currentBalance.subtract(amount);
+				tran.getWallet().setBalance(currentBalance);
+				transaction = transactionRepo.save(tran);
+			} else if (tran.getTransactionType().equals("RECEIVE")) {
+				currentBalance = currentBalance.add(amount);
+				tran.getWallet().setBalance(currentBalance);
+				transaction = transactionRepo.save(tran);
+			} else {
+				throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");
+			}
 		} else {
 			throw new InvalidInputException("Transaction types are only either SEND or RECEIVE");
 		}
@@ -73,33 +72,30 @@ public class TransactionService implements ITransactionService {
 		return TransactionUtils.convertToTransactionDto(transaction);
 	}
 
-	/* Author      : T.Deepan Chakravarthy
-	*  Description : Service to viewAlltransactions() of the given wallet is written here,It will display each and every fundtransfer done by specific wallet. 
-	*  Input Params: int walletId
-	*  Return value: TransactionDTO List
-	*/
+	/*
+	 * Author : T.Deepan Chakravarthy Description : Service to viewAlltransactions()
+	 * of the given wallet is written here,It will display each and every
+	 * fundtransfer done by specific wallet. Input Params: int walletId Return
+	 * value: TransactionDTO List
+	 */
 	@Override
 	public List<TransactionDTO> viewAllTransactions(int walletId) {
-		Customer wallet =  walletRepo.findByWalletId(walletId);
-	    if(wallet != null)
-	    {
-        logger.info("viewAlltransactions() is get intiated");
-		List<Transaction> list = transactionRepo.viewAllTransactions(walletId);
-		logger.info("viewAllTransaction() is get executed");
-		return TransactionUtils.convertToTransactionDtoList(list);
-	    }
-	    else
-	    {
-	    	throw new WalletNotFoundException("Wallet is not found");
-	    }
+		Customer wallet = walletRepo.findByWalletId(walletId);
+		if (wallet != null) {
+			logger.info("viewAlltransactions() is get intiated");
+			List<Transaction> list = transactionRepo.viewAllTransactions(walletId);
+			logger.info("viewAllTransaction() is get executed");
+			return TransactionUtils.convertToTransactionDtoList(list);
+		} else {
+			throw new WalletNotFoundException("Wallet is not found");
+		}
 	}
-	    
 
-	/* Author      : T.Deepan Chakravarthy
-	*  Description : Service to viewAlltransactions() of the given transaction type is written here.
-	*  Input Params: String type
-	*  Return value: TransactionDTO List
-	*/
+	/*
+	 * Author : T.Deepan Chakravarthy Description : Service to viewAlltransactions()
+	 * of the given transaction type is written here. Input Params: String type
+	 * Return value: TransactionDTO List
+	 */
 	@Override
 	public List<TransactionDTO> viewAllTransactions(String type) {
 		logger.info("viewAlltransactions() is get intiated");
@@ -112,34 +108,31 @@ public class TransactionService implements ITransactionService {
 		logger.info("viewAllTransaction() is get executed");
 		return TransactionUtils.convertToTransactionDtoList(list);
 	}
-    
-	/* Author      : T.Deepan Chakravarthy
-	*  Description : Service to provide transaction between given dates.
-	*  Input Params: LocalDate
-	*  Return value: TransactionDTO List
-	*/
+
+	/*
+	 * Author : T.Deepan Chakravarthy Description : Service to provide transaction
+	 * between given dates. Input Params: LocalDate Return value: TransactionDTO
+	 * List
+	 */
 	@Override
 	public List<TransactionDTO> viewTransactionsByDate(@DateTimeFormat(iso = ISO.DATE) LocalDate from,
 			@DateTimeFormat(iso = ISO.DATE) LocalDate to) {
-		if(from.isBefore(to))
-		{
-		logger.info("viewTransactionByDate() is get intiated");
-		List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
-		logger.info("viewTransactionByDate() is get executed");
-		return TransactionUtils.convertToTransactionDtoList(list);
-		}
-		else
-		{
+		if (from.isBefore(to)) {
+			logger.info("viewTransactionByDate() is get intiated");
+			List<Transaction> list = transactionRepo.viewTransactionsByDate(from, to);
+			logger.info("viewTransactionByDate() is get executed");
+			return TransactionUtils.convertToTransactionDtoList(list);
+		} else {
 			throw new InvalidInputException("From date must be before than to date");
 		}
 	}
 
-	//Validation to provide transaction type as "SEND" and "RECIEVE".
+	// Validation to provide transaction type as "SEND" and "RECIEVE".
 	private static boolean transactionTypeValidation(String type) {
 		boolean flag = false;
 		if (type.equals("SEND") || type.equals("RECEIVE")) {
 			flag = true;
 		}
 		return flag;
-	}	
+	}
 }

@@ -62,7 +62,7 @@ class AccountServiceImplTest {
 		WalletDTO bankAccount = accountService.removeAccount(bankacc);
 		assertNotNull(bankAccount);
 		assertEquals(wallet.getWalletId(), bankAccount.getWalletId());
-		
+
 		BankAccount bankacc1 = new BankAccount(ifscCode, bankName, amount, wallet);
 		assertDoesNotThrow(() -> accountService.removeAccount(bankacc1));
 

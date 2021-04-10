@@ -32,7 +32,7 @@ public class Exceptions {
 	public ResponseEntity<Object> exceptionWalletNotFoundException(WalletNotFoundException exception) {
 		return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(value = InvalidInputException.class)
 	public ResponseEntity<Object> exceptionInvalidInputException(InvalidInputException exception) {
 		return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
@@ -43,12 +43,12 @@ public class Exceptions {
 			MethodArgumentTypeMismatchException exception) {
 		return new ResponseEntity<>("Invalid Date Format", HttpStatus.NOT_ACCEPTABLE);
 	}
-	
-	@ExceptionHandler(value=InvalidFormatException.class)
-	public ResponseEntity<Object> exceptionInvalidFormatException(InvalidFormatException exception){
-		if(exception.getTargetType()==com.capg.payment_wallet_application.beans.BillType.class) {
-			return new ResponseEntity<>("Enter a valid bill type",HttpStatus.NOT_ACCEPTABLE);
+
+	@ExceptionHandler(value = InvalidFormatException.class)
+	public ResponseEntity<Object> exceptionInvalidFormatException(InvalidFormatException exception) {
+		if (exception.getTargetType() == com.capg.payment_wallet_application.beans.BillType.class) {
+			return new ResponseEntity<>("Enter a valid bill type", HttpStatus.NOT_ACCEPTABLE);
 		}
-		return new ResponseEntity<>(exception.getTargetType(),HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<>(exception.getTargetType(), HttpStatus.NOT_ACCEPTABLE);
 	}
 }

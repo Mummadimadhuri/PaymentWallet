@@ -21,27 +21,27 @@ import com.capg.payment_wallet_application.exception.InvalidInputException;
 
 @SpringBootTest
 class BillPaymentServiceImplTest {
-	
+
 	@Autowired
 	private BillPaymentServiceImpl billServiceImpl;
-	
-    @Test
+
+	@Test
 	void testAddBillPayment() {
 		BigDecimal balance = new BigDecimal(20000);
 		Wallet wallet = new Wallet(balance);
 		wallet.setWalletId(40);
 		LocalDate date = LocalDate.parse("2000-03-11");
 		double amount = 10000;
-        double amount1 =25000;
-		
-		BillPayment payment = new BillPayment(wallet,BillType.DTH,amount,date);
+		double amount1 = 25000;
+
+		BillPayment payment = new BillPayment(wallet, BillType.DTH, amount, date);
 		BillPaymentDTO billPayment = billServiceImpl.addBillPayment(payment);
-	    assertNotNull(billPayment);
-	    assertEquals(amount,payment.getAmount());
-	    
-	    BillPayment payment1 = new BillPayment(wallet,BillType.DTH,amount1,date);
-	    assertThrows(InsufficientBalanceException.class,()-> billServiceImpl.addBillPayment(payment1));
-	    
+		assertNotNull(billPayment);
+		assertEquals(amount, payment.getAmount());
+
+		BillPayment payment1 = new BillPayment(wallet, BillType.DTH, amount1, date);
+		assertThrows(InsufficientBalanceException.class, () -> billServiceImpl.addBillPayment(payment1));
+
 	}
 
 	@Test
@@ -50,11 +50,11 @@ class BillPaymentServiceImplTest {
 		int billId1 = 1000;
 		BillPaymentDTO billPayment = billServiceImpl.viewBillPayment(billId);
 		LocalDate expected = LocalDate.parse("2020-07-01");
-		assertEquals(expected,billPayment.getPaymentDate());
+		assertEquals(expected, billPayment.getPaymentDate());
 		assertNotNull(billPayment);
-		Assertions.assertDoesNotThrow(()->billServiceImpl.viewBillPayment(billId));
-		
-		assertThrows(InvalidInputException.class,()->billServiceImpl.viewBillPayment(billId1));
-		
+		Assertions.assertDoesNotThrow(() -> billServiceImpl.viewBillPayment(billId));
+
+		assertThrows(InvalidInputException.class, () -> billServiceImpl.viewBillPayment(billId1));
+
 	}
 }
