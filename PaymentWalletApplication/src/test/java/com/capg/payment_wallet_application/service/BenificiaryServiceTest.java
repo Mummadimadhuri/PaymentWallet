@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.transaction.TransactionSystemException;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
@@ -89,6 +90,10 @@ class BenificiaryServiceTest {
 		benificiary.setWallet(wallet);
 		String response = benificiaryService.deleteBenificiary(benificiary);
 		assertEquals("Benificiary Details is Deleted", response);
+
+		BenificiaryDetails benificiary2 = new BenificiaryDetails();
+		assertThrows(InvalidDataAccessApiUsageException.class,
+				() -> benificiaryService.deleteBenificiary(benificiary2));
 	}
 
 	@Test
@@ -109,6 +114,7 @@ class BenificiaryServiceTest {
 		assertThrows(InvalidInputException.class,()->benificiaryService.viewBenificiary(mobileNumber1));
 		assertThrows(InvalidInputException.class,()->benificiaryService.viewBenificiary(mobileNumber2));
 	}
+
 
 	@Test
 	void testViewAllBenificiary() {
