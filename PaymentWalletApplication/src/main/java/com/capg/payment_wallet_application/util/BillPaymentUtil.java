@@ -26,7 +26,7 @@ public class BillPaymentUtil {
 		BillPayment billPayment = new BillPayment();
 
 		billPayment.setAmount(dto.getAmount());
-		billPayment.setBilltype(dto.getBilltype());
+		billPayment.setBillType(dto.getBillType());
 		billPayment.setPaymentDate(dto.getPaymentDate());
 		billPayment.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
         billPayment.setBillId(dto.getBillId());
@@ -38,7 +38,7 @@ public class BillPaymentUtil {
 		BillPaymentDTO dto = new BillPaymentDTO();
 
 		dto.setAmount(billPayment.getAmount());
-		dto.setBilltype(billPayment.getBilltype());
+		dto.setBillType(billPayment.getBillType());
 		dto.setPaymentDate(billPayment.getPaymentDate());
 		dto.setWalletDto(WalletUtils.convertToWalletDto(billPayment.getWallet()));
         dto.setBillId(billPayment.getBillId());

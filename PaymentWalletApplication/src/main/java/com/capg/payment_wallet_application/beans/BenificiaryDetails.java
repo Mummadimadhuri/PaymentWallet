@@ -14,7 +14,7 @@ public class BenificiaryDetails {
 	@Id
 	@Pattern(regexp = "^[6-9]{1}[0-9]{9}$",
 			message = "Mobile number should have exactly 10 digits and start with a number 6 to 9")
-	private String mobileNumber;
+	private String mobileNo;
 	
 	@ManyToOne
 	private Wallet wallet;
@@ -25,10 +25,10 @@ public class BenificiaryDetails {
 
 	public BenificiaryDetails(
 			@Pattern(regexp = "^[A-Za-z ]{3,30}$", message = "Name should be in the range of 3 to 30 characters") String name,
-			@Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Mobile number should have exactly 10 digits and start with a number 6 to 9") String mobileNumber) {
+			@Pattern(regexp = "^[6-9]{1}[0-9]{9}$", message = "Mobile number should have exactly 10 digits and start with a number 6 to 9") String mobileNo) {
 		super();
 		this.name = name;
-		this.mobileNumber = mobileNumber;
+		this.mobileNo = mobileNo;
 	}
 
 	
@@ -40,18 +40,18 @@ public class BenificiaryDetails {
 		this.name = name;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
+	public String getMobileNo() {
+		return mobileNo;
 	}
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 	@Override
 	public String toString() {
-		return "BenificiaryDetails [name=" + name + ", mobileNumber="
-				+ mobileNumber + "]";
+		return "BenificiaryDetails [name=" + name + ", mobileNo="
+				+ mobileNo + "]";
 	}
 
 	public Wallet getWallet() {

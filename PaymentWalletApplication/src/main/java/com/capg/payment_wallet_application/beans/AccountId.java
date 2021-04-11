@@ -47,20 +47,26 @@ public class AccountId implements Serializable{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		AccountId other = (AccountId) obj;
-		if (accountNo != other.accountNo)
+		if (accountNo != other.accountNo) {
 			return false;
+		}
 		if (ifscCode == null) {
-			if (other.ifscCode != null)
+			if (other.ifscCode != null) {
 				return false;
-		} else if (!ifscCode.equals(other.ifscCode))
+			}
+		} else if (!ifscCode.equals(other.ifscCode)) {
 			return false;
+		}
 		return true;
 	}
 	

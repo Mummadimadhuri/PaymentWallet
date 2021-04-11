@@ -6,18 +6,20 @@ import org.springframework.stereotype.Component;
 public class BenificiaryDetailsDTO {
 
 	private String name;
-	private String mobileNumber;
+	private String mobileNo;
 	private WalletDTO walletDto;
 
 	public BenificiaryDetailsDTO() {
 		super();
 	}
 
-	public BenificiaryDetailsDTO(String name, String mobileNumber) {
+	public BenificiaryDetailsDTO(String name, String mobileNo) {
 		super();
 		this.name = name;
-		this.mobileNumber = mobileNumber;
+		this.mobileNo = mobileNo;
 	}
+
+
 
 	public String getName() {
 		return name;
@@ -27,18 +29,18 @@ public class BenificiaryDetailsDTO {
 		this.name = name;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
+	public String getMobileNo() {
+		return mobileNo;
 	}
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 	@Override
 	public String toString() {
 		return "BenificiaryDetails [ name=" + name + ", mobileNumber="
-				+ mobileNumber + "]";
+				+ mobileNo + "]";
 	}
 
 	public WalletDTO getWalletDto() {

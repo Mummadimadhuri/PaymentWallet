@@ -21,7 +21,7 @@ import com.capg.payment_wallet_application.util.BeneficiaryDetailsUtils;
 public class BenificiaryService implements IBenificiaryService {
 
 	@Autowired
-	private IBenificiaryRepository ibenificiaryrepo;
+	private IBenificiaryRepository benificiaryRepo;
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -29,26 +29,26 @@ public class BenificiaryService implements IBenificiaryService {
 	private WalletRepo walletRepo;
 
 	@Override
-	public BenificiaryDetailsDTO addBenificiary(BenificiaryDetails bd) {
+	public BenificiaryDetailsDTO addBenificiary(BenificiaryDetails benificiaryDetails) {
 		logger.info("addBenificiary() is get intiated");
-		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save(bd);
+		BenificiaryDetails benificiarydetails = benificiaryRepo.save(benificiaryDetails);
 		logger.info("addBenificiary() is get executed");
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
 
 	@Override
-	public BenificiaryDetailsDTO updateBenificiary(BenificiaryDetails bd) {
+	public BenificiaryDetailsDTO updateBenificiary(BenificiaryDetails benificiaryDetails) {
 		logger.info("updateBenificiary() is get intiated");
-		BenificiaryDetails benificiarydetails = ibenificiaryrepo.save(bd);
+		BenificiaryDetails benificiarydetails = benificiaryRepo.save(benificiaryDetails);
 		logger.info("updateBenificiary() is get executed");
 		return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDto(benificiarydetails);
 	}
 
 	@Override
-	public String deleteBenificiary(BenificiaryDetails bd) {
+	public String deleteBenificiary(BenificiaryDetails benificiaryDetails) {
 		logger.info("deleteBenificiary() is get intiated");
-		if (ibenificiaryrepo.findById(bd.getMobileNumber()) != null) {
-			ibenificiaryrepo.delete(bd);
+		if (benificiaryRepo.findById(benificiaryDetails.getMobileNo()) != null) {
+			benificiaryRepo.delete(benificiaryDetails);
 			logger.info("deleteBenificiary() is get executed");
 			return "Benificiary Details is Deleted";
 		} else {
@@ -62,7 +62,7 @@ public class BenificiaryService implements IBenificiaryService {
 		if (!mobileNoValidation(mobileNo)) {
 			throw new InvalidInputException("Mobile number should be a 10 digit number with first digit from 6 to 9");
 		}
-		BenificiaryDetails benificiarydetails = ibenificiaryrepo.findById(mobileNo).orElse(null);
+		BenificiaryDetails benificiarydetails = benificiaryRepo.findById(mobileNo).orElse(null);
 		if (benificiarydetails == null) {
 			throw new InvalidInputException("Mobile no is not registered to any benificiary");
 		}
@@ -75,7 +75,7 @@ public class BenificiaryService implements IBenificiaryService {
 		Customer wallet = walletRepo.findByWalletId(walletId);
 		if (wallet != null) {
 			logger.info("viewAllBenificiary() is get intiated");
-			List<BenificiaryDetails> list = ibenificiaryrepo.viewAllBenificiary(walletId);
+			List<BenificiaryDetails> list = benificiaryRepo.viewAllBenificiary(walletId);
 			logger.info("viewAllBenificiary() is get executed");
 			return BeneficiaryDetailsUtils.convertToBenificiaryDetailsDtoList(list);
 		} else {

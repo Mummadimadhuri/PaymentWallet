@@ -19,18 +19,18 @@ public class WalletUtils {
 		return dtolist;
 	}
 
-	public static Wallet convertToWallet(WalletDTO dto) {
+	public static Wallet convertToWallet(WalletDTO walletDto) {
 		Wallet wallet = new Wallet();
-		wallet.setWalletId(dto.getWalletId());
-		wallet.setBalance(dto.getBalance());
+		wallet.setWalletId(walletDto.getWalletId());
+		wallet.setBalance(walletDto.getBalance());
 		return wallet;
 	}
 
 	public static WalletDTO convertToWalletDto(Wallet wallet) {
-		WalletDTO walletdto = new WalletDTO();
-		walletdto.setWalletId(wallet.getWalletId());
-		walletdto.setBalance(wallet.getBalance());
-		return walletdto;
+		WalletDTO walletDto = new WalletDTO();
+		walletDto.setWalletId(wallet.getWalletId());
+		walletDto.setBalance(wallet.getBalance());
+		return walletDto;
 	}
 
 }

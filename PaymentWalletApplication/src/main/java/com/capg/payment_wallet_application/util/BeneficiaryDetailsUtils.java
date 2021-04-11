@@ -21,7 +21,7 @@ public class BeneficiaryDetailsUtils {
 	public static BenificiaryDetails convertToBenificiaryDetails(BenificiaryDetailsDTO dto) {
 		BenificiaryDetails benificiarydetails = new BenificiaryDetails();
 
-		benificiarydetails.setMobileNumber(dto.getMobileNumber());
+		benificiarydetails.setMobileNo(dto.getMobileNo());
 		benificiarydetails.setName(dto.getName());
 		benificiarydetails.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
 		return benificiarydetails;
@@ -31,7 +31,7 @@ public class BeneficiaryDetailsUtils {
 	public static BenificiaryDetailsDTO convertToBenificiaryDetailsDto(BenificiaryDetails benificiarydetails) {
 		BenificiaryDetailsDTO benificiarydetailsDTO = new BenificiaryDetailsDTO();
 
-		benificiarydetailsDTO.setMobileNumber(benificiarydetails.getMobileNumber());
+		benificiarydetailsDTO.setMobileNo(benificiarydetails.getMobileNo());
 		benificiarydetailsDTO.setName(benificiarydetails.getName());
 		benificiarydetailsDTO.setWalletDto(WalletUtils.convertToWalletDto(benificiarydetails.getWallet()));
 		return benificiarydetailsDTO;

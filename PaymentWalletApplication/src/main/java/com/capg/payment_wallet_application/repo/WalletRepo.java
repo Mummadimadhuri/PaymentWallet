@@ -20,15 +20,15 @@ import com.capg.payment_wallet_application.beans.Customer;
 @Repository
 public interface WalletRepo extends JpaRepository<Customer, String> {
 
-	//JPQL query to get the customer object using its mobile no
+	// JPQL query to get the customer object using its mobile no
 	@Query("select c from Customer c where c.mobileNo = :mobileNo")
 	public Customer findOne(@Param(value = "mobileNo") String mobileNo);
 
-	//JPQL query to get the list of all the customers
+	// JPQL query to get the list of all the customers
 	@Query("select c from Customer c")
 	public List<Customer> getList();
 
-	//JPQL query to get a customer object based on its wallet id
+	// JPQL query to get a customer object based on its wallet id
 	@Query("select c from Customer c where c.wallet.walletId = :walletId")
-	public Customer findByWalletId(@Param(value="walletId") int walletId);
+	public Customer findByWalletId(@Param(value = "walletId") int walletId);
 }

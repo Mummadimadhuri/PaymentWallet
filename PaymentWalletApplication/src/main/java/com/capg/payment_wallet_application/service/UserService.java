@@ -16,7 +16,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private IUserRepo userRepo;
-	
+
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
@@ -24,7 +24,7 @@ public class UserService implements IUserService {
 		logger.info("validateLogin() is get intiated");
 		password = Integer.valueOf(password.hashCode()).toString();
 		Customer customer = userRepo.validateLogin(mobileNumber, password);
-		if(customer==null) {
+		if (customer == null) {
 			throw new InvalidInputException("Wrong Credentials");
 		} else {
 			logger.info("validateLogin() is get executed");

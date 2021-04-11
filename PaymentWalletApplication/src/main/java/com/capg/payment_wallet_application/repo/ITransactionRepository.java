@@ -21,18 +21,19 @@ import org.springframework.stereotype.Repository;
 import com.capg.payment_wallet_application.beans.Transaction;
 
 @Repository
-public interface ITransactionRepository extends JpaRepository<Transaction, Integer>{
+public interface ITransactionRepository extends JpaRepository<Transaction, Integer> {
 
-	
-    //Jpql Query is written to view all transaction of the given wallet id
+	// Jpql Query is written to view all transaction of the given wallet id
 	@Query("select t from Transaction t where t.wallet.walletId = :walletId")
-	public List<Transaction> viewAllTransactions (@Param(value = "walletId") int walletId);
-	
-	//Jpql Query is written to view all transaction between two dates
+	public List<Transaction> viewAllTransactions(@Param(value = "walletId") int walletId);
+
+	// Jpql Query is written to view all transaction between two dates
 	@Query("SELECT t FROM Transaction t WHERE t.transactionDate BETWEEN :from AND :to")
-	public List<Transaction> viewTransactionsByDate(@Param(value = "from") @DateTimeFormat(iso = ISO.DATE) LocalDate from,@Param(value = "to") @DateTimeFormat(iso = ISO.DATE) LocalDate to);
-	
-	//Jpql Query is written to view all transaction of the given type
+	public List<Transaction> viewTransactionsByDate(
+			@Param(value = "from") @DateTimeFormat(iso = ISO.DATE) LocalDate from,
+			@Param(value = "to") @DateTimeFormat(iso = ISO.DATE) LocalDate to);
+
+	// Jpql Query is written to view all transaction of the given type
 	@Query("select t from Transaction t where t.transactionType = :type")
 	public List<Transaction> viewAllTransactions(@Param(value = "type") String type);
 

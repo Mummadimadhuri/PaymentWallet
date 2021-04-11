@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.TransactionSystemException;
 
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
@@ -46,7 +45,7 @@ class BenificiaryServiceTest {
 		benificiary.setWallet(wallet);
 		BenificiaryDetailsDTO benificiaryDetails = benificiaryService.addBenificiary(benificiary);
 		assertNotNull(benificiaryDetails);
-		assertEquals(mobileNumber, benificiaryDetails.getMobileNumber());
+		assertEquals(mobileNumber, benificiaryDetails.getMobileNo());
 		assertDoesNotThrow(() -> benificiaryService.addBenificiary(benificiary));
 
 		BenificiaryDetails benificiary2 = new BenificiaryDetails(name1, mobileNumber2);
@@ -83,8 +82,8 @@ class BenificiaryServiceTest {
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207603",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		
-		String name = "Ravi",name1="Suresh3";
-		String mobileNumber = "9875623456",mobileNumber2="987574754a";
+		String name = "Ravi";
+		String mobileNumber = "9875623456";
 
 		BenificiaryDetails benificiary = new BenificiaryDetails(name,mobileNumber);
 		benificiary.setWallet(wallet);
@@ -103,10 +102,10 @@ class BenificiaryServiceTest {
 		BenificiaryDetails beneficiary = new BenificiaryDetails("Deepan","9360043198");
 		beneficiary.setWallet(wallet);
 		BenificiaryDetailsDTO beneficiary1 = benificiaryService.addBenificiary(beneficiary);
-		String mobileNumber = beneficiary1.getMobileNumber();
+		String mobileNumber = beneficiary1.getMobileNo();
 		BenificiaryDetailsDTO beneficiary2 = benificiaryService.viewBenificiary(mobileNumber); 
 		assertNotNull(beneficiary2);
-		assertEquals(beneficiary1.getMobileNumber(),beneficiary2.getMobileNumber());
+		assertEquals(beneficiary1.getMobileNo(),beneficiary2.getMobileNo());
 		
 		String mobileNumber1 = "9842291860";
 		String mobileNumber2="984229186a";
@@ -125,7 +124,6 @@ class BenificiaryServiceTest {
 		BenificiaryDetails beneficiary1 = new BenificiaryDetails("Mara","7854356788");
 		beneficiary1.setWallet(wallet);
 		BenificiaryDetailsDTO beneficiary2 =benificiaryService.addBenificiary(beneficiary);
-		BenificiaryDetailsDTO beneficiary3 =benificiaryService.addBenificiary(beneficiary1);
 		int walletId = beneficiary2.getWalletDto().getWalletId();
 		int walletId1 =1000;
 		List<BenificiaryDetailsDTO> benificiaryDetails = benificiaryService.viewAllBenificiary(walletId);

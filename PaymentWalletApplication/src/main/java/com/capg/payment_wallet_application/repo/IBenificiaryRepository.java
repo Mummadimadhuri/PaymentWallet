@@ -11,10 +11,10 @@ import org.springframework.stereotype.Repository;
 import com.capg.payment_wallet_application.beans.BenificiaryDetails;
 
 @Repository
-public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails,String> {
+public interface IBenificiaryRepository extends JpaRepository<BenificiaryDetails, String> {
 
-    @Query("select bd from BenificiaryDetails bd where bd.wallet.walletId=:walletId")
+	@Query("select bd from BenificiaryDetails bd where bd.wallet.walletId=:walletId")
 	public List<BenificiaryDetails> viewAllBenificiary(@Param("walletId") int walletId);
-	
-    public Optional<BenificiaryDetails> findById(String mobileNumber);
+
+	public Optional<BenificiaryDetails> findById(String mobileNumber);
 }

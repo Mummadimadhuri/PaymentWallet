@@ -60,12 +60,12 @@ public class BillPayment {
 		this.wallet = wallet;
 	}
 
-	public BillType getBilltype() {
+	public BillType getBillType() {
 		return billType;
 	}
 
-	public void setBilltype(BillType billtype) {
-		this.billType = billtype;
+	public void setBillType(BillType billType) {
+		this.billType = billType;
 	}
 
 	public double getAmount() {

@@ -25,28 +25,28 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Autowired
 	private IAccountRepository accountRepo;
-	
+
 	@Autowired
 	private WalletRepo walletRepo;
-	
+
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
-	public WalletDTO addAccount(BankAccount bacc) {
+	public WalletDTO addAccount(BankAccount bankAccount) {
 		logger.info("addAccount() is get intiated");
-		accountRepo.save(bacc);
-		Wallet wallet = bacc.getWallet();
+		accountRepo.save(bankAccount);
+		Wallet wallet = bankAccount.getWallet();
 		logger.info("addAccount() is get executed");
 		return WalletUtils.convertToWalletDto(wallet);
 	}
 
 	@Override
-	public WalletDTO removeAccount(BankAccount bacc) {
+	public WalletDTO removeAccount(BankAccount bankAccount) {
 		logger.info("removeAccount() is get intiated");
-		AccountId id = new AccountId(bacc.getAccountNo(), bacc.getIfscCode());
-		accountRepo.findById(id).orElseThrow(()->new InvalidInputException("Given Account no is not present"));
-		Wallet wallet = bacc.getWallet();
-		accountRepo.delete(bacc);
+		AccountId id = new AccountId(bankAccount.getAccountNo(), bankAccount.getIfscCode());
+		accountRepo.findById(id).orElseThrow(() -> new InvalidInputException("Given Account no is not present"));
+		Wallet wallet = bankAccount.getWallet();
+		accountRepo.delete(bankAccount);
 		logger.info("removeAccount() is get exectued");
 		return WalletUtils.convertToWalletDto(wallet);
 	}

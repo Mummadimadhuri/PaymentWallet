@@ -6,8 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class WalletDTO {
-	
-	
+
 	private int walletId;
 	private BigDecimal balance;
 
@@ -19,7 +18,7 @@ public class WalletDTO {
 		super();
 		this.balance = amount;
 	}
-	
+
 	public int getWalletId() {
 		return walletId;
 	}
@@ -38,7 +37,7 @@ public class WalletDTO {
 
 	@Override
 	public String toString() {
-		return "Wallet [walletId=" + walletId + ", balance=" + balance 	+ "]";
+		return "Wallet [walletId=" + walletId + ", balance=" + balance + "]";
 	}
 
 }

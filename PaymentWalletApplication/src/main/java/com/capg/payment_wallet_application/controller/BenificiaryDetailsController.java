@@ -25,39 +25,39 @@ import com.capg.payment_wallet_application.service.IBenificiaryService;
 public class BenificiaryDetailsController {
 
 	@Autowired
-	private IBenificiaryService benificiaryservice;
+	private IBenificiaryService benificiaryService;
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@PostMapping(value = "/add", consumes = "application/json")
 	public BenificiaryDetailsDTO addBenificiary(@RequestBody BenificiaryDetails bd) {
 		logger.info("Benificiary details added sucessfully");
-		return benificiaryservice.addBenificiary(bd);
+		return benificiaryService.addBenificiary(bd);
 	}
 
 	@PutMapping("/updateAccount")
 	public BenificiaryDetailsDTO updateBenificiary(@RequestBody BenificiaryDetails bd) {
 		logger.info("Benificiary Details Updated sucessfully");
-		return benificiaryservice.updateBenificiary(bd);
+		return benificiaryService.updateBenificiary(bd);
 	}
 
 	@DeleteMapping("/delete")
 	public ResponseEntity<String>  deleteBenificiary(@RequestBody BenificiaryDetails bd) {
 		 logger.info("Benificiary Details deleted sucessfully");
-		 String response =benificiaryservice.deleteBenificiary(bd);
+		 String response =benificiaryService.deleteBenificiary(bd);
 		 return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	@GetMapping("/viewbenificiary/{mobileNo}")
 	public BenificiaryDetailsDTO viewBenificiary(@PathVariable String mobileNo) {
 		logger.info("Details Of particular benificary is displayed sucessfully");
-		return benificiaryservice.viewBenificiary(mobileNo);		
+		return benificiaryService.viewBenificiary(mobileNo);		
 	}
 
 	@GetMapping("/view-all-benificiary/{walletId}")
 	public List<BenificiaryDetailsDTO> viewAllBenificiary(@PathVariable int walletId) {
 		logger.info("Benificiary of particular wallet is displayed sucessfully");
-		return benificiaryservice.viewAllBenificiary(walletId);
+		return benificiaryService.viewAllBenificiary(walletId);
 	}
 
 }

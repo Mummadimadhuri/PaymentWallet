@@ -13,7 +13,7 @@ public interface IAccountService {
 	public WalletDTO removeAccount(BankAccount bacc);
 
 	public List<BankAccountDTO> viewAllAccounts(int walletId);
-	
-    WalletDTO viewAccount(int accountNo, String ifscCode);
-	
+
+	WalletDTO viewAccount(int accountNo, String ifscCode);
+
 }

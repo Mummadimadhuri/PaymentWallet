@@ -38,43 +38,42 @@ public class WalletServiceImpl implements WalletService {
 
 	@Autowired
 	private WalletRepo walletRepo;
-	
+
 	@Autowired
 	private ITransactionRepository transactionRepo;
 
 	@Autowired
 	private IBenificiaryRepository benificiaryRepo;
-	
+
 	@Autowired
 	private IAccountRepository accountRepo;
-	
+
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	String invalidMobileNo = "Mobile number should be a 10 digit number with first digit from 6 to 9";
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 
 	/*
-	 * Description : A new customer is created with a new wallet
-	 * Input Param : String, String, BigDecimal, String
-	 * Return Value : CustomerDTO
-	 * Exception : 	InvalidInputException, InsufficientBalanceException, 
-	 * 				ConstraintViolationException, TransactionSystemException
-	 * */
+	 * Description : A new customer is created with a new wallet Input Param :
+	 * String, String, BigDecimal, String Return Value : CustomerDTO Exception :
+	 * InvalidInputException, InsufficientBalanceException,
+	 * ConstraintViolationException, TransactionSystemException
+	 */
 	@Override
 	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password) {
 		logger.info("createAccount() is get intiated");
-		if(walletRepo.findOne(mobileno)!=null) {
+		if (walletRepo.findOne(mobileno) != null) {
 			throw new InvalidInputException("This mobileno has already been registered to a customer");
 		}
-		if(amount.compareTo(new BigDecimal(1))<=0) {
+		if (amount.compareTo(new BigDecimal(1)) <= 0) {
 			throw new InsufficientBalanceException("amount should be atleast 1.0");
 		}
-		if(!validatePassword(password)) {
+		if (!validatePassword(password)) {
 			throw new InvalidInputException("Password should contain at least one Capital letter, "
 					+ "one small letter, one number and one special character");
 		}
 		password = Integer.valueOf(password.hashCode()).toString();
-		Customer customer = new Customer(name, mobileno,password);
+		Customer customer = new Customer(name, mobileno, password);
 		Wallet wallet = customer.getWallet();
 		wallet.setBalance(amount);
 		customer.setWallet(wallet);
@@ -83,11 +82,9 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Returns the customer object with its wallet balance
-	 * Input Param : String
-	 * Return Value : CustomerDTO
-	 * Exception : InvalidInputException
-	 * */
+	 * Description : Returns the customer object with its wallet balance Input Param
+	 * : String Return Value : CustomerDTO Exception : InvalidInputException
+	 */
 	@Override
 	public CustomerDTO showBalance(String mobileno) {
 		logger.info("showBalance() is get intiated");
@@ -105,13 +102,12 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Transfers money from one customer to another using the mobile number of two customers
-	 * 				 Also adds the transaction object for both sender and receiver customers
-	 * 				 Also adds a benificiary object of the receiver for sender
-	 * Input Param : String, String, BigDecimal
-	 * Return Value : CustomerDTO
-	 * Exception : InvalidInputException, InsufficientBalanceException
-	 * */
+	 * Description : Transfers money from one customer to another using the mobile
+	 * number of two customers Also adds the transaction object for both sender and
+	 * receiver customers Also adds a benificiary object of the receiver for sender
+	 * Input Param : String, String, BigDecimal Return Value : CustomerDTO Exception
+	 * : InvalidInputException, InsufficientBalanceException
+	 */
 	@Override
 	@Transactional
 	public CustomerDTO fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount) {
@@ -122,10 +118,10 @@ public class WalletServiceImpl implements WalletService {
 		if (!mobileNoValidation(targetMobileNo)) {
 			throw new InvalidInputException(invalidMobileNo);
 		}
-		if(sourceMobileNo.equals(targetMobileNo)) {
+		if (sourceMobileNo.equals(targetMobileNo)) {
 			throw new InvalidInputException("Sender and receiver should not be same");
 		}
-		if(amount.compareTo(new BigDecimal(1))<=0) {
+		if (amount.compareTo(new BigDecimal(1)) <= 0) {
 			throw new InsufficientBalanceException("amount should be atleast 1.0");
 		}
 		Customer source = walletRepo.findById(sourceMobileNo).orElse(null);
@@ -143,13 +139,11 @@ public class WalletServiceImpl implements WalletService {
 		}
 		sourceWallet.setBalance(sourceWallet.getBalance().subtract(amount));
 		targetWallet.setBalance(targetWallet.getBalance().add(amount));
-		Transaction sourceTransaction = 
-				new Transaction("SEND",LocalDate.now(),sourceWallet,Double.parseDouble(amount.toString()),
-						"Sending "+amount+" to "+targetMobileNo);
-		Transaction targetTransaction = 
-				new Transaction("RECEIVE",LocalDate.now(),targetWallet,Double.parseDouble(amount.toString()),
-						"Receiving "+amount+" from "+sourceMobileNo);
-		BenificiaryDetails benificiary = new BenificiaryDetails(target.getName(),target.getMobileNo());
+		Transaction sourceTransaction = new Transaction("SEND", LocalDate.now(), sourceWallet,
+				Double.parseDouble(amount.toString()), "Sending " + amount + " to " + targetMobileNo);
+		Transaction targetTransaction = new Transaction("RECEIVE", LocalDate.now(), targetWallet,
+				Double.parseDouble(amount.toString()), "Receiving " + amount + " from " + sourceMobileNo);
+		BenificiaryDetails benificiary = new BenificiaryDetails(target.getName(), target.getMobileNo());
 		benificiary.setWallet(sourceWallet);
 		benificiaryRepo.save(benificiary);
 		transactionRepo.save(sourceTransaction);
@@ -161,16 +155,14 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Adds amount to the wallet of the customer
-	 * Input Param : String, BigDecimal
-	 * Return Value : CustomerDTO
-	 * Exception : InvalidInputException
-	 * */
+	 * Description : Adds amount to the wallet of the customer Input Param : String,
+	 * BigDecimal Return Value : CustomerDTO Exception : InvalidInputException
+	 */
 	@Override
 	public CustomerDTO depositAmount(String mobileNo, BigDecimal amount) {
 		Customer customer = null;
 		logger.info("depositAmount() is get intiated");
-		if(amount.compareTo(new BigDecimal(1))<=0) {
+		if (amount.compareTo(new BigDecimal(1)) <= 0) {
 			throw new InvalidInputException("amount should be atleast 1.0");
 		}
 		if (mobileNoValidation(mobileNo)) {
@@ -188,15 +180,14 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Withdraws money from the wallet
-	 * Input Param : String, BigDecimal
-	 * Return Value : CustomerDTO
-	 * Exception : InvalidInputException, InsufficientBalanceException
-	 * */
+	 * Description : Withdraws money from the wallet Input Param : String,
+	 * BigDecimal Return Value : CustomerDTO Exception : InvalidInputException,
+	 * InsufficientBalanceException
+	 */
 	@Override
 	public CustomerDTO withdrawAmount(String mobileNo, BigDecimal amount) {
 		logger.info("withdrawAmount() is get intiated()");
-		if(amount.compareTo(new BigDecimal(1))<=0) {
+		if (amount.compareTo(new BigDecimal(1)) <= 0) {
 			throw new InvalidInputException("amount should be atleast 1.0");
 		}
 		Customer customer = null;
@@ -222,11 +213,9 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Gives the list of all the customers
-	 * Input Param : -
-	 * Return Value : List<CustomerDTO>
-	 * Exception : -
-	 * */
+	 * Description : Gives the list of all the customers Input Param : - Return
+	 * Value : List<CustomerDTO> Exception : -
+	 */
 	@Override
 	public List<CustomerDTO> getList() {
 		logger.info("list of customer is intiated");
@@ -236,26 +225,25 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Updates the customer details
-	 * Input Param : Customer
-	 * Return Value : CustomerDTO
-	 * Exception : InvalidInputException, InsufficientBalanceException
-	 * */
+	 * Description : Updates the customer details Input Param : Customer Return
+	 * Value : CustomerDTO Exception : InvalidInputException,
+	 * InsufficientBalanceException
+	 */
 	@Override
 	public CustomerDTO updateAccount(Customer customer) {
 		logger.info("updateAccount() is get intiated");
-		if(customer.getWallet().getBalance().compareTo(new BigDecimal(1))<=0) {
+		if (customer.getWallet().getBalance().compareTo(new BigDecimal(1)) <= 0) {
 			throw new InsufficientBalanceException("amount should be atleast 1.0");
 		}
-		if(!validatePassword(customer.getPassword())) {
+		if (!validatePassword(customer.getPassword())) {
 			throw new InvalidInputException("Password should contain at least one Capital letter, "
 					+ "one small letter, one number and one special character");
 		}
 		customer.setPassword(Integer.valueOf(customer.getPassword().hashCode()).toString());
-		if(!mobileNoValidation(customer.getMobileNo())) {
+		if (!mobileNoValidation(customer.getMobileNo())) {
 			throw new InvalidInputException("Mobile number should be a 10 digit number with first digit from 6 to 9");
 		}
-		if(walletRepo.findOne(customer.getMobileNo())==null) {
+		if (walletRepo.findOne(customer.getMobileNo()) == null) {
 			throw new InvalidInputException("The customer with given mobile no doesn't exist");
 		}
 		walletRepo.save(customer);
@@ -264,32 +252,31 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Adds money to wallet from a customer's bank account
-	 * Input Param : int, double
-	 * Return Value : CustomerDTO
-	 * Exception : InvalidInputException, InsufficientBalanceException
-	 * */
+	 * Description : Adds money to wallet from a customer's bank account Input Param
+	 * : int, double Return Value : CustomerDTO Exception : InvalidInputException,
+	 * InsufficientBalanceException
+	 */
 	@Override
 	@Transactional
 	public CustomerDTO addMoney(int walletId, double amount) {
 		logger.info("addMoney() is get intiated");
-		if(amount<1) {
+		if (amount < 1) {
 			throw new InvalidInputException("amount should be atleast 1.0");
 		}
 		Customer customer = walletRepo.findByWalletId(walletId);
 		Wallet wallet = customer.getWallet();
 		List<BankAccount> accounts = accountRepo.findByWalletId(wallet.getWalletId());
 		BankAccount currAccount = null;
-		for(BankAccount account:accounts) {
-			if(account.getBalance()>=amount) {
+		for (BankAccount account : accounts) {
+			if (account.getBalance() >= amount) {
 				currAccount = account;
 				break;
 			}
 		}
-		if(currAccount==null) {
+		if (currAccount == null) {
 			throw new InsufficientBalanceException("None of your accounts have enough money");
 		}
-		currAccount.setBalance(currAccount.getBalance()-amount);
+		currAccount.setBalance(currAccount.getBalance() - amount);
 		accountRepo.save(currAccount);
 		wallet.setBalance(wallet.getBalance().add(BigDecimal.valueOf(amount)));
 		customer.setWallet(wallet);
@@ -299,11 +286,9 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Validates the mobile number based on given standards
-	 * Input Param : String
-	 * Return Value : boolean
-	 * Exception : -
-	 * */
+	 * Description : Validates the mobile number based on given standards Input
+	 * Param : String Return Value : boolean Exception : -
+	 */
 	private static boolean mobileNoValidation(String mobileNo) {
 		boolean flag = false;
 		if (Pattern.matches("^[6-9][0-9]{9}$", mobileNo)) {
@@ -311,16 +296,14 @@ public class WalletServiceImpl implements WalletService {
 		}
 		return flag;
 	}
-	
+
 	/*
-	 * Description : Validates the password based on the standards
-	 * Input Param : String
-	 * Return Value : boolean
-	 * Exception : -
-	 * */
+	 * Description : Validates the password based on the standards Input Param :
+	 * String Return Value : boolean Exception : -
+	 */
 	private static boolean validatePassword(String password) {
 		boolean flag = false;
-		if(Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", password)) {
+		if (Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", password)) {
 			flag = true;
 		}
 		return flag;

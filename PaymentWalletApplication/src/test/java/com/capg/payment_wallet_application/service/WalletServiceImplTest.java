@@ -70,7 +70,7 @@ class WalletServiceImplTest {
 	void testShowBalance() {
 		walletService.createAccount("Arun Kumar M","8765432190",new BigDecimal(1000),"Arun@2000");
 		
-		String mobileNo = "8765432190", mobileNo1 = "876543211", 
+		String mobileNo = "8765432190", mobileNo1 = "8765432191", 
 				mobileNo2 = "98765432101", mobileNo3 = "984229186a";
 		
 		CustomerDTO balance = walletService.showBalance(mobileNo);
@@ -126,7 +126,7 @@ class WalletServiceImplTest {
 		assertEquals(sourceTransaction.getTransactionDate(),sourceTransaction1.getTransactionDate());
 		assertEquals(targetTransaction.getTransactionDate(),targetTransaction1.getTransactionDate());
 		assertEquals(benificiary.getName(),benificiary1.getName());
-		assertEquals(benificiary.getMobileNumber(),benificiary1.getMobileNumber());
+		assertEquals(benificiary.getMobileNo(),benificiary1.getMobileNo());
 		assertEquals(benificiary.getWallet().getWalletId(),benificiary1.getWallet().getWalletId());
 		
 		assertThrows(InvalidInputException.class,()->walletService.fundTransfer(sourceMobileNo1,targetMobileNo,amount));
