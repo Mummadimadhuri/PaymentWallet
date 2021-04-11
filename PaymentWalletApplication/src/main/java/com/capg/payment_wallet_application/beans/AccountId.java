@@ -1,7 +1,13 @@
 package com.capg.payment_wallet_application.beans;
 
 import java.io.Serializable;
-
+/*
+ * Entity Name              : AccountId
+ * Author                   : S. Eswar Bhavish Reddy
+ * Implementation Start Date: 2021-04-01
+ * Implementation End Date  : 2021-04-02
+ * Description				: Composite key for BankAccount entity class
+ * */
 public class AccountId implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -11,7 +17,7 @@ public class AccountId implements Serializable{
 	private String ifscCode;
 
 	public AccountId() {
-		
+		super();
 	}
 	
 	public AccountId(int accountNo, String ifscCode) {
