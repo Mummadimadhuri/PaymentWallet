@@ -216,7 +216,7 @@ class WalletServiceImplTest {
 	@Test
 	void testAddMoney() {
 		CustomerDTO customerDto = walletService.createAccount("Arun Kumar M", "6654321980", new BigDecimal(1000), "Arun@2000");
-		BankAccount bankAccount = new BankAccount("SBIN0000123", "State Bank", 100000, WalletUtils.convertToWallet(customerDto.getWalletDto()));
+		BankAccount bankAccount = new BankAccount(1001,"SBIN0000123", "State Bank", 100000, WalletUtils.convertToWallet(customerDto.getWalletDto()));
 		accountService.addAccount(bankAccount);
 		
 		Double amount = 2000.0, amount1 = 0.0;

@@ -1,8 +1,6 @@
 package com.capg.payment_wallet_application.beans;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
@@ -23,7 +21,6 @@ import javax.validation.constraints.Size;
 public class BankAccount {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int accountNo;
 	
 	//Bean validation to check the validity of IFSC code
@@ -49,10 +46,11 @@ public class BankAccount {
 		super();
 	}
 	//Constructor for BankAccount entity
-	public BankAccount(@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$") String ifscCode, @Size(max = 30) String bankName,
+	public BankAccount(int accountNo,@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$") String ifscCode, @Size(max = 30) String bankName,
 			@DecimalMin(value = "1000.0", message = "balance must be a number at least 1000") double balance,
 			Wallet wallet) {
 		super();
+		this.accountNo = accountNo;
 		this.ifscCode = ifscCode;
 		this.bankName = bankName;
 		this.balance = balance;
