@@ -17,7 +17,15 @@ import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
 import com.capg.payment_wallet_application.service.AccountServiceImpl;
-
+/*
+ * Controller Name          : AccountController
+ * Author                   : S. Eswar Bhavish Reddy
+ * Implementation Start Date: 2021-04-06
+ * implementation End Date  : 2021-04-07
+ * Used Annotation          : @RestController, @RequestMapping, @Autowired, @PostMapping, @GetMapping, @DeleteMapping
+ * Swagger                  : Swagger is enabled
+ * Description				: Controller layer for Account
+ * */
 @RestController
 @RequestMapping("/api/pwa/account")
 public class AccountController {
@@ -25,26 +33,45 @@ public class AccountController {
 	@Autowired
 	private AccountServiceImpl accountService;
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
+	/* Author       : S. Eswar Bhavish Reddy
+	*  Description  : Adds BankAccount to the Wallet
+	*  Input Param  : BankAccount
+	*  Return value : WalletDTO Object
+	*/
 	@PostMapping("/add")
-	public WalletDTO addAccount(@RequestBody BankAccount bacc) {
+	public WalletDTO addAccount(@RequestBody BankAccount bankAccount) {
 		logger.info("Account added succesfully");
-		return accountService.addAccount(bacc);
+		return accountService.addAccount(bankAccount);
 	}
-
+	
+	/* Author       : S. Eswar Bhavish Reddy
+	*  Description  : Removed account from Wallet
+	*  Input Param  : BankAccount
+	*  Return value : WalletDTO Object
+	*/
 	@DeleteMapping("/remove")
-	public WalletDTO removeAccount(@RequestBody BankAccount bacc) {
-		logger.info("Account deleted");
-		return accountService.removeAccount(bacc);
+	public WalletDTO removeAccount(@RequestBody BankAccount bankAccount) {
+		logger.info("Account removed");
+		return accountService.removeAccount(bankAccount);
 	}
 
-
+	/* Author       : S. Eswar Bhavish Reddy
+	*  Description  : Views Wallet related to account
+	*  Input Params : int, String
+	*  Return value : WalletDTO Object
+	*/
 	@GetMapping("/view/{accountNo}/{ifscCode}")
 	public WalletDTO viewAccount(@PathVariable int accountNo,@PathVariable String ifscCode) {
 		logger.info("wallet for the account fetched");
 		return accountService.viewAccount(accountNo,ifscCode);
 	}
-
+	
+	/* Author       : S. Eswar Bhavish Reddy
+	*  Description  : view all accounts linked with the wallet
+	*  Input Param  : int
+	*  Return value : List of BankAccount DTO
+	*/
 	@GetMapping("/viewAll/{walletId}")
 	public List<BankAccountDTO> viewAllAccounts(@PathVariable int walletId) {
 		logger.info("all accounts linked with the wallet are fetched");

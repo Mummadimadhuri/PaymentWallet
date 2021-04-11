@@ -1,7 +1,13 @@
 package com.capg.payment_wallet_application.dto;
 
 import org.springframework.stereotype.Component;
-
+/*
+ * DTO Name					: BankAccount DTO
+ * Author                   : S. Eswar Bhavish Reddy
+ * Implementation Start Date: 2021-04-01
+ * implementation End Date  : 2021-04-02
+ * Description				: DTO Layer for BankAccount
+ * */
 @Component
 public class BankAccountDTO {
 
