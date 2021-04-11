@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.TransactionSystemException;
@@ -27,9 +29,12 @@ class TransactionServiceTest {
 	@Autowired
 	private WalletServiceImpl walletService;
 	
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	
 	@Test
 	void testAddTransaction() {
-	    	
+		logger.info("testAddTransaction() method is executed()");
 		CustomerDTO customer = walletService.createAccount("Deepan Chakravarthy", "9360043198", new BigDecimal(10000), "Deepan@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		LocalDate Date = LocalDate.parse("2020-08-01");
@@ -60,9 +65,11 @@ class TransactionServiceTest {
 		assertThrows(TransactionSystemException.class, () -> transactionService.addTransaction(tran3));	
 		Transaction tran4 = new Transaction("SEN",Date,wallet,amount2,"String");
 		assertThrows(InvalidInputException.class, () -> transactionService.addTransaction(tran4));	
+		logger.info("testAddTransaction() method is Executed");
 	}
 	@Test
 	void testViewAllTransactionsWallet() {
+		logger.info("testViewAllTransactionWallet() is get intiated");
 		CustomerDTO customer = walletService.createAccount("Deepan Chakravarthy","9894010016", new BigDecimal(10000), "Deepan@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		double amount = 3000;
@@ -75,10 +82,12 @@ class TransactionServiceTest {
 		assertDoesNotThrow(()->transactionService.viewAllTransactions(walletId));
 		assertThrows(WalletNotFoundException.class,()->transactionService.viewAllTransactions(walletId1));
 		assertNotNull(tran1);
-	}
+		logger.info("testViewAllTransactionWallet() is getexecuted");
+		}
 
 	@Test
 	void testViewAllTransactionsString() {
+		logger.info("testViewAllTransactionsString() is get intiated");
 		CustomerDTO customer = walletService.createAccount("Deepan Chakravarthy", "9839012306", new BigDecimal(10000), "Deepan@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		double amount = 3000;
@@ -99,10 +108,12 @@ class TransactionServiceTest {
 		assertNotNull(tran3);
 		
 		assertThrows(InvalidInputException.class, () -> transactionService.viewAllTransactions(transactionType2));
+		logger.info("testViewAllTransactionString() is get exceuted");
 	}
 
 	@Test
 	void testViewTransactionsByDate() {
+		logger.info("testViewTransactionByDate() is get intiated");
 		CustomerDTO customer1 = walletService.createAccount("Deepan Chakravarthy", "9840091135", new BigDecimal(10000), "Deepan@2000");
 		Wallet wallet1 = WalletUtils.convertToWallet(customer1.getWalletDto());
 		double amount1 = 3000;
@@ -131,6 +142,6 @@ class TransactionServiceTest {
 		assertNotNull(tran5);
 		assertDoesNotThrow(() -> transactionService.viewTransactionsByDate(from, to));
 		assertThrows(InvalidInputException.class, () -> transactionService.viewTransactionsByDate(from1, to1));
+		logger.info("testViewtransactionBydate() is get executed");
 	}
-
 }
