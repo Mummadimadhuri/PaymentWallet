@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
@@ -31,8 +33,11 @@ class BenificiaryServiceTest {
 	@Autowired
 	private WalletServiceImpl walletService;
 	
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Test
 	void testAddBeneficiary() {
+		logger.info("testAddBeneficiary() is intiated");
 		CustomerDTO customer = walletService.createAccount("Mummadi madhuri", "9440207619", new BigDecimal(1000), "Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		String name = "Ravi";
@@ -54,10 +59,13 @@ class BenificiaryServiceTest {
 		BeneficiaryDetails beneficiary3 = new BeneficiaryDetails(name2, mobileNumber);
 		beneficiary3.setWallet(wallet);
 		assertThrows(TransactionSystemException.class, () -> beneficiaryService.addBeneficiary(beneficiary3));
+		logger.info("testAddBenificiary() is executed");
+		
 	}
 
 	@Test
 	void testUpdateBeneficiary() {
+		logger.info("testUpdateBeneficiary() is intiated");
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207615",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		
@@ -75,10 +83,12 @@ class BenificiaryServiceTest {
 		assertThrows(TransactionSystemException.class, () -> beneficiaryService.updateBeneficiary(beneficiary1));
 		BeneficiaryDetails beneficiary2 = new BeneficiaryDetails(name,mobileNumber2);
 		assertThrows(TransactionSystemException.class, () -> beneficiaryService.updateBeneficiary(beneficiary2));
+		logger.info("testUpdateBeneficiary() is executed");
 	}
 
 	@Test
 	void testDeleteBenificiary() {
+		logger.info("testDeleteBenificiary() is intiated");
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207603",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		
@@ -93,10 +103,12 @@ class BenificiaryServiceTest {
 		BeneficiaryDetails beneficiary2 = new BeneficiaryDetails();
 		assertThrows(InvalidDataAccessApiUsageException.class,
 				() -> beneficiaryService.deleteBeneficiary(beneficiary2));
+		logger.info("testDeleteBenificiary() is executed");
 	}
 
 	@Test
 	void testViewBeneficiary() {
+		logger.info("testViewBeneficiary() is intiated");
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207605",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		BeneficiaryDetails beneficiary = new BeneficiaryDetails("Deepan","9360043198");
@@ -112,11 +124,13 @@ class BenificiaryServiceTest {
 		
 		assertThrows(InvalidInputException.class,()->beneficiaryService.viewBeneficiary(mobileNumber1));
 		assertThrows(InvalidInputException.class,()->beneficiaryService.viewBeneficiary(mobileNumber2));
+		logger.info("testViewBeneficiary() is executed");
 	}
 
 
 	@Test
 	void testViewAllBeneficiary() {
+		logger.info("testViewAllBeneficiary() is intiated");
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207561",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		BeneficiaryDetails beneficiary = new BeneficiaryDetails("Maran","7854356789");
@@ -129,5 +143,6 @@ class BenificiaryServiceTest {
 		List<BeneficiaryDetailsDTO> beneficiaryDetails = beneficiaryService.viewAllBeneficiary(walletId);
 		assertNotNull(beneficiaryDetails);
 		assertThrows(WalletNotFoundException.class,()->beneficiaryService.viewAllBeneficiary(walletId1));
+		logger.info("testViewAllBeneficiary() is executed");
 	}
 }

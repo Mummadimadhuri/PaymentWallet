@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -29,9 +31,11 @@ class BillPaymentServiceImplTest {
 	@Autowired
     private WalletServiceImpl walletService;
 	
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
     @Test
 	void testAddBillPayment() {
+    	logger.info("testAddBillPayment() is intiated");
     	BigDecimal balance = new BigDecimal(2000);
     	CustomerDTO customer = walletService.createAccount("DharaniyaShree","9952068278",balance,"Dharaniya@2000");
     	Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
@@ -48,10 +52,12 @@ class BillPaymentServiceImplTest {
 	    
 	    BillPayment payment1 = new BillPayment(wallet,BillType.DTH,amount1,date);
 	    assertThrows(InsufficientBalanceException.class,()->billServiceImpl.addBillPayment(payment1));
+	    logger.info("testAddBillPayment() is executed");
 	}
 
 	@Test
 	void testViewBillPayment() {
+		logger.info("testViewBillPayment() is intiated");
 		BigDecimal balance = new BigDecimal(2000);
 		CustomerDTO customer = walletService.createAccount("DharaniyaShree","9952068286",balance,"Dharaniya@2000");
     	Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
@@ -65,6 +71,7 @@ class BillPaymentServiceImplTest {
 		
 		int billId1=340;
 		assertThrows(InvalidInputException.class,()->billServiceImpl.viewBillPayment(billId1));
+		logger.info("testViewBillPayment() is executed");
 				
 	}
 }

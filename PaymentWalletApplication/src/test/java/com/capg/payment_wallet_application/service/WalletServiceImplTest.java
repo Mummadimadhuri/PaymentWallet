@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.TransactionSystemException;
@@ -38,8 +40,11 @@ class WalletServiceImplTest {
 	@Autowired
 	private AccountServiceImpl accountService;
 	
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Test
 	void testCreateAccount() {
+		logger.info("testCreateAccount() is get intiated");
 		BigDecimal amount = new BigDecimal(10000), amount1 = new BigDecimal(0);
 		String name = "Arun Kumar", name1 = "Arun Kumar1";
 		String mobileNo = "9876543210", mobileNo1 = "9876543211", mobileNo2 = "9876543212",
@@ -64,10 +69,12 @@ class WalletServiceImplTest {
 				()->walletService.createAccount(name,mobileNo4,amount,password));
 		assertThrows(TransactionSystemException.class, 
 				()->walletService.createAccount(name,mobileNo5,amount,password));
+		logger.info("testCreateAccount() is get executed");
 	}
 
 	@Test
 	void testShowBalance() {
+		logger.info("testShowBalance() is get intialized");
 		walletService.createAccount("Arun Kumar M","8765432190",new BigDecimal(1000),"Arun@2000");
 		
 		String mobileNo = "8765432190", mobileNo1 = "8765432191", 
@@ -80,10 +87,12 @@ class WalletServiceImplTest {
 		assertThrows(InvalidInputException.class, ()->walletService.showBalance(mobileNo1));
 		assertThrows(InvalidInputException.class, ()->walletService.showBalance(mobileNo2));
 		assertThrows(InvalidInputException.class, ()->walletService.showBalance(mobileNo3));
+		logger.info("testShowbalance() is get executed");
 	}
 
 	@Test
 	void testFundTransfer() {
+		logger.info("testFundTransfer() is get intiated");
 		walletService.createAccount("Arun Kumar M","7654321980",new BigDecimal(1000),"Arun@2000");
 		walletService.createAccount("Madhuri","7654321981",new BigDecimal(1000),"Madhuri@2000");
 		
@@ -132,10 +141,12 @@ class WalletServiceImplTest {
 		assertThrows(InvalidInputException.class,()->walletService.fundTransfer(sourceMobileNo1,targetMobileNo,amount));
 		assertThrows(InvalidInputException.class,()->walletService.fundTransfer(sourceMobileNo,targetMobileNo1,amount));
 		assertThrows(InsufficientBalanceException.class,()->walletService.fundTransfer(sourceMobileNo,targetMobileNo,amount1));
+		logger.info("testFundTransfer() is get executed");
 	}
 
 	@Test
 	void testDepositAmount() {
+		logger.info("testDepositAmount() is get intiated");
 		walletService.createAccount("Arun Kumar M", "6543219870", new BigDecimal(1000), "Arun@2000");
 		
 		BigDecimal amount = new BigDecimal(10000), amount1 = new BigDecimal(0);
@@ -150,10 +161,12 @@ class WalletServiceImplTest {
 		assertThrows(InvalidInputException.class, ()->walletService.depositAmount(mobileNo1,amount));
 		assertThrows(InvalidInputException.class, ()->walletService.depositAmount(mobileNo2,amount));
 		assertThrows(InvalidInputException.class, ()->walletService.depositAmount(mobileNo,amount1));
+		logger.info("testDepositAmount() is get executed");
 	}
 
 	@Test
 	void testWithdrawAmount() {
+		logger.info("testWithdrawAmount() is get intiated");
 		walletService.createAccount("Arun Kumar M", "9987654321", new BigDecimal(1000), "Arun@2000");
 		
 		BigDecimal amount = new BigDecimal(500), amount1 = new BigDecimal(0), amount2 = new BigDecimal(5000);
@@ -169,19 +182,23 @@ class WalletServiceImplTest {
 		assertThrows(InvalidInputException.class, ()->walletService.withdrawAmount(mobileNo2, amount));
 		assertThrows(InvalidInputException.class, ()->walletService.withdrawAmount(mobileNo, amount1));
 		assertThrows(InsufficientBalanceException.class, ()->walletService.withdrawAmount(mobileNo, amount2));
+		logger.info("testWithdrawAmount() is get executed");
 	}
 
 	@Test
 	void testGetList() {
+		logger.info("testGetList() is get intiated");
 		walletService.createAccount("Arun Kumar", "8876543210", new BigDecimal(1000), "Arun@2000");
 		
 		List<CustomerDTO> list = walletService.getList();
 		assertNotNull(list);
 		assertDoesNotThrow(()->walletService.getList());
+		logger.info("testGetList() is get executed");
 	}
 
 	@Test
 	void testUpdateAccount() {
+		logger.info("testUpdateAccount() is get intiated");
 		walletService.createAccount("Arun Kumar M", "7765432190", new BigDecimal(1000), "Arun@2000");
 		
 		String name = "Arun Kumar M", name1 = "Arun Kumar 1";
@@ -211,10 +228,12 @@ class WalletServiceImplTest {
 		Customer customer5 = new Customer(name,mobileNo2,password);
 		customer5.getWallet().setBalance(amount);
 		assertThrows(InvalidInputException.class, ()->walletService.updateAccount(customer5));
+		logger.info("testUpdateAccount() is get executed");
 	}
 
 	@Test
 	void testAddMoney() {
+		logger.info("testaddMoney() is get intialized");
 		CustomerDTO customerDto = walletService.createAccount("Arun Kumar M", "6654321980", new BigDecimal(1000), "Arun@2000");
 		BankAccount bankAccount = new BankAccount(1001,"SBIN0000123", "State Bank", 100000, WalletUtils.convertToWallet(customerDto.getWalletDto()));
 		accountService.addAccount(bankAccount);
@@ -233,6 +252,7 @@ class WalletServiceImplTest {
 		
 		assertThrows(InvalidInputException.class,()->walletService.addMoney(walletId, amount1));
 		assertThrows(NullPointerException.class,()->walletService.addMoney(walletId1, amount));
+		logger.info("testaddMoney() is get executed");
 	}
 
 }
