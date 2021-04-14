@@ -14,9 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.transaction.TransactionSystemException;
 
-import com.capg.payment_wallet_application.beans.BenificiaryDetails;
+import com.capg.payment_wallet_application.beans.BeneficiaryDetails;
 import com.capg.payment_wallet_application.beans.Wallet;
-import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
+import com.capg.payment_wallet_application.dto.BeneficiaryDetailsDTO;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.exception.WalletNotFoundException;
@@ -26,13 +26,13 @@ import com.capg.payment_wallet_application.util.WalletUtils;
 class BenificiaryServiceTest {
 
 	@Autowired
-	private BenificiaryService benificiaryService;
+	private BeneficiaryService beneficiaryService;
 	
 	@Autowired
 	private WalletServiceImpl walletService;
 	
 	@Test
-	void testAddBenificiary() {
+	void testAddBeneficiary() {
 		CustomerDTO customer = walletService.createAccount("Mummadi madhuri", "9440207619", new BigDecimal(1000), "Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		String name = "Ravi";
@@ -41,40 +41,40 @@ class BenificiaryServiceTest {
 		String mobileNumber = "9875623456";
 		String mobileNumber2 = "9445891860566";
 
-		BenificiaryDetails benificiary = new BenificiaryDetails(name, mobileNumber);
-		benificiary.setWallet(wallet);
-		BenificiaryDetailsDTO benificiaryDetails = benificiaryService.addBenificiary(benificiary);
-		assertNotNull(benificiaryDetails);
-		assertEquals(mobileNumber, benificiaryDetails.getMobileNo());
-		assertDoesNotThrow(() -> benificiaryService.addBenificiary(benificiary));
+		BeneficiaryDetails beneficiary = new BeneficiaryDetails(name, mobileNumber);
+		beneficiary.setWallet(wallet);
+		BeneficiaryDetailsDTO beneficiaryDetails = beneficiaryService.addBeneficiary(beneficiary);
+		assertNotNull(beneficiaryDetails);
+		assertEquals(mobileNumber, beneficiaryDetails.getMobileNo());
+		assertDoesNotThrow(() -> beneficiaryService.addBeneficiary(beneficiary));
 
-		BenificiaryDetails benificiary2 = new BenificiaryDetails(name1, mobileNumber2);
-		benificiary2.setWallet(wallet);
-		assertThrows(TransactionSystemException.class, () -> benificiaryService.addBenificiary(benificiary2));
-		BenificiaryDetails benificiary3 = new BenificiaryDetails(name2, mobileNumber);
-		benificiary3.setWallet(wallet);
-		assertThrows(TransactionSystemException.class, () -> benificiaryService.addBenificiary(benificiary3));
+		BeneficiaryDetails beneficiary2 = new BeneficiaryDetails(name1, mobileNumber2);
+		beneficiary2.setWallet(wallet);
+		assertThrows(TransactionSystemException.class, () -> beneficiaryService.addBeneficiary(beneficiary2));
+		BeneficiaryDetails beneficiary3 = new BeneficiaryDetails(name2, mobileNumber);
+		beneficiary3.setWallet(wallet);
+		assertThrows(TransactionSystemException.class, () -> beneficiaryService.addBeneficiary(beneficiary3));
 	}
 
 	@Test
-	void testUpdateBenificiary() {
+	void testUpdateBeneficiary() {
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207615",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
 		
 		 String name = "Ravi",name1="Suresh12";
 		 String mobileNumber ="9875623456",mobileNumber2="987574754a";
 		 
-		BenificiaryDetails benificiary = new BenificiaryDetails(name,mobileNumber);
-		benificiary.setWallet(wallet);
-		BenificiaryDetailsDTO benificiaryDetails = benificiaryService.updateBenificiary(benificiary);
-		assertEquals(name, benificiaryDetails.getName());
-		assertNotNull(benificiary);
-		assertDoesNotThrow(()->benificiaryService.updateBenificiary(benificiary));
+		BeneficiaryDetails beneficiary = new BeneficiaryDetails(name,mobileNumber);
+		beneficiary.setWallet(wallet);
+		BeneficiaryDetailsDTO beneficiaryDetails = beneficiaryService.updateBeneficiary(beneficiary);
+		assertEquals(name, beneficiaryDetails.getName());
+		assertNotNull(beneficiary);
+		assertDoesNotThrow(()->beneficiaryService.updateBeneficiary(beneficiary));
 		
-		BenificiaryDetails benificiary1 = new BenificiaryDetails(name1,mobileNumber);
-		assertThrows(TransactionSystemException.class, () -> benificiaryService.updateBenificiary(benificiary1));
-		BenificiaryDetails benificiary2 = new BenificiaryDetails(name,mobileNumber2);
-		assertThrows(TransactionSystemException.class, () -> benificiaryService.updateBenificiary(benificiary2));
+		BeneficiaryDetails beneficiary1 = new BeneficiaryDetails(name1,mobileNumber);
+		assertThrows(TransactionSystemException.class, () -> beneficiaryService.updateBeneficiary(beneficiary1));
+		BeneficiaryDetails beneficiary2 = new BeneficiaryDetails(name,mobileNumber2);
+		assertThrows(TransactionSystemException.class, () -> beneficiaryService.updateBeneficiary(beneficiary2));
 	}
 
 	@Test
@@ -85,49 +85,49 @@ class BenificiaryServiceTest {
 		String name = "Ravi";
 		String mobileNumber = "9875623456";
 
-		BenificiaryDetails benificiary = new BenificiaryDetails(name,mobileNumber);
-		benificiary.setWallet(wallet);
-		String response = benificiaryService.deleteBenificiary(benificiary);
-		assertEquals("Benificiary Details is Deleted", response);
+		BeneficiaryDetails beneficiary = new BeneficiaryDetails(name,mobileNumber);
+		beneficiary.setWallet(wallet);
+		String response = beneficiaryService.deleteBeneficiary(beneficiary);
+		assertEquals("Beneficiary Details is Deleted", response);
 
-		BenificiaryDetails benificiary2 = new BenificiaryDetails();
+		BeneficiaryDetails beneficiary2 = new BeneficiaryDetails();
 		assertThrows(InvalidDataAccessApiUsageException.class,
-				() -> benificiaryService.deleteBenificiary(benificiary2));
+				() -> beneficiaryService.deleteBeneficiary(beneficiary2));
 	}
 
 	@Test
-	void testViewBenificiary() {
+	void testViewBeneficiary() {
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207605",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
-		BenificiaryDetails beneficiary = new BenificiaryDetails("Deepan","9360043198");
+		BeneficiaryDetails beneficiary = new BeneficiaryDetails("Deepan","9360043198");
 		beneficiary.setWallet(wallet);
-		BenificiaryDetailsDTO beneficiary1 = benificiaryService.addBenificiary(beneficiary);
+		BeneficiaryDetailsDTO beneficiary1 = beneficiaryService.addBeneficiary(beneficiary);
 		String mobileNumber = beneficiary1.getMobileNo();
-		BenificiaryDetailsDTO beneficiary2 = benificiaryService.viewBenificiary(mobileNumber); 
+		BeneficiaryDetailsDTO beneficiary2 = beneficiaryService.viewBeneficiary(mobileNumber); 
 		assertNotNull(beneficiary2);
 		assertEquals(beneficiary1.getMobileNo(),beneficiary2.getMobileNo());
 		
 		String mobileNumber1 = "9842291860";
 		String mobileNumber2="984229186a";
 		
-		assertThrows(InvalidInputException.class,()->benificiaryService.viewBenificiary(mobileNumber1));
-		assertThrows(InvalidInputException.class,()->benificiaryService.viewBenificiary(mobileNumber2));
+		assertThrows(InvalidInputException.class,()->beneficiaryService.viewBeneficiary(mobileNumber1));
+		assertThrows(InvalidInputException.class,()->beneficiaryService.viewBeneficiary(mobileNumber2));
 	}
 
 
 	@Test
-	void testViewAllBenificiary() {
+	void testViewAllBeneficiary() {
 		CustomerDTO customer = walletService.createAccount("Mummadi Madhuri","9440207561",new BigDecimal(1000),"Madhuri@2000");
 		Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
-		BenificiaryDetails beneficiary = new BenificiaryDetails("Maran","7854356789");
+		BeneficiaryDetails beneficiary = new BeneficiaryDetails("Maran","7854356789");
 		beneficiary.setWallet(wallet);
-		BenificiaryDetails beneficiary1 = new BenificiaryDetails("Mara","7854356788");
+		BeneficiaryDetails beneficiary1 = new BeneficiaryDetails("Mara","7854356788");
 		beneficiary1.setWallet(wallet);
-		BenificiaryDetailsDTO beneficiary2 =benificiaryService.addBenificiary(beneficiary);
+		BeneficiaryDetailsDTO beneficiary2 =beneficiaryService.addBeneficiary(beneficiary);
 		int walletId = beneficiary2.getWalletDto().getWalletId();
 		int walletId1 =1000;
-		List<BenificiaryDetailsDTO> benificiaryDetails = benificiaryService.viewAllBenificiary(walletId);
-		assertNotNull(benificiaryDetails);
-		assertThrows(WalletNotFoundException.class,()->benificiaryService.viewAllBenificiary(walletId1));
+		List<BeneficiaryDetailsDTO> beneficiaryDetails = beneficiaryService.viewAllBeneficiary(walletId);
+		assertNotNull(beneficiaryDetails);
+		assertThrows(WalletNotFoundException.class,()->beneficiaryService.viewAllBeneficiary(walletId1));
 	}
 }

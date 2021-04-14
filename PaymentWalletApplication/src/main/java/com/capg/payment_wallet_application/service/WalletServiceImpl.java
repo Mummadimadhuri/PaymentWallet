@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capg.payment_wallet_application.beans.BankAccount;
-import com.capg.payment_wallet_application.beans.BenificiaryDetails;
+import com.capg.payment_wallet_application.beans.BeneficiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.beans.Wallet;
@@ -20,7 +20,7 @@ import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.IAccountRepository;
-import com.capg.payment_wallet_application.repo.IBenificiaryRepository;
+import com.capg.payment_wallet_application.repo.IBeneficiaryRepository;
 import com.capg.payment_wallet_application.repo.ITransactionRepository;
 import com.capg.payment_wallet_application.repo.WalletRepo;
 import com.capg.payment_wallet_application.util.CustomerUtils;
@@ -43,7 +43,7 @@ public class WalletServiceImpl implements WalletService {
 	private ITransactionRepository transactionRepo;
 
 	@Autowired
-	private IBenificiaryRepository benificiaryRepo;
+	private IBeneficiaryRepository benificiaryRepo;
 
 	@Autowired
 	private IAccountRepository accountRepo;
@@ -143,9 +143,9 @@ public class WalletServiceImpl implements WalletService {
 				Double.parseDouble(amount.toString()), "Sending " + amount + " to " + targetMobileNo);
 		Transaction targetTransaction = new Transaction("RECEIVE", LocalDate.now(), targetWallet,
 				Double.parseDouble(amount.toString()), "Receiving " + amount + " from " + sourceMobileNo);
-		BenificiaryDetails benificiary = new BenificiaryDetails(target.getName(), target.getMobileNo());
-		benificiary.setWallet(sourceWallet);
-		benificiaryRepo.save(benificiary);
+		BeneficiaryDetails beneficiary = new BeneficiaryDetails(target.getName(), target.getMobileNo());
+		beneficiary.setWallet(sourceWallet);
+		benificiaryRepo.save(beneficiary);
 		transactionRepo.save(sourceTransaction);
 		transactionRepo.save(targetTransaction);
 		walletRepo.save(source);

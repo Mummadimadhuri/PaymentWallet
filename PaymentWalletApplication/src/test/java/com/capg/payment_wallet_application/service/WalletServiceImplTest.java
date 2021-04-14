@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.TransactionSystemException;
 
 import com.capg.payment_wallet_application.beans.BankAccount;
-import com.capg.payment_wallet_application.beans.BenificiaryDetails;
+import com.capg.payment_wallet_application.beans.BeneficiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
@@ -33,7 +33,7 @@ class WalletServiceImplTest {
 	private TransactionService transactionService;
 	
 	@Autowired
-	private BenificiaryService benificiaryService;
+	private BeneficiaryService beneficiaryService;
 	
 	@Autowired
 	private AccountServiceImpl accountService;
@@ -106,17 +106,17 @@ class WalletServiceImplTest {
 						WalletUtils.convertToWallet(walletService.showBalance(targetMobileNo).getWalletDto()),
 						Double.parseDouble(amount.toString()),
 						"Receiving "+amount+" from "+sourceMobileNo);
-		BenificiaryDetails benificiary = 
-				new BenificiaryDetails(
+		BeneficiaryDetails beneficiary = 
+				new BeneficiaryDetails(
 						walletService.showBalance(targetMobileNo).getName(),
 						walletService.showBalance(targetMobileNo).getMobileNo());
-		benificiary.setWallet(WalletUtils.convertToWallet(walletService.showBalance(sourceMobileNo).getWalletDto()));
+		beneficiary.setWallet(WalletUtils.convertToWallet(walletService.showBalance(sourceMobileNo).getWalletDto()));
 		Transaction sourceTransaction1 = TransactionUtils.convertToTransaction(transactionService.viewAllTransactions(
 				walletService.showBalance(sourceMobileNo).getWalletDto().getWalletId()).get(0));
 		Transaction targetTransaction1 = TransactionUtils.convertToTransaction(transactionService.viewAllTransactions(
 				walletService.showBalance(targetMobileNo).getWalletDto().getWalletId()).get(0));
-		BenificiaryDetails benificiary1 = 
-				BeneficiaryDetailsUtils.convertToBenificiaryDetails(benificiaryService.viewBenificiary(targetMobileNo));
+		BeneficiaryDetails beneficiary1 = 
+				BeneficiaryDetailsUtils.convertToBeneficiaryDetails(beneficiaryService.viewBeneficiary(targetMobileNo));
 		
 		assertNotNull(balance);
 		assertTrue(sourceOldBalance.subtract(amount).compareTo(sourceNewBalance)==0);
@@ -125,9 +125,9 @@ class WalletServiceImplTest {
 		assertTrue(targetTransaction.getTransactionType().equals(targetTransaction1.getTransactionType()));
 		assertEquals(sourceTransaction.getTransactionDate(),sourceTransaction1.getTransactionDate());
 		assertEquals(targetTransaction.getTransactionDate(),targetTransaction1.getTransactionDate());
-		assertEquals(benificiary.getName(),benificiary1.getName());
-		assertEquals(benificiary.getMobileNo(),benificiary1.getMobileNo());
-		assertEquals(benificiary.getWallet().getWalletId(),benificiary1.getWallet().getWalletId());
+		assertEquals(beneficiary.getName(),beneficiary1.getName());
+		assertEquals(beneficiary.getMobileNo(),beneficiary1.getMobileNo());
+		assertEquals(beneficiary.getWallet().getWalletId(),beneficiary1.getWallet().getWalletId());
 		
 		assertThrows(InvalidInputException.class,()->walletService.fundTransfer(sourceMobileNo1,targetMobileNo,amount));
 		assertThrows(InvalidInputException.class,()->walletService.fundTransfer(sourceMobileNo,targetMobileNo1,amount));

@@ -2,8 +2,10 @@ package com.capg.payment_wallet_application.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.capg.payment_wallet_application.beans.BenificiaryDetails;
-import com.capg.payment_wallet_application.dto.BenificiaryDetailsDTO;
+
+import com.capg.payment_wallet_application.beans.BeneficiaryDetails;
+import com.capg.payment_wallet_application.dto.BeneficiaryDetailsDTO;
+
 
 public class BeneficiaryDetailsUtils {
 
@@ -11,30 +13,30 @@ public class BeneficiaryDetailsUtils {
 
 	}
 
-	public static List<BenificiaryDetailsDTO> convertToBenificiaryDetailsDtoList(List<BenificiaryDetails> list) {
-		List<BenificiaryDetailsDTO> dtolist = new ArrayList<>();
-		for (BenificiaryDetails BenificiaryDetails : list)
-			dtolist.add(convertToBenificiaryDetailsDto(BenificiaryDetails));
+	public static List<BeneficiaryDetailsDTO> convertToBeneficiaryDetailsDtoList(List<BeneficiaryDetails> list) {
+		List<BeneficiaryDetailsDTO> dtolist = new ArrayList<>();
+		for (BeneficiaryDetails BeneficiaryDetails : list)
+			dtolist.add(convertToBeneficiaryDetailsDto(BeneficiaryDetails));
 		return dtolist;
 	}
 
-	public static BenificiaryDetails convertToBenificiaryDetails(BenificiaryDetailsDTO dto) {
-		BenificiaryDetails benificiarydetails = new BenificiaryDetails();
+	public static BeneficiaryDetails convertToBeneficiaryDetails(BeneficiaryDetailsDTO dto) {
+		BeneficiaryDetails beneficiarydetails = new BeneficiaryDetails();
 
-		benificiarydetails.setMobileNo(dto.getMobileNo());
-		benificiarydetails.setName(dto.getName());
-		benificiarydetails.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
-		return benificiarydetails;
+		beneficiarydetails.setMobileNo(dto.getMobileNo());
+		beneficiarydetails.setName(dto.getName());
+		beneficiarydetails.setWallet(WalletUtils.convertToWallet(dto.getWalletDto()));
+		return beneficiarydetails;
 
 	}
 
-	public static BenificiaryDetailsDTO convertToBenificiaryDetailsDto(BenificiaryDetails benificiarydetails) {
-		BenificiaryDetailsDTO benificiarydetailsDTO = new BenificiaryDetailsDTO();
+	public static BeneficiaryDetailsDTO convertToBeneficiaryDetailsDto(BeneficiaryDetails beneficiarydetails) {
+		BeneficiaryDetailsDTO beneficiarydetailsDTO = new BeneficiaryDetailsDTO();
 
-		benificiarydetailsDTO.setMobileNo(benificiarydetails.getMobileNo());
-		benificiarydetailsDTO.setName(benificiarydetails.getName());
-		benificiarydetailsDTO.setWalletDto(WalletUtils.convertToWalletDto(benificiarydetails.getWallet()));
-		return benificiarydetailsDTO;
+		beneficiarydetailsDTO.setMobileNo(beneficiarydetails.getMobileNo());
+		beneficiarydetailsDTO.setName(beneficiarydetails.getName());
+		beneficiarydetailsDTO.setWalletDto(WalletUtils.convertToWalletDto(beneficiarydetails.getWallet()));
+		return beneficiarydetailsDTO;
 
 	}
 }
