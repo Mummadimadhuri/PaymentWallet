@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 public class BankAccount {
 
 	@Id
-	private int accountNo;
+	private long accountNo;
 	
 	//Bean validation to check the validity of IFSC code
 	@Id
@@ -45,8 +45,11 @@ public class BankAccount {
 	public BankAccount() {
 		super();
 	}
+	
 	//Constructor for BankAccount entity
-	public BankAccount(int accountNo,@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$") String ifscCode, @Size(max = 30) String bankName,
+	public BankAccount(long accountNo,
+			@Pattern(regexp = "^[A-Z]{4}[0-9]{7}$", message = "IFSC code must have 4 alphabets followed by 7 numbers total 11 characters") String ifscCode,
+			@Pattern(regexp = "^[A-Za-z ]{3,30}$") @Size(max = 30, message = "Bank name should be less than 30 characters") String bankName,
 			@DecimalMin(value = "1000.0", message = "balance must be a number at least 1000") double balance,
 			Wallet wallet) {
 		super();
@@ -57,14 +60,13 @@ public class BankAccount {
 		this.wallet = wallet;
 	}
 
-	public int getAccountNo() {
+	public long getAccountNo() {
 		return accountNo;
 	}
-
-	public void setAccountNo(int accountNo) {
+	
+	public void setAccountNo(long accountNo) {
 		this.accountNo = accountNo;
 	}
-
 	public String getIfscCode() {
 		return ifscCode;
 	}

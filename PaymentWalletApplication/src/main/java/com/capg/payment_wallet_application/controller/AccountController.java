@@ -62,7 +62,7 @@ public class AccountController {
 	*  Return value : WalletDTO Object
 	*/
 	@GetMapping("/view/{accountNo}/{ifscCode}")
-	public WalletDTO viewAccount(@PathVariable int accountNo,@PathVariable String ifscCode) {
+	public WalletDTO viewAccount(@PathVariable long accountNo,@PathVariable String ifscCode) {
 		logger.info("wallet for the account fetched");
 		return accountService.viewAccount(accountNo,ifscCode);
 	}

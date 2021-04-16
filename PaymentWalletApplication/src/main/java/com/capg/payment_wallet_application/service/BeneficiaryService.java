@@ -62,10 +62,7 @@ public class BeneficiaryService implements IBeneficiaryService {
 		if (!mobileNoValidation(mobileNo)) {
 			throw new InvalidInputException("Mobile number should be a 10 digit number with first digit from 6 to 9");
 		}
-		BeneficiaryDetails beneficiarydetails = beneficiaryRepo.findById(mobileNo).orElse(null);
-		if (beneficiarydetails == null) {
-			throw new InvalidInputException("Mobile no is not registered to any beneficiary");
-		}
+		BeneficiaryDetails beneficiarydetails = beneficiaryRepo.findById(mobileNo).orElseThrow(()->new InvalidInputException("Mobile no is not registered to any beneficiary"));
 		logger.info("viewBenificiary() is get executed");
 		return BeneficiaryDetailsUtils.convertToBeneficiaryDetailsDto(beneficiarydetails);
 	}

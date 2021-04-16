@@ -54,10 +54,11 @@ public class WalletServiceImpl implements WalletService {
 	String unregisteredMobileNo = "Mobile number is not registered to any customer";
 
 	/*
-	 * Description : A new customer is created with a new wallet Input Param :
-	 * String, String, BigDecimal, String Return Value : CustomerDTO Exception :
-	 * InvalidInputException, InsufficientBalanceException,
-	 * ConstraintViolationException, TransactionSystemException
+	 * Description : A new customer is created with a new wallet 
+	 * Input Param :String, String, BigDecimal, String 
+	 * Return Value : CustomerDTO 
+	 * Exception :InvalidInputException, InsufficientBalanceException,
+	 * 				ConstraintViolationException, TransactionSystemException
 	 */
 	@Override
 	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password) {
@@ -82,8 +83,9 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Returns the customer object with its wallet balance Input Param
-	 * : String Return Value : CustomerDTO Exception : InvalidInputException
+	 * Description : Returns the customer object with its wallet balance 
+	 * Input Param: String Return Value : CustomerDTO 
+	 * Exception : InvalidInputException
 	 */
 	@Override
 	public CustomerDTO showBalance(String mobileno) {
@@ -103,10 +105,12 @@ public class WalletServiceImpl implements WalletService {
 
 	/*
 	 * Description : Transfers money from one customer to another using the mobile
-	 * number of two customers Also adds the transaction object for both sender and
-	 * receiver customers Also adds a benificiary object of the receiver for sender
-	 * Input Param : String, String, BigDecimal Return Value : CustomerDTO Exception
-	 * : InvalidInputException, InsufficientBalanceException
+	 * 				number of two customers Also adds the transaction object for both 
+	 * 				sender and receiver customers Also adds a benificiary object of 
+	 * 				the receiver for sender
+	 * Input Param : String, String, BigDecimal 
+	 * Return Value : CustomerDTO 
+	 * Exceptionc: InvalidInputException, InsufficientBalanceException
 	 */
 	@Override
 	@Transactional
@@ -155,8 +159,9 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Adds amount to the wallet of the customer Input Param : String,
-	 * BigDecimal Return Value : CustomerDTO Exception : InvalidInputException
+	 * Description : Adds amount to the wallet of the customer 
+	 * Input Param : String,BigDecimal 
+	 * Return Value : CustomerDTO Exception : InvalidInputException
 	 */
 	@Override
 	public CustomerDTO depositAmount(String mobileNo, BigDecimal amount) {
@@ -180,9 +185,10 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Withdraws money from the wallet Input Param : String,
-	 * BigDecimal Return Value : CustomerDTO Exception : InvalidInputException,
-	 * InsufficientBalanceException
+	 * Description : Withdraws money from the wallet 
+	 * Input Param : String,BigDecimal 
+	 * Return Value : CustomerDTO 
+	 * Exception : InvalidInputException, InsufficientBalanceException
 	 */
 	@Override
 	public CustomerDTO withdrawAmount(String mobileNo, BigDecimal amount) {
@@ -213,8 +219,10 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Gives the list of all the customers Input Param : - Return
-	 * Value : List<CustomerDTO> Exception : -
+	 * Description : Gives the list of all the customers 
+	 * Input Param : - 
+	 * Return Value : List<CustomerDTO> 
+	 * Exception : -
 	 */
 	@Override
 	public List<CustomerDTO> getList() {
@@ -225,9 +233,10 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Updates the customer details Input Param : Customer Return
-	 * Value : CustomerDTO Exception : InvalidInputException,
-	 * InsufficientBalanceException
+	 * Description : Updates the customer details 
+	 * Input Param : Customer 
+	 * Return Value : CustomerDTO 
+	 * Exception : InvalidInputException, InsufficientBalanceException
 	 */
 	@Override
 	public CustomerDTO updateAccount(Customer customer) {
@@ -252,9 +261,10 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Adds money to wallet from a customer's bank account Input Param
-	 * : int, double Return Value : CustomerDTO Exception : InvalidInputException,
-	 * InsufficientBalanceException
+	 * Description : Adds money to wallet from a customer's bank account 
+	 * Input Param: int, double 
+	 * Return Value : CustomerDTO 
+	 * Exception : InvalidInputException, InsufficientBalanceException
 	 */
 	@Override
 	@Transactional
@@ -286,8 +296,9 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Validates the mobile number based on given standards Input
-	 * Param : String Return Value : boolean Exception : -
+	 * Description : Validates the mobile number based on given standards 
+	 * Input Param : String
+	 * Return Value : boolean Exception : -
 	 */
 	private static boolean mobileNoValidation(String mobileNo) {
 		boolean flag = false;
@@ -298,8 +309,10 @@ public class WalletServiceImpl implements WalletService {
 	}
 
 	/*
-	 * Description : Validates the password based on the standards Input Param :
-	 * String Return Value : boolean Exception : -
+	 * Description : Validates the password based on the standards 
+	 * Input Param : String 
+	 * Return Value : boolean 
+	 * Exception : -
 	 */
 	private static boolean validatePassword(String password) {
 		boolean flag = false;

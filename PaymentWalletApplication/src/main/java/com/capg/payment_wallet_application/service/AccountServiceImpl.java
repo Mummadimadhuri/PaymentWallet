@@ -96,17 +96,14 @@ public class AccountServiceImpl implements IAccountService {
 	*  Exception	: InvalidInputException
 	*/
 	@Override
-	public WalletDTO viewAccount(int accountNo, String ifscCode) {
+	public WalletDTO viewAccount(long accountNo, String ifscCode) {
 		logger.info("viewAccount() is get intiated");
 		if (!validateIfscCode(ifscCode)) {
 			throw new InvalidInputException(
 					"IFSC code must have 4 alphabets followed by 7 numbers total 11 characters");
 		}
 		AccountId id = new AccountId(accountNo, ifscCode);
-		BankAccount bankAccount = accountRepo.findById(id).orElse(null);
-		if (bankAccount == null) {
-			throw new InvalidInputException("Wrong credentials");
-		}
+		BankAccount bankAccount = accountRepo.findById(id).orElseThrow(()->new InvalidInputException("Wrong credentials"));
 		Wallet wallet = bankAccount.getWallet();
 		logger.info("viewAccount() is get executed");
 		return WalletUtils.convertToWalletDto(wallet);

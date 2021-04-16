@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BankAccountDTO {
 
-	private int accountNo;
+	private long accountNo;
 	private String ifscCode;
 	private String bankName;
 	private double balance;
@@ -20,20 +20,21 @@ public class BankAccountDTO {
 	public BankAccountDTO() {
 		super();
 	}
-
-	public BankAccountDTO(String ifscCode, String bankName, double balance, WalletDTO wallet) {
+	
+	public BankAccountDTO(long accountNo, String ifscCode, String bankName, double balance, WalletDTO walletDto) {
 		super();
+		this.accountNo = accountNo;
 		this.ifscCode = ifscCode;
 		this.bankName = bankName;
 		this.balance = balance;
-		this.walletDto = wallet;
+		this.walletDto = walletDto;
 	}
-	
-	public int getAccountNo() {
+
+	public long getAccountNo() {
 		return accountNo;
 	}
 
-	public void setAccountNo(int accountNo) {
+	public void setAccountNo(long accountNo) {
 		this.accountNo = accountNo;
 	}
 

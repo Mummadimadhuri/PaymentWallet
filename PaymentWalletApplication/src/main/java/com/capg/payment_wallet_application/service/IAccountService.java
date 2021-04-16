@@ -20,6 +20,6 @@ public interface IAccountService {
 
 	public List<BankAccountDTO> viewAllAccounts(int walletId);
 
-	WalletDTO viewAccount(int accountNo, String ifscCode);
+	WalletDTO viewAccount(long accountNo, String ifscCode);
 
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.TransactionSystemException;
 
+import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.BankAccountDTO;
@@ -72,11 +73,10 @@ class AccountServiceImplTest {
 
 		BankAccount bankacc = new BankAccount(accountNo,ifscCode, bankName, amount, wallet);
 		accountService.addAccount(bankacc);
-		bankacc.setAccountNo(accountService.viewAllAccounts(wallet.getWalletId()).get(0).getAccountNo());
 		WalletDTO bankAccount = accountService.removeAccount(bankacc);
 		assertNotNull(bankAccount);
 		assertEquals(wallet.getWalletId(), bankAccount.getWalletId());
-		assertTrue(accountService.viewAllAccounts(wallet.getWalletId()).size()==0);
+		assertThrows(InvalidInputException.class,()->accountService.viewAccount(accountNo, ifscCode));
 
 		BankAccount bankacc3 = new BankAccount(accountNo,ifscCode1, bankName, amount1, wallet);
 		assertThrows(InvalidInputException.class, () -> accountService.removeAccount(bankacc3));
