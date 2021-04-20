@@ -2,6 +2,12 @@ package com.capg.payment_wallet_application.dto;
 
 import org.springframework.stereotype.Component;
 
+/*
+ * Entity Name              : CustomerDTO
+ * Author                   : Arun Kumar M
+ * Implementation Start Date: 2021-04-01
+ * implementation End Date  : 2021-04-02
+ * */
 @Component
 public class CustomerDTO {
 

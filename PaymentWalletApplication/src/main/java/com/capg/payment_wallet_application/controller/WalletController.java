@@ -46,7 +46,7 @@ public class WalletController {
 	// Controller for fetching a customer object with its wallet balance
 	@GetMapping("/show-balance/{mobileno}")
 	public CustomerDTO showBalance(@PathVariable String mobileno) {
-		logger.info("Balance of the given mobile number is displayed sucessfully");
+		logger.info("Balance of the given mobile number is displayed");
 		return walletService.showBalance(mobileno);
 	}
 
@@ -55,7 +55,7 @@ public class WalletController {
 	@PutMapping("/fund-transfer/{sourceMobileNo}/{targetMobileNo}/{amount}")
 	public CustomerDTO fundTransfer(@PathVariable String sourceMobileNo, @PathVariable String targetMobileNo,
 			@PathVariable BigDecimal amount) {
-		logger.info("Fund transfer and transaction between source and target held sucessfully");
+		logger.info("Fund transfer and transaction between source and target");
 		return walletService.fundTransfer(sourceMobileNo, targetMobileNo, amount);
 	}
 
@@ -76,21 +76,21 @@ public class WalletController {
 	// Controller for getting the list of all the customers
 	@GetMapping("/get-list")
 	public List<CustomerDTO> getList() {
-		logger.info("The List of customer is displayed sucessfully");
+		logger.info("The List of customer is displayed");
 		return walletService.getList();
 	}
 
 	// Controller to update the customer details
 	@PutMapping("/update-account")
 	public CustomerDTO updateAccount(@RequestBody Customer customer) {
-		logger.info("The customer profile is updated sucessfully");
+		logger.info("The customer profile is updated");
 		return walletService.updateAccount(customer);
 	}
 
 	// Controller for adding money into the wallet from bank account
 	@PutMapping("/add-money/{walletId}/{amount}")
 	public CustomerDTO addMoney(@PathVariable int walletId, @PathVariable double amount) {
-		logger.info("The money is added into wallet sucessfully");
+		logger.info("The money is added into wallet");
 		return walletService.addMoney(walletId, amount);
 	}
 

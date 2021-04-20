@@ -5,21 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Pattern;
-import org.springframework.beans.factory.annotation.Autowired;
 
+/*
+ * Entity Name              : Customer
+ * Author                   : Arun Kumar M
+ * Implementation Start Date: 2021-04-01
+ * implementation End Date  : 2021-04-02
+ * Used Annotation          : @Entity,@Id(primary key),@Pattern,@OneToOne
+ * validation               : Bean validation is enabled
+ * */
 @Entity
 public class Customer {
 
+	//Bean validation for a valid name
 	@Pattern(regexp = "^[A-Za-z ]{3,20}$", message = "Name must only be alphabets and whitespaces from 3 to 20 characters")
 	private String name;
 
 	@Id
+	//Bean validation for a valid mobile number
 	@Pattern(regexp = "^[6-9]{1}[0-9]{9}", message = "Mobile number should be a 10 digit number with first digit from 6 to 9")
 	private String mobileNo;
 
 	private String password;
 
-	@Autowired
+	//One to one mapping with wallet entity
 	@OneToOne(cascade = CascadeType.ALL)
 	private Wallet wallet;
 

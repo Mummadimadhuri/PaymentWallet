@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ import com.capg.payment_wallet_application.util.CustomerUtils;
  * Author                   : Arun Kumar M
  * Implementation Start Date: 2021-04-05
  * implementation End Date  : 2021-04-06
- * Used Annotation          : @Service,@Autowired,@Override,@Transactional
+ * Used Annotation          : @Service,@Autowired,@Override
  * Validation               : Validation are done at Required Place
  * */
 @Service
@@ -113,7 +112,6 @@ public class WalletServiceImpl implements WalletService {
 	 * Exceptionc: InvalidInputException, InsufficientBalanceException
 	 */
 	@Override
-	@Transactional
 	public CustomerDTO fundTransfer(String sourceMobileNo, String targetMobileNo, BigDecimal amount) {
 		logger.info("fundTransfer() is get intiated");
 		if (!mobileNoValidation(sourceMobileNo)) {
@@ -236,7 +234,8 @@ public class WalletServiceImpl implements WalletService {
 	 * Description : Updates the customer details 
 	 * Input Param : Customer 
 	 * Return Value : CustomerDTO 
-	 * Exception : InvalidInputException, InsufficientBalanceException
+	 * Exception : InvalidInputException, InsufficientBalanceException, 
+	 * ConstraintViolationException, TransactionSystemException
 	 */
 	@Override
 	public CustomerDTO updateAccount(Customer customer) {
@@ -267,7 +266,6 @@ public class WalletServiceImpl implements WalletService {
 	 * Exception : InvalidInputException, InsufficientBalanceException
 	 */
 	@Override
-	@Transactional
 	public CustomerDTO addMoney(int walletId, double amount) {
 		logger.info("addMoney() is get intiated");
 		if (amount < 1) {
