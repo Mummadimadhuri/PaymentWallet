@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
 
+/*
+ * Entity Name              : WalletDTO
+ * Author                   : Arun Kumar M
+ * Implementation Start Date: 2021-04-01
+ * implementation End Date  : 2021-04-02
+ * */
 @Component
 public class WalletDTO {
 

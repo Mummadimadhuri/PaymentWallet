@@ -11,6 +11,14 @@ import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.repo.IUserRepo;
 import com.capg.payment_wallet_application.util.CustomerUtils;
 
+/*
+ * Implemented Service Name : User Service
+ * Author                   : Rishi Kiran
+ * Implementation Start Date: 2021-04-05
+ * implementation End Date  : 2021-04-06
+ * Used Annotation          : @Service,@Autowired,@Override
+ * Validation               : Validation are done at Required Place
+ * */
 @Service
 public class UserService implements IUserService {
 
