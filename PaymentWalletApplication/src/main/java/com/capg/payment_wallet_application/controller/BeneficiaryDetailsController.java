@@ -28,32 +28,54 @@ public class BeneficiaryDetailsController {
 	private IBeneficiaryService beneficiaryService;
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+	/* Author       : Madhuri
+	*  Description  : This method add beneficiary 
+	*  Input Params : Beneficiary Details
+	*  Return value : BeneficiaryDTO object
+	*/
 	@PostMapping(value = "/add", consumes = "application/json")
 	public BeneficiaryDetailsDTO addBeneficiary(@RequestBody BeneficiaryDetails bd) {
 		logger.info("Beneficiary details added sucessfully");
 		return beneficiaryService.addBeneficiary(bd);
 	}
 
+	/* Author       : Madhuri
+	*  Description  : This method update beneficiary 
+	*  Input Params : Beneficiary Details
+	*  Return value : BeneficiaryDTO object
+	*/
 	@PutMapping("/updateAccount")
 	public BeneficiaryDetailsDTO updateBeneficiary(@RequestBody BeneficiaryDetails bd) {
 		logger.info("Beneficiary Details Updated sucessfully");
 		return beneficiaryService.updateBeneficiary(bd);
 	}
 
+	/* Author       : Madhuri
+	*  Description  : This method delete beneficiary 
+	*  Input Params : Beneficiary Details
+	*  Return value : BeneficiaryDTO object
+	*/
 	@DeleteMapping("/delete")
 	public ResponseEntity<String>  deleteBeneficiary(@RequestBody BeneficiaryDetails bd) {
 		 logger.info("Beneficiary Details deleted sucessfully");
 		 String response =beneficiaryService.deleteBeneficiary(bd);
 		 return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-	
+	/* Author       : Madhuri
+	*  Description  : This method is used to view beneficiary through mobile number 
+	*  Input Params : String 
+	*  Return value : BeneficiaryDTO object
+	*/
 	@GetMapping("/viewbeneficiary/{mobileNo}")
 	public BeneficiaryDetailsDTO viewBeneficiary(@PathVariable String mobileNo) {
 		logger.info("Details Of particular beneficary is displayed sucessfully");
 		return beneficiaryService.viewBeneficiary(mobileNo);		
 	}
-
+	/* Author       : Madhuri
+	*  Description  : This method used to viewall Beneficiary of particular WalletID 
+	*  Input Params : int WalletID
+	*  Return value : BeneficiaryDTO List
+	*/
 	@GetMapping("/view-all-beneficiary/{walletId}")
 	public List<BeneficiaryDetailsDTO> viewAllBeneficiary(@PathVariable int walletId) {
 		logger.info("Beneficiary of particular wallet is displayed sucessfully");

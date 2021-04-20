@@ -27,6 +27,14 @@ public class BeneficiaryService implements IBeneficiaryService {
 
 	@Autowired
 	private WalletRepo walletRepo;
+	
+	
+	/*
+	 * Author      : Madhuri
+	 * Description : Service for addBeneficiary() method is added after adding details. 
+	 * Input Params: Beneficiary
+	 * Return value: BeneficiaryDTO object
+	 */
 
 	@Override
 	public BeneficiaryDetailsDTO addBeneficiary(BeneficiaryDetails beneficiaryDetails) {
@@ -35,7 +43,14 @@ public class BeneficiaryService implements IBeneficiaryService {
 		logger.info("addBeneficiary() is get executed");
 		return BeneficiaryDetailsUtils.convertToBeneficiaryDetailsDto(beneficiarydetails);
 	}
-
+	
+	/*
+	 * Author      : Madhuri
+	 * Description : Service for updateBeneficiary() method is changed after updating details. 
+	 * Input Params: Beneficiary
+	 * Return value: BeneficiaryDTO object
+	 */
+	
 	@Override
 	public BeneficiaryDetailsDTO updateBeneficiary(BeneficiaryDetails beneficiaryDetails) {
 		logger.info("updateBeneficiary() is get intiated");
@@ -43,6 +58,13 @@ public class BeneficiaryService implements IBeneficiaryService {
 		logger.info("updateBeneficiary() is get executed");
 		return BeneficiaryDetailsUtils.convertToBeneficiaryDetailsDto(beneficiarydetails);
 	}
+	
+	/*
+	 * Author      : Madhuri
+	 * Description : Service for deleteBeneficiary(). 
+	 * Input Params: Beneficiary
+	 * Return value: BeneficiaryDTO object
+	 */
 
 	@Override
 	public String deleteBeneficiary(BeneficiaryDetails beneficiaryDetails) {
@@ -56,6 +78,12 @@ public class BeneficiaryService implements IBeneficiaryService {
 		}
 	}
 
+	/*
+	 * Author      : Madhuri
+	 * Description : Service to viewbeneficiary() of the given Mobile Number is return here,It will display each and every beneficiary done by the specific Mobile Number. 
+	 * Input Params: String Mobile Number
+	 * Return value: BeneficiaryDTO object
+	 */
 	@Override
 	public BeneficiaryDetailsDTO viewBeneficiary(String mobileNo) {
 		logger.info("viewBeneficiary() is get intiated");
@@ -67,6 +95,12 @@ public class BeneficiaryService implements IBeneficiaryService {
 		return BeneficiaryDetailsUtils.convertToBeneficiaryDetailsDto(beneficiarydetails);
 	}
 
+	/*
+	 * Author      : Madhuri
+	 * Description : Service to viewAllBeneficiary() of the given wallet is return here,It will display each and every beneficiary done by specific wallet. 
+	 * Input Params: int walletId 
+	 * Return value: BeneficiaryDTO List
+	 */
 	@Override
 	public List<BeneficiaryDetailsDTO> viewAllBeneficiary(int walletId) {
 		Customer wallet = walletRepo.findByWalletId(walletId);
