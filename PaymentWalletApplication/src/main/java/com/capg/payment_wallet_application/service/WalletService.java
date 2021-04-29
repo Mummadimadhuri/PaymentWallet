@@ -7,7 +7,7 @@ import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 
 public interface WalletService {
-	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password);
+	public CustomerDTO createAccount(Customer customer);
 
 	public CustomerDTO showBalance(String mobileno);
 

@@ -27,53 +27,53 @@ import com.capg.payment_wallet_application.util.WalletUtils;
 @SpringBootTest
 class BillPaymentServiceImplTest {
 	
-	@Autowired
-	private BillPaymentServiceImpl billServiceImpl;
-	
-	@Autowired
-    private WalletServiceImpl walletService;
-	
-	final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-    @Test
-	void testAddBillPayment() {
-    	logger.info("testAddBillPayment() is intiated");
-    	BigDecimal balance = new BigDecimal(2000);
-    	CustomerDTO customer = walletService.createAccount("DharaniyaShree","9952068278",balance,"Dharaniya@2000");
-    	Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
-		LocalDate date = LocalDate.parse("2000-03-11");
-		double amount = 1000;
-		double amount1 = 3000;
-		
-		BillPayment payment = new BillPayment(wallet,BillType.DTH,amount,date);
-		BillPaymentDTO billPayment = billServiceImpl.addBillPayment(payment);
-		BigDecimal updatedAmount = BigDecimal.valueOf(amount);
-		BigDecimal updatedBalance = balance.subtract(updatedAmount);
-		assertEquals(updatedBalance,billPayment.getWalletDto().getBalance());
-	    assertNotNull(billPayment);
-	    
-	    BillPayment payment1 = new BillPayment(wallet,BillType.DTH,amount1,date);
-	    assertThrows(InsufficientBalanceException.class,()->billServiceImpl.addBillPayment(payment1));
-	    logger.info("testAddBillPayment() is executed");
-	}
-
-	@Test
-	void testViewBillPayment() {
-		logger.info("testViewBillPayment() is intiated");
-		BigDecimal balance = new BigDecimal(2000);
-		CustomerDTO customer = walletService.createAccount("DharaniyaShree","9952068286",balance,"Dharaniya@2000");
-    	Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
-		LocalDate date = LocalDate.parse("2000-03-11");
-		double amount = 1000;
-		BillPayment payment = new BillPayment(wallet,BillType.DTH,amount,date);
-		BillPaymentDTO billPayment = billServiceImpl.addBillPayment(payment);
-		int billId = billPayment.getBillId();
-		BillPaymentDTO billPayment1 = billServiceImpl.viewBillPayment(billId);
-		assertEquals(date,billPayment1.getPaymentDate());
-		
-		int billId1=340;
-		assertThrows(InvalidInputException.class,()->billServiceImpl.viewBillPayment(billId1));
-		logger.info("testViewBillPayment() is executed");
-				
-	}
+//	@Autowired
+//	private BillPaymentServiceImpl billServiceImpl;
+//	
+//	@Autowired
+//    private WalletServiceImpl walletService;
+//	
+//	final Logger logger = LoggerFactory.getLogger(this.getClass());
+//	
+//    @Test
+//	void testAddBillPayment() {
+//    	logger.info("testAddBillPayment() is intiated");
+//    	BigDecimal balance = new BigDecimal(2000);
+//    	CustomerDTO customer = walletService.createAccount("DharaniyaShree","9952068278",balance,"Dharaniya@2000");
+//    	Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
+//		LocalDate date = LocalDate.parse("2000-03-11");
+//		double amount = 1000;
+//		double amount1 = 3000;
+//		
+//		BillPayment payment = new BillPayment(wallet,BillType.DTH,amount,date);
+//		BillPaymentDTO billPayment = billServiceImpl.addBillPayment(payment);
+//		BigDecimal updatedAmount = BigDecimal.valueOf(amount);
+//		BigDecimal updatedBalance = balance.subtract(updatedAmount);
+//		assertEquals(updatedBalance,billPayment.getWalletDto().getBalance());
+//	    assertNotNull(billPayment);
+//	    
+//	    BillPayment payment1 = new BillPayment(wallet,BillType.DTH,amount1,date);
+//	    assertThrows(InsufficientBalanceException.class,()->billServiceImpl.addBillPayment(payment1));
+//	    logger.info("testAddBillPayment() is executed");
+//	}
+//
+//	@Test
+//	void testViewBillPayment() {
+//		logger.info("testViewBillPayment() is intiated");
+//		BigDecimal balance = new BigDecimal(2000);
+//		CustomerDTO customer = walletService.createAccount("DharaniyaShree","9952068286",balance,"Dharaniya@2000");
+//    	Wallet wallet = WalletUtils.convertToWallet(customer.getWalletDto());
+//		LocalDate date = LocalDate.parse("2000-03-11");
+//		double amount = 1000;
+//		BillPayment payment = new BillPayment(wallet,BillType.DTH,amount,date);
+//		BillPaymentDTO billPayment = billServiceImpl.addBillPayment(payment);
+//		int billId = billPayment.getBillId();
+//		BillPaymentDTO billPayment1 = billServiceImpl.viewBillPayment(billId);
+//		assertEquals(date,billPayment1.getPaymentDate());
+//		
+//		int billId1=340;
+//		assertThrows(InvalidInputException.class,()->billServiceImpl.viewBillPayment(billId1));
+//		logger.info("testViewBillPayment() is executed");
+//				
+//	}
 }

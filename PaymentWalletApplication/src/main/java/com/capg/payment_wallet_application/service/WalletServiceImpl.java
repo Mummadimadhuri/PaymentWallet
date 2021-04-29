@@ -60,23 +60,20 @@ public class WalletServiceImpl implements WalletService {
 	 * 				ConstraintViolationException, TransactionSystemException
 	 */
 	@Override
-	public CustomerDTO createAccount(String name, String mobileno, BigDecimal amount, String password) {
+	public CustomerDTO createAccount(Customer customer) {
 		logger.info("createAccount() is get intiated");
-		if (walletRepo.findOne(mobileno) != null) {
+		if (walletRepo.findOne(customer.getMobileNo()) != null) {
 			throw new InvalidInputException("This mobileno has already been registered to a customer");
 		}
-		if (amount.compareTo(new BigDecimal(1)) <= 0) {
+		if (customer.getWallet().getBalance().compareTo(new BigDecimal(1)) <= 0) {
 			throw new InsufficientBalanceException("amount should be atleast 1.0");
 		}
-		if (!validatePassword(password)) {
+		if (!validatePassword(customer.getPassword())) {
 			throw new InvalidInputException("Password should contain at least one Capital letter, "
 					+ "one small letter, one number and one special character");
 		}
-		password = Integer.valueOf(password.hashCode()).toString();
-		Customer customer = new Customer(name, mobileno, password);
-		Wallet wallet = customer.getWallet();
-		wallet.setBalance(amount);
-		customer.setWallet(wallet);
+		String password = Integer.valueOf(customer.getPassword().hashCode()).toString();
+		customer.setPassword(password);
 		logger.info("createAccount() is get executed");
 		return CustomerUtils.convertToCustomerDto(walletRepo.save(customer));
 	}
