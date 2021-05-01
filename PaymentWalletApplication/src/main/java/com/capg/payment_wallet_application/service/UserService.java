@@ -32,6 +32,7 @@ public class UserService implements IUserService {
 		logger.info("validateLogin() is get intiated");
 		password = Integer.valueOf(password.hashCode()).toString();
 		Customer customer = userRepo.validateLogin(mobileNumber, password);
+		logger.info(password);
 		if (customer == null) {
 			throw new InvalidInputException("Wrong Credentials");
 		} else {
