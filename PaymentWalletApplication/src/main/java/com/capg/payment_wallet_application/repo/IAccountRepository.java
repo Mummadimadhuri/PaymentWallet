@@ -23,5 +23,8 @@ public interface IAccountRepository extends JpaRepository<BankAccount, AccountId
 	// JPQL query to get bankAccount object using its wallet id
 	@Query("select bacc from BankAccount bacc where bacc.wallet.walletId=:walletId")
 	public List<BankAccount> findByWalletId(@Param("walletId") int walletId);
+	
+	@Query("select bacc from BankAccount bacc where bacc.wallet.walletId=:walletId and bacc.accountNo=:accountNo and bacc.ifscCode=:ifscCode")
+	public BankAccount findByWalletIdandAccountId(@Param("walletId") int walletId,@Param("accountNo") long accountNo,@Param("ifscCode")String ifscCode);
 
 }

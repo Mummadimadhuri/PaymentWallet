@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.dto.BankAccountDTO;
 import com.capg.payment_wallet_application.dto.WalletDTO;
@@ -80,6 +81,12 @@ public class AccountController {
 		return accountService.viewAllAccounts(walletId);
 
 
+	}
+	
+	@GetMapping("/viewIndividualAccount/{walletId}/{accountNo}/{ifscCode}")
+	public BankAccountDTO viewIndividualAccount(@PathVariable int walletId,@PathVariable long accountNo,@PathVariable String ifscCode )
+	{
+	    return accountService.viewIndividualAccount(walletId,accountNo,ifscCode);	
 	}
 
 }
