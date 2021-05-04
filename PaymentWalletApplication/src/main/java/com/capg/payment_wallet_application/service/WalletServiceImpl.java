@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.BeneficiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
@@ -263,23 +264,17 @@ public class WalletServiceImpl implements WalletService {
 	 * Exception : InvalidInputException, InsufficientBalanceException
 	 */
 	@Override
-	public CustomerDTO addMoney(int walletId, double amount) {
+	public CustomerDTO addMoney(int walletId, double amount,long accountNo,String ifscCode) {
 		logger.info("addMoney() is get intiated");
 		if (amount < 1) {
 			throw new InvalidInputException("amount should be atleast 1.0");
 		}
 		Customer customer = walletRepo.findByWalletId(walletId);
 		Wallet wallet = customer.getWallet();
-		List<BankAccount> accounts = accountRepo.findByWalletId(wallet.getWalletId());
 		BankAccount currAccount = null;
-		for (BankAccount account : accounts) {
-			if (account.getBalance() >= amount) {
-				currAccount = account;
-				break;
-			}
-		}
+		currAccount = accountRepo.findByWalletIdandAccountId(walletId,accountNo,ifscCode);
 		if (currAccount == null) {
-			throw new InsufficientBalanceException("None of your accounts have enough money");
+			throw new InsufficientBalanceException("your accounts does not have enough money");
 		}
 		currAccount.setBalance(currAccount.getBalance() - amount);
 		accountRepo.save(currAccount);
