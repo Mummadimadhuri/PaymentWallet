@@ -58,7 +58,7 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 			customer.setWallet(wallet);
 			walletRepo.save(customer);
 			logger.info("addBillPayment() is get executed");
-			Transaction transaction = new Transaction("SEND",LocalDate.now(),wallet,payment.getAmount(),payment.getBillType().toString());
+			Transaction transaction = new Transaction("SEND",LocalDate.now(),wallet,payment.getAmount(),"BILL"+payment.getBillType().toString());
 			transactionRepo.save(transaction);
 			return BillPaymentUtil.convertToBillPaymentDto(billRepo.save(payment));
 		} else {

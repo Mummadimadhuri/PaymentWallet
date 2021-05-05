@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
+import com.capg.payment_wallet_application.dto.TransactionDTO;
 import com.capg.payment_wallet_application.service.WalletService;
 
 /*
@@ -56,30 +58,30 @@ public class WalletController {
 	// Controller for sending money from one customer to another using their mobile
 	// numbers
 	@PutMapping("/fund-transfer/{sourceMobileNo}/{targetMobileNo}/{amount}")
-	public CustomerDTO fundTransfer(@PathVariable String sourceMobileNo, @PathVariable String targetMobileNo,
-			@PathVariable BigDecimal amount) {
+	public TransactionDTO fundTransfer(@PathVariable String sourceMobileNo, @PathVariable String targetMobileNo,
+			@PathVariable double amount) {
 		logger.info("Fund transfer and transaction between source and target");
-		return walletService.fundTransfer(sourceMobileNo, targetMobileNo, amount);
+		return walletService.fundTransfer(sourceMobileNo, targetMobileNo,new BigDecimal(amount));
 	}
 
 	// Controller for depositing amount into the wallet
-	@PutMapping("/deposit-amount/{mobileNo}/{amount}")
-	public CustomerDTO depositAmount(@PathVariable String mobileNo, @PathVariable BigDecimal amount) {
+	@PutMapping("/deposit-amount/{walletId}/{amount}")
+	public TransactionDTO depositAmount(@PathVariable int walletId, @PathVariable BigDecimal amount) {
 		logger.info("The amount is deposited in the wallet of given mobilenumber");
-		return walletService.depositAmount(mobileNo, amount);
+		return walletService.depositAmount(walletId, amount);
 	}
 
 	// Controller for withdrawing money from the wallet
-	@PutMapping("/withdraw-amount/{mobileNo}/{amount}")
-	public CustomerDTO withdrawAmount(@PathVariable String mobileNo, @PathVariable BigDecimal amount) {
+	@PutMapping("/withdraw-amount/{walletId}/{amount}")
+	public TransactionDTO withdrawAmount(@PathVariable int walletId, @PathVariable BigDecimal amount) {
 		logger.info("The amount is withdraw from the wallet of given mobilenumber");
-		return walletService.withdrawAmount(mobileNo, amount);
+		return walletService.withdrawAmount(walletId, amount);
 	}
 
 	// Controller for getting the list of all the customers
 	@GetMapping("/get-list")
 	public List<CustomerDTO> getList() {
-		logger.info("The List of customer is displayed");
+//		logger.info("The List of customer is displayed");
 		return walletService.getList();
 	}
 
