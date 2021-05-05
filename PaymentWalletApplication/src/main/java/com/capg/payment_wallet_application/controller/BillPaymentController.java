@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class BillPaymentController {
 	*  Input Params: BillPayment
 	*  Return value: BillPaymentDTO object
 	*/
-	@PutMapping(value = "/add-bill", consumes = "application/json")
+	@PostMapping(value = "/add-bill")
 	public BillPaymentDTO addBillPayment(@RequestBody BillPayment payment) {
 		logger.info("BillPayment is added sucessfully");
 		return billService.addBillPayment(payment);
@@ -46,7 +47,7 @@ public class BillPaymentController {
 	*  Input Params: int
 	*  Return value: BillPaymentDTO object
 	*/
-	@GetMapping(value = "/view", produces = "application/json")
+	@GetMapping(value = "/view")
 	public BillPaymentDTO viewBillPayment(int billId) {
 		logger.info("BillPayment is displayed sucessfully through billId");
 		return billService.viewBillPayment(billId);

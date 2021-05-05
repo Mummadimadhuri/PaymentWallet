@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,7 @@ import com.capg.payment_wallet_application.util.WalletUtils;
 
 import java.util.List;
 
+@Disabled
 @SpringBootTest
 class WalletServiceImplTest {
 	

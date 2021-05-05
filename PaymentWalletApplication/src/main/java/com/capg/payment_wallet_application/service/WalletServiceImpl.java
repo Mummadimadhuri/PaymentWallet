@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.BeneficiaryDetails;
 import com.capg.payment_wallet_application.beans.Customer;
@@ -277,7 +278,7 @@ public class WalletServiceImpl implements WalletService {
 		Customer customer = walletRepo.findByWalletId(walletId);
 		Wallet wallet = customer.getWallet();
 		if (account.getBalance() <= amount) {
-			throw new InsufficientBalanceException("None of your accounts have enough money");
+			throw new InsufficientBalanceException("Your account doesn't have enough money");
 		}
 		account.setBalance(account.getBalance() - amount);
 		accountRepo.save(account);
@@ -311,7 +312,7 @@ public class WalletServiceImpl implements WalletService {
 	 */
 	private static boolean validatePassword(String password) {
 		boolean flag = false;
-		if (Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", password)) {
+		if (Pattern.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()Â–[{}]:;',?/*~$^+=<>]).{8,20}$", password)) {
 			flag = true;
 		}
 		return flag;

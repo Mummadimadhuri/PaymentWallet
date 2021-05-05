@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Customer;
@@ -123,4 +125,17 @@ public class AccountServiceImpl implements IAccountService {
 		logger.info("validateIfscCode() validation is  get executed");
 		return flag;
 	}
+
+	@Override
+	public BankAccountDTO viewIndividualAccount(int walletId,long accountNo,String ifscCode) {
+		// TODO Auto-generated method stub
+		Customer wallet = walletRepo.findByWalletId(walletId);
+		if (wallet != null) {
+			BankAccount bankAccount = accountRepo.findByWalletIdandAccountId(walletId,accountNo,ifscCode);
+			logger.info("viewAllAccounts() is get executed");
+			return AccountUtils.convertToBankAccountDto(bankAccount);
+		} else
+			throw new WalletNotFoundException("Given wallet is not found");
+		}
 }
+

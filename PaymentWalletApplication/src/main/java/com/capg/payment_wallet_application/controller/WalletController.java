@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.payment_wallet_application.beans.BankAccount;
+import com.capg.payment_wallet_application.beans.AccountId;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.dto.CustomerDTO;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
@@ -92,10 +93,10 @@ public class WalletController {
 	}
 
 	// Controller for adding money into the wallet from bank account
-	@PutMapping("/add-money/{walletId}/{amount}")
-	public TransactionDTO addMoney(@RequestBody BankAccount account ,@PathVariable int walletId, @PathVariable double amount) {
+	@PutMapping("/add-money/{walletId}/{amount}/{accountNo}/{ifscCode}")
+	public CustomerDTO addMoney(@PathVariable int walletId, @PathVariable double amount,@PathVariable long accountNo,@PathVariable String ifscCode ) {
 		logger.info("The money is added into wallet");
-		return walletService.addMoney(account,walletId, amount);
+		return walletService.addMoney(walletId, amount,accountNo,ifscCode);
 	}
 
 }
