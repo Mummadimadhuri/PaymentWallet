@@ -58,8 +58,10 @@ public class BillPaymentServiceImpl implements IBillPaymentService {
 			customer.setWallet(wallet);
 			walletRepo.save(customer);
 			logger.info("addBillPayment() is get executed");
-			Transaction transaction = new Transaction("SEND",LocalDate.now(),wallet,payment.getAmount(),"BILL"+payment.getBillType().toString());
+			LocalDate date= LocalDate.now();
+			Transaction transaction = new Transaction("SEND",date,wallet,payment.getAmount(),"BILL"+payment.getBillType().toString());
 			transactionRepo.save(transaction);
+			payment.setPaymentDate(date);
 			return BillPaymentUtil.convertToBillPaymentDto(billRepo.save(payment));
 		} else {
 			throw new InsufficientBalanceException("Balance of wallet is not Sufficient to do Transaction");

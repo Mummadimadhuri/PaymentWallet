@@ -19,15 +19,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Service;
 
+import com.capg.payment_wallet_application.beans.AccountId;
+import com.capg.payment_wallet_application.beans.BankAccount;
 import com.capg.payment_wallet_application.beans.Customer;
 import com.capg.payment_wallet_application.beans.Transaction;
+import com.capg.payment_wallet_application.beans.Wallet;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
+import com.capg.payment_wallet_application.dto.WalletDTO;
 import com.capg.payment_wallet_application.exception.InsufficientBalanceException;
 import com.capg.payment_wallet_application.exception.InvalidInputException;
 import com.capg.payment_wallet_application.exception.WalletNotFoundException;
 import com.capg.payment_wallet_application.repo.ITransactionRepository;
 import com.capg.payment_wallet_application.repo.WalletRepo;
 import com.capg.payment_wallet_application.util.TransactionUtils;
+import com.capg.payment_wallet_application.util.WalletUtils;
 
 @Service
 public class TransactionService implements ITransactionService {
@@ -126,6 +131,16 @@ public class TransactionService implements ITransactionService {
 			throw new InvalidInputException("From date must be before than to date");
 		}
 	}
+	
+	@Override
+	public WalletDTO removeTransaction(int transactionid) {
+		logger.info("removetransaction is get intiated");
+		Transaction transaction =transactionRepo.findById(transactionid).orElseThrow(() -> new InvalidInputException("Given transaction is not present"));
+		Wallet wallet =transaction.getWallet();
+		transactionRepo.delete(transaction);
+		logger.info("removeAccount() is get exectued");
+		return WalletUtils.convertToWalletDto(wallet);
+	}
 
 	// Validation to provide transaction type as "SEND" and "RECIEVE".
 	private static boolean transactionTypeValidation(String type) {
@@ -135,5 +150,7 @@ public class TransactionService implements ITransactionService {
 		}
 		return flag;
 	}
+	
+	
 
 }

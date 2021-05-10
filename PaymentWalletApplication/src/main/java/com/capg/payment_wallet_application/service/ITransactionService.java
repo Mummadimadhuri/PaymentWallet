@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
+import com.capg.payment_wallet_application.dto.WalletDTO;
 
 public interface ITransactionService {
 
@@ -15,4 +16,6 @@ public interface ITransactionService {
 	public List<TransactionDTO> viewAllTransactions(String type);
 
 	public List<TransactionDTO> viewTransactionsByDate(LocalDate from, LocalDate to);
+	
+	WalletDTO removeTransaction(int transactionId);
 }

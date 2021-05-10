@@ -62,10 +62,10 @@ public class AccountServiceImpl implements IAccountService {
 	*  Exception	: InvalidInputException
 	*/
 	@Override
-	public WalletDTO removeAccount(BankAccount bankAccount) {
+	public WalletDTO removeAccount(long accountNo,String ifscCode ) {
 		logger.info("removeAccount() is get intiated");
-		AccountId id = new AccountId(bankAccount.getAccountNo(), bankAccount.getIfscCode());
-		accountRepo.findById(id).orElseThrow(() -> new InvalidInputException("Given Account no is not present"));
+		AccountId id = new AccountId(accountNo,ifscCode);
+		BankAccount bankAccount =accountRepo.findById(id).orElseThrow(() -> new InvalidInputException("Given Account no is not present"));
 		Wallet wallet = bankAccount.getWallet();
 		accountRepo.delete(bankAccount);
 		logger.info("removeAccount() is get exectued");

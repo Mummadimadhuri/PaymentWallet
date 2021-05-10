@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.capg.payment_wallet_application.beans.Transaction;
 import com.capg.payment_wallet_application.dto.TransactionDTO;
+import com.capg.payment_wallet_application.dto.WalletDTO;
 import com.capg.payment_wallet_application.service.TransactionService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -79,5 +81,11 @@ public class TransactionController {
 	public List<TransactionDTO> viewAllTransactions(@PathVariable String type) {
 		logger.info("Transaction of the particular type is displayed sucessfully");
 		return transactionService.viewAllTransactions(type);
+	}
+	
+	@DeleteMapping("/remove/{transactionId}")
+	public WalletDTO removeTransaction(@PathVariable int transactionId) {
+		logger.info("Transaction removed");
+		return transactionService.removeTransaction(transactionId);
 	}
 }

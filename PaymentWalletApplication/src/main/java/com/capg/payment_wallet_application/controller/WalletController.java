@@ -93,10 +93,10 @@ public class WalletController {
 	}
 
 	// Controller for adding money into the wallet from bank account
-	@PutMapping("/add-money/{walletId}/{amount}/{accountNo}/{ifscCode}")
-	public CustomerDTO addMoney(@PathVariable int walletId, @PathVariable double amount,@PathVariable long accountNo,@PathVariable String ifscCode ) {
+	@PutMapping("/add-money/{walletId}/{amount}")
+	public TransactionDTO addMoney(@RequestBody BankAccount account,@PathVariable int walletId,@PathVariable double amount ) {
 		logger.info("The money is added into wallet");
-		return walletService.addMoney(walletId, amount,accountNo,ifscCode);
+		return walletService.addMoney(account,walletId, amount);
 	}
 
 }

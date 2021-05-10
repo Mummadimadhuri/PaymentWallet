@@ -53,10 +53,10 @@ public class AccountController {
 	*  Input Param  : BankAccount
 	*  Return value : WalletDTO Object
 	*/
-	@DeleteMapping("/remove")
-	public WalletDTO removeAccount(@RequestBody BankAccount bankAccount) {
+	@DeleteMapping("/remove/{accountNo}/{ifscCode}")
+	public WalletDTO removeAccount(@PathVariable long accountNo,@PathVariable String ifscCode) {
 		logger.info("Account removed");
-		return accountService.removeAccount(bankAccount);
+		return accountService.removeAccount(accountNo,ifscCode);
 	}
 
 	/* Author       : S. Eswar Bhavish Reddy

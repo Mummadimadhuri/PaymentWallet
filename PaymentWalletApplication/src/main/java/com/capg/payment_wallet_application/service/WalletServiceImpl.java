@@ -177,6 +177,7 @@ public class WalletServiceImpl implements WalletService {
 		Wallet wallet = customer.getWallet();
 		walletRepo.save(customer);
 		Transaction transaction = new Transaction("RECEIVE",LocalDate.now(),wallet,Double.parseDouble(amount.toString()),"Receiving "+amount+" from deposit");
+		transactionRepo.save(transaction);
 		logger.info("depositAmount() is get executed");
 		return TransactionUtils.convertToTransactionDto(transaction);
 	}
@@ -209,6 +210,7 @@ public class WalletServiceImpl implements WalletService {
 		Wallet wallet = customer.getWallet();
 		walletRepo.save(customer);
 		Transaction transaction = new Transaction("SEND",LocalDate.now(),wallet,Double.parseDouble(amount.toString()),"Receiving "+amount+" from deposit");
+		transactionRepo.save(transaction);
 		logger.info("withdrawAmount() is get executed");
 		return TransactionUtils.convertToTransactionDto(transaction);
 	}
